@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台管理</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-icons.css' %}">
+    <style>
+    /* 自定义样式 */
+    body {
+        padding-top: 56px;
+    }
+    .navbar {
+        background-color: #498AD4 !important; /* 自定义颜色 */
+    }
+    .sidebar {
+        position: fixed;
+        top: 56px;
+        bottom: 0;
+        left: 0;
+        padding-top: 1.5rem;
+        overflow-x: auto;
+        overflow-y: auto;
+        background-color: #498AD4;
+        width: 190px;
+    }
+    .content {
+        margin-left: 200px;
+        padding: 20px;
+    }
+    .nav-item {
+        background-color: #498AD4;
+    }
+    .active a{
+        color: blue; /* 设置活动状态下的文字颜色 */
+    }
+    a{
+        color: black; /* 设置活动状态下的文字颜色 */
+    }
+    .thumbnail-image {
+        width: 100px;
+        height: 100px;
+    }
+    .aa {
+        color: #FFFFF0 !important;
+    }
+    .aa1 {
+        padding-left: 34px;
+        color: #C0C0C0 !important;
+        /*background-color: #0056b3;*/
+    }
+    .aaa{
+        padding-left: 45px;
+        color: #C0C0C0 !important;
+        /*background-color: #0056b3;*/
+    }
+    .nav-item:hover {
+        background-color: #1374CC; /* 这里替换为你想要的悬浮时的背景色 */
+    }
+    #imageModal .modal-dialog {
+      max-width: 100%;
+      margin: auto;
+    }
+
+    #imageModal .modal-body {
+      text-align: center;
+    }
+
+    #imageModal .modal-body img {
+      max-width: 100%;
+      height: auto;
+    }
+    .th{
+       position: center;
+    }
+    </style>
+</head>
+<body>
+
+<!-- 导航栏 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="{% url 'page' %}?param1=homePage&param2=1">岩石基因库管理系统</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <a class="nav-link" href="{% url 'logout' %}">退出 </a>
+        </ul>
+    </div>
+</nav>
+
+<!-- 页面内容 -->
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- 侧边栏 -->
+        <div class="col-md-3 col-lg-3 sidebar">
+            <div class="nav">
+                <li class="nav-item aa active">
+                    <a class="nav-link" href="{% url 'page' %}?param1=RockPropertiesDatabase&param2=1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16" color="#FFFFF0">
+                            <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+                            <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        </svg>
+                        <span class="menu-title aa"> 岩石物性库 </span>
+                    </a>
+                </li>
+                <li class="nav-item aa">
+                    <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic2" aria-expanded="false"
+                       aria-controls="ui-basic">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16" color="#FFFFF0">
+                            <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
+                        </svg>
+                        <span class="menu-title aa"> 力学实验库</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic2" style="">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link aa1"
+                                   href="{% url 'page' %}?param1=UniaxialCompressionExperimentInMechanicsLabPage&param2=2-1">
+                                    单轴压缩实验
+                                </a>
+                            </li>
+                            <li class="nav-item aa">
+                                <a class="nav-link aa1"
+                                   href="{% url 'page' %}?param1=TriaxialCompressionExperimentInMechanicsLab&param2=2-2">
+                                    三轴压缩实验
+                                </a>
+                            </li>
+                            <li class="nav-item aa">
+                                <a class="nav-link aa1"
+                                   href="{% url 'page' %}?param1=TensileStrengthExperimentInMechanicsLab&param2=2-3">
+                                    抗拉强度实验
+                                </a>
+                            </li>
+                            <li class="nav-item aa">
+                                <a class="nav-link aa1"
+                                   href="{% url 'page' %}?param1=DirectShearExperimentInMechanicsLab&param2=2-4">
+                                    直接剪切实验
+                                </a>
+                            </li>
+                            <li class="nav-item aa">
+                                <a class="nav-link aa1"
+                                   href="{% url 'page' %}?param1=XRDDiffractionExperimentInMechanicsLab&param2=2-5">
+                                    XRD衍射实验
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item aa">
+                    <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                       aria-controls="ui-basic">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-signpost-2" viewBox="0 0 16 16" color="#FFFFF0">
+                            <path d="M7 1.414V2H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h5v1H2.5a1 1 0 0 0-.8.4L.725 8.7a.5.5 0 0 0 0 .6l.975 1.3a1 1 0 0 0 .8.4H7v5h2v-5h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H9V6h4.5a1 1 0 0 0 .8-.4l.975-1.3a.5.5 0 0 0 0-.6L14.3 2.4a1 1 0 0 0-.8-.4H9v-.586a1 1 0 0 0-2 0zM13.5 3l.75 1-.75 1H2V3h11.5zm.5 5v2H2.5l-.75-1 .75-1H14z"/>
+                        </svg>
+                        <span class="menu-title aa"> 工程数据库</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic" style="">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item aa">
+                                <a class="nav-link aaa"
+                                   href="{% url 'page' %}?param1=OpenPitBlastingInEngineeringDatabase&param2=3-1">
+                                    露天爆破
+                                </a>
+                            </li>
+                            <li class="nav-item aa">
+                                <a class="nav-link aaa"
+                                   href="{% url 'page' %}?param1=TunnelingBlastingInEngineeringDatabase&param2=3-2">
+                                    掘进爆破
+                                </a>
+                            </li>
+                            <li class="nav-item aa">
+                                <a class="nav-link aaa"
+                                   href="{% url 'page' %}?param1=RetreatBlastingInEngineeringDatabase&param2=3-3">
+                                    回采爆破
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item aa">
+                    <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic1" aria-expanded="false"
+                       aria-controls="ui-basic1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop-window" viewBox="0 0 16 16" color="#FFFFF0">
+                            <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h12V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zm2 .5a.5.5 0 0 1 .5.5V13h8V9.5a.5.5 0 0 1 1 0V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a.5.5 0 0 1 .5-.5z"/>
+                        </svg>
+                        <span class="menu-title aa"> 大数据平台</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic1" style="">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item ">
+                                <a class="nav-link aaa" href="{% url 'page' %}?param1=Theoretical_Calculation&param2=4-1">
+                                    理论计算
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link aaa" href="{% url 'page' %}?param1=Big_Date&param2=4-2">
+                                    大数据分析
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item aa">
+                    <a class="nav-link" href="{% url 'page' %}?param1=Mine_Date&param2=5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-robot" viewBox="0 0 16 16" color="#FFFFF0">
+                            <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.58 26.58 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.933.933 0 0 1-.765.935c-.845.147-2.34.346-4.235.346-1.895 0-3.39-.2-4.235-.346A.933.933 0 0 1 3 9.219V8.062Zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a24.767 24.767 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25.286 25.286 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135Z"/>
+                            <path d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2V1.866ZM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5Z"/>
+                        </svg>
+                        <span class="menu-title aa">矿山信息库</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="col-md-10 col-lg-10 content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Image" class="img-fluid" >
+            </div>
+        </div>
+    </div>
+</div>
+  
+<script>
+    function openModal(imageUrl) {
+        var modalImage = document.getElementById("modalImage");
+        modalImage.src = imageUrl;
+    }
+</script>  
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

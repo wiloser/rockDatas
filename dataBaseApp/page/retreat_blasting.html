@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% block content %}
+<style>
+    th {
+      font-size: 16px;
+    }
+
+</style>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
+        <li class="breadcrumb-item"><a href="#">工程数据库</a></li>
+        <li class="breadcrumb-item active" aria-current="page">回采爆破</li>
+    </ol>
+</nav>
+
+<div>
+    <form action="{% url 'search_rocks' %}" method="get">
+        <div class="row col-xl-12">
+            <div class="col-xl-4">
+                <label for="rockId">岩石Id：</label>
+                <input type="text" id="rockId" name="rockId" placeholder="输入岩石Id"
+                       class="form-control" value="{{ rockId }}">
+            </div>
+            <div class="col-xl-4">
+                <br>
+                <input type="hidden" name="rockData" value="3-3">
+                <button type="submit" class="btn btn-primary">查询</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">添加</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<hr>
+{% if rocks %}
+<table class="table table-hover">
+    <thead>
+    <th>岩石ID</th>
+    <th>岩石名称</th>
+    <th>采矿方法</th>
+    <th>落矿方式</th>
+    <th>炮孔布置形式</th>
+    <th>炮孔直径</th>
+    <th>孔距/孔底距</th>
+    <th>排距/最小抵抗线</th>
+    <th>炸药类型</th>
+    <th>回采炸药单耗</th>
+    <th>分段高度</th>
+    <th>进路间距</th>
+    <th>崩矿步距</th>
+    <th>边孔角</th>
+    </thead>
+    <tbody>
+    {% for rock in rocks %}
+    <tr>
+        <td>{{ rock.key.rock_id }}</td>
+        <td>{{ rock.key.rock_name }}</td>
+        <td>{{ rock.stopeMethod|convert_empty_string }}</td>
+        <td>{{ rock.stopeOreCaving|convert_empty_string }}</td>
+        <td>{{ rock.stopeHoleLayout|convert_empty_string }}</td>
+        <td>{{ rock.stopeBoreholeDiameter|convert_empty_string }}</td>
+        <td>{{ rock.stopeDistance|convert_empty_string }}</td>
+        <td>{{ rock.stopeArrayPitch|convert_empty_string }}</td>
+        <td>{{ rock.stopeExplosiveType|convert_empty_string }}</td>
+        <td>{{ rock.stopeSpecificCharge|convert_empty_string }}</td>
+        <td>{{ rock.stopeSublevelHeight|convert_empty_string }}</td>
+        <td>{{ rock.stopeDriftInterval|convert_empty_string }}</td>
+        <td>{{ rock.stopeCollapseStepDistance|convert_empty_string }}</td>
+        <td>{{ rock.stopeEdgeHoleAngle|convert_empty_string }}</td>
+        <td><a href="#" onclick="confirmDelete('{{ rock.key.rock_id }}','3-3')">删除</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+        {% else %}
+        <div class="alert alert-warning">
+            <strong>没有找到符合条件的岩石。</strong>
+        </div>
+        {% endif %}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="{% url 'addRock' %}?rockData=3-3" method="post">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-body">
+                    <label for="static-strength">岩石ID：</label>
+                    <input type="text" id="static-strength" name="rock_id" class="form-control">
+                    <label>岩石名称：</label>
+                    <div class="input-group">
+                        <select class="custom-select" id="inputGroupSelect01" name="rock_type">
+                            <option value="1">沉积岩</option>
+                            <option value="2">岩浆岩</option>
+                            <option value="3">变质岩</option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="岩石名称" name="rock_name">
+                    </div>
+                    <label for="stopeMethod">采矿方法：</label>
+                    <input type="text" id="stopeMethod" name="stopeMethod" placeholder="输入"
+                           class="form-control">
+                    <label for="stopeOreCaving">落矿方式 ：</label>
+                    <input type="text" id="stopeOreCaving" name="stopeOreCaving" placeholder="输入"
+                           class="form-control">
+                    <label for="stopeHoleLayout">炮孔布置形式 ：</label>
+                    <input type="text" id="stopeHoleLayout" name="stopeHoleLayout" placeholder="输入"
+                           class="form-control">
+                    <label for="stopeBoreholeDiameter">炮孔直径：</label>
+                    <input type="text" id="stopeBoreholeDiameter" name="stopeBoreholeDiameter" placeholder="输入"
+                           class="form-control">
+                    <label for="stopeDistance">孔距/孔底距：</label>
+                    <input type="text" id="stopeDistance" name="stopeDistance" placeholder="输入"
+                           class="form-control">
+                    <label for="stopeArrayPitch">排距/最小抵抗线：</label>
+                    <input type="text" id="stopeArrayPitch" name="stopeArrayPitch" placeholder="输入"
+                           class="form-control">
+                    <label for="stopeExplosiveType">炸药类型：</label>
+                    <input type="text" id="stopeExplosiveType" name="stopeExplosiveType" placeholder="输入"
+                           class="form-control">
+                    <label for="stopeSpecificCharge">回采炸药单耗：</label>
+                    <input type="text" id="stopeSpecificCharge" name="stopeSpecificCharge" placeholder="输入"
+                           class="form-control">
+                    <label for="stopeSublevelHeight">分段高度：</label>
+                    <input type="text" id="stopeSublevelHeight" name="stopeSublevelHeight" placeholder="输入"
+                           class="form-control">
+                    <label for="stopeDriftInterval">进路间距：</label>
+                    <input type="text" id="stopeDriftInterval" name="stopeDriftInterval" placeholder="输入"
+                           class="form-control">
+                    <label for="stopeCollapseStepDistance">崩矿步距：</label>
+                    <input type="text" id="stopeCollapseStepDistance" name="stopeCollapseStepDistance"
+                           placeholder="输入"
+                           class="form-control">
+                    <label for="stopeEdgeHoleAngle">边孔角：</label>
+                    <input type="text" id="stopeEdgeHoleAngle" name="stopeEdgeHoleAngle" placeholder="输入"
+                           class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(rockId,rockType) {
+        if (confirm("确定要删除该岩石记录吗？")) {
+            // 发送删除请求
+            window.location.href = "{% url 'delete' %}?rock_id=" + rockId + "&rockType=" + rockType;
+        }
+    }
+
+
+</script>
+{% endblock %}

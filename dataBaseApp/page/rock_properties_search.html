@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filters %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'page' %}">岩石物性库</a></li>
+        <li class="breadcrumb-item active" aria-current="page">查询</li>
+    </ol>
+</nav>
+
+<div>
+    <form action="{% url 'search_rocks' %}" method="get">
+        <div class="row col-xl-12">
+            <div class="col-xl-4">
+                <label>岩石名称：</label>
+                <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect01" name="rock_type">
+                        <option value="沉积岩" {% if selectIndex.0 %}selected{% endif %} >沉积岩</option>
+                        <option value="岩浆岩" {% if selectIndex.1 %}selected{% endif %} >岩浆岩</option>
+                        <option value="变质岩" {% if selectIndex.2 %}selected{% endif %} >变质岩</option>
+                    </select>
+                    <input type="text" class="form-control" placeholder="岩石名称" name="rock_name" value="{{rock_name}}">
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <label for="static-strength">静态强度：</label>
+                <input type="text" id="static-strength" name="static_strength" placeholder="输入静态强度"
+                       class="form-control">
+            </div>
+            <div class="col-xl-4">
+                <label for="dynamic-strength">动态强度：</label>
+                <input type="text" id="dynamic-strength" name="dynamic_strength" placeholder="输入动态强度"
+                       class="form-control">
+            </div>
+        </div>
+        <div class="row col-xl-12">
+            <div class="col-xl-4">
+                <label for="rock-density">岩石密度：</label>
+                <input type="text" id="rock-density" name="rock_density" value="{{ rock_density }}" placeholder="输入岩石密度"
+                       class="form-control">
+            </div>
+            <div class="col-xl-4">
+                <label for="longitudinal-velocity">纵波速度：</label>
+                <input type="text" id="longitudinal-velocity" name="longitudinal_velocity" placeholder="输入纵波速度"
+                       class="form-control">
+            </div>
+            <div class="col-xl-4">
+                <br>
+                <button type="submit" class="btn btn-primary">查询</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">添加</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="{% url 'addRock' %}?rockData=1" method="post">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-body">
+                    <label for="static-strength">岩石ID：</label>
+                    <input type="text" id="static-strength" name="rock_id" class="form-control">
+                    <label>岩石名称：</label>
+                    <div class="input-group">
+                        <select class="custom-select" id="inputGroupSelect01" name="rock_type">
+                            <option value="沉积岩">沉积岩</option>
+                            <option value="岩浆岩">岩浆岩</option>
+                            <option value="变质岩">变质岩</option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="岩石名称" name="rock_name">
+                    </div>
+                    <label for="rock-density">岩石密度：</label>
+                    <input type="text" id="rock-density" name="rock_density" placeholder="输入岩石密度"
+                           class="form-control">
+                    <!--、、、、、、-->
+                    <label for="rockPorosity">孔隙率：</label>
+                    <input type="text" id="rockPorosity" name="rockPorosity" placeholder="输入孔隙率"
+                           class="form-control">
+
+                    <label for="rockWaterAbsorption">吸水率：</label>
+                    <input type="text" id="rockWaterAbsorption" name="rockWaterAbsorption" placeholder="输入吸水率"
+                           class="form-control">
+
+                    <label for="rockPermeabilityCoefficient">渗透系数：</label>
+                    <input type="text" id="rockPermeabilityCoefficient" name="rockPermeabilityCoefficient"
+                           placeholder="输入渗透系数" class="form-control">
+
+                    <label for="rockLongitudinalWaveVelocity">纵波波速：</label>
+                    <input type="text" id="rockLongitudinalWaveVelocity" name="rockLongitudinalWaveVelocity"
+                           placeholder="输入纵波波速" class="form-control">
+
+                    <label for="rockTransverseWaveVelocity">横波波速：</label>
+                    <input type="text" id="rockTransverseWaveVelocity" name="rockTransverseWaveVelocity"
+                           placeholder="输入横波波速" class="form-control">
+
+                    <label for="rockWaveImpedance">波阻抗：</label>
+                    <input type="text" id="rockWaveImpedance" name="rockWaveImpedance" placeholder="输入波阻抗"
+                           class="form-control">
+
+                    <label for="rockOrigin">岩石产地：</label>
+                    <input type="text" id="rockOrigin" name="rockOrigin" placeholder="输入岩石产地"
+                           class="form-control">
+                    <!--                    、、、、、、、-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<hr>
+
+<div class="" id="table_context">
+    {% if rocks %}
+    <table class="table table-hover">
+        <thead>
+        <th>岩石ID</th>
+        <th>岩石名称</th>
+        <th>岩石类型</th>
+        <th>密度</th>
+        <th>孔隙率</th>
+        <th>吸水率</th>
+        <th>渗透系数</th>
+        <th>纵波波速</th>
+        <th>横波波速</th>
+        <th>波阻抗</th>
+        <th>岩石产地</th>
+        </thead>
+
+        <tbody>
+        {% for rock in rocks %}
+        <tr>
+            <td>{{ rock.key.rock_id }}</td>
+            <td>{{ rock.key.rock_name }}</td>
+            <td>{{ rock.rockType }}</td>
+            <td>{{ rock.rockDensity|convert_empty_string }}</td>
+            <td>{{ rock.rockPorosity|convert_empty_string }}</td>
+            <td>{{ rock.rockWaterAbsorption|convert_empty_string }}</td>
+            <td>{{ rock.rockPermeabilityCoefficient|convert_empty_string }}</td>
+            <td>{{ rock.rockLongitudinalWaveVelocity|convert_empty_string }}</td>
+            <td>{{ rock.rockTransverseWaveVelocity|convert_empty_string }}</td>
+            <td>{{ rock.rockWaveImpedance|convert_empty_string }}</td>
+            <td>{{ rock.rockOrigin|convert_empty_string }}</td>
+            <td><a href="#" onclick="confirmDelete('{{ rock.key.rock_id }}', '1-1')">删除</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+    <div class="alert alert-warning">
+        <strong>没有找到符合条件的岩石。</strong>
+    </div>
+    {% endif %}
+</div>
+<script>
+    function confirmDelete(rockId,rockType) {
+        if (confirm("确定要删除该岩石记录吗？")) {
+            // 发送删除请求
+            window.location.href = "{% url 'delete' %}?rock_id=" + rockId + "&rockType=" + rockType;
+        }
+    }
+
+</script>
+{% endblock %}

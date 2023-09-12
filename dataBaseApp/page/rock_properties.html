@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filters %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
+        <li class="breadcrumb-item active" aria-current="page">岩石物性库</li>
+        <li class="breadcrumb-item justify-content-end"><a href="{% url 'page' %}?param1=RockPropertiesDatabaseSearch&param2=1">查询</a></li>
+    </ol>
+</nav>
+
+<hr>
+
+<div class="" id="table_context">
+    {% if rocks %}
+    <table class="table table-hover">
+        <thead>
+        <th>岩石ID</th>
+        <th>岩石名称</th>
+        <th>岩石类型</th>
+        <th>密度</th>
+        <th>孔隙率</th>
+        <th>吸水率</th>
+        <th>渗透系数</th>
+        <th>纵波波速</th>
+        <th>横波波速</th>
+        <th>波阻抗</th>
+        <th>岩石产地</th>
+        </thead>
+
+        <tbody>
+        {% for rock in rocks %}
+        <tr>
+            <td>{{ rock.key.rock_id }}</td>
+            <td>{{ rock.key.rock_name }}</td>
+            <td>{{ rock.rockType }}</td>
+            <td>{{ rock.rockDensity|convert_empty_string }}</td>
+            <td>{{ rock.rockPorosity|convert_empty_string }}</td>
+            <td>{{ rock.rockWaterAbsorption|convert_empty_string }}</td>
+            <td>{{ rock.rockPermeabilityCoefficient|convert_empty_string }}</td>
+            <td>{{ rock.rockLongitudinalWaveVelocity|convert_empty_string }}</td>
+            <td>{{ rock.rockTransverseWaveVelocity|convert_empty_string }}</td>
+            <td>{{ rock.rockWaveImpedance|convert_empty_string }}</td>
+            <td>{{ rock.rockOrigin|convert_empty_string }}</td>
+            <td><a href="#" onclick="confirmDelete('{{ rock.key.rock_id }}','1')">删除</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+    <div class="alert alert-warning">
+        <strong>没有找到符合条件的岩石。</strong>
+    </div>
+    {% endif %}
+</div>
+<script>
+    function confirmDelete(rockId,rockType) {
+        if (confirm("确定要删除该岩石记录吗？")) {
+            // 发送删除请求
+            window.location.href = "{% url 'delete' %}?rock_id=" + rockId + "&rockType=" + rockType;
+        }
+    }
+</script>
+{% endblock %}

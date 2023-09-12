@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
+        <li class="breadcrumb-item"><a href="#">工程数据库</a></li>
+        <li class="breadcrumb-item active" aria-current="page">掘进爆破</li>
+    </ol>
+</nav>
+
+<div>
+    <form action="{% url 'search_rock' %}" method="get">
+        <div class="row col-xl-12">
+            <div class="col-xl-4">
+                <label for="rockId">岩石Id：</label>
+                <input type="text" id="rockId" name="rockId" placeholder="输入岩石Id"
+                       class="form-control" value="{{ rockId }}">
+            </div>
+            <div class="col-xl-4">
+                <br>
+                <input type="hidden" name="rockData" value="3-2">
+                <button type="submit" class="btn btn-primary">查询</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">添加</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<hr>
+{% if rocks %}
+<table class="table table-hover">
+    <thead>
+        <th>岩石ID</th>
+        <th>岩石名称</th>
+        <th>断面形状</th>
+        <th>断面面积</th>
+        <th>掏槽形式</th>
+        <th>空孔直径</th>
+        <th>炮孔直径</th>
+        <th>炮孔数量</th>
+        <th>掏槽单耗</th>
+        <th>炸药类型</th>
+        <th>炸药单耗</th>
+    </thead>
+    <tbody>
+        {% for rock in rocks %}
+        <tr>
+            <td>{{ rock.key.rock_id }}</td>
+            <td>{{ rock.key.rock_name }}</td>
+            <td>{{ rock.excavationSectionShape|convert_empty_string }}</td>
+            <td>{{ rock.|convert_empty_string|convert_empty_string }}</td>
+            <td>{{ rock.excavationCutForm|convert_empty_string }}</td>
+            <td>{{ rock.excavationHollowholeDiameter|convert_empty_string }}</td>
+            <td>{{ rock.excavationBoreholeDiameter|convert_empty_string }}</td>
+            <td>{{ rock.excavationBoreholeNumber|convert_empty_string }}</td>
+            <td>{{ rock.excavationCutCharge|convert_empty_string }}</td>
+            <td>{{ rock.excavationExplosiveType|convert_empty_string }}</td>
+            <td>{{ rock.excavationSpecificCharge|convert_empty_string }}</td>
+                <td><a href="#" onclick="confirmDelete('{{ rock.key.rock_id }}','3-2')">删除</a></td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+     {% else %}
+        <div class="alert alert-warning">
+            <strong>没有找到符合条件的岩石。</strong>
+        </div>
+        {% endif %}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="{% url 'addRock' %}?rockData=3-2" method="post">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-body">
+                    <label for="static-strength">岩石ID：</label>
+                    <input type="text" id="static-strength" name="rock_id" class="form-control">
+                    <label>岩石名称：</label>
+                    <div class="input-group">
+                        <select class="custom-select" id="inputGroupSelect01" name="rock_type">
+                            <option value="1">沉积岩</option>
+                            <option value="2">岩浆岩</option>
+                            <option value="3">变质岩</option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="岩石名称" name="rock_name">
+                    </div>
+                    <label for="excavationSectionShape">断面形状：</label>
+                    <input type="text" id="excavationSectionShape" name="excavationSectionShape" placeholder="输入"
+                           class="form-control">
+                    <label for="excavationSectionArea">断面面积：</label>
+                    <input type="text" id="excavationSectionArea" name="excavationSectionArea" placeholder="输入"
+                           class="form-control">
+                    <label for="excavationCutForm">掏槽形式：</label>
+                    <input type="text" id="excavationCutForm" name="excavationCutForm" placeholder="输入"
+                           class="form-control">
+                    <label for="excavationHollowholeDiameter">空孔直径：</label>
+                    <input type="text" id="excavationHollowholeDiameter" name="excavationHollowholeDiameter" placeholder="输入"
+                           class="form-control">
+                    <label for="excavationBoreholeDiameter">炮孔直径：</label>
+                    <input type="text" id="excavationBoreholeDiameter" name="excavationBoreholeDiameter" placeholder="输入"
+                           class="form-control">
+                    <label for="excavationBoreholeNumber">炮孔数量：</label>
+                    <input type="text" id="excavationBoreholeNumber" name="excavationBoreholeNumber" placeholder="输入"
+                           class="form-control">
+                    <label for="excavationCutCharge">掏槽单耗：</label>
+                    <input type="text" id="excavationCutCharge" name="excavationCutCharge" placeholder="输入"
+                           class="form-control">
+                    <label for="excavationExplosiveType">炸药类型：</label>
+                    <input type="text" id="excavationExplosiveType" name="excavationExplosiveType" placeholder="输入"
+                           class="form-control">
+                    <label for="excavationSpecificCharge">掘进炸药单耗：</label>
+                    <input type="text" id="excavationSpecificCharge" name="excavationSpecificCharge" placeholder="输入"
+                           class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(rockId,rockType) {
+        if (confirm("确定要删除该岩石记录吗？")) {
+            // 发送删除请求
+            window.location.href = "{% url 'delete' %}?rock_id=" + rockId + "&rockType=" + rockType;
+        }
+    }
+</script>
+{% endblock %}

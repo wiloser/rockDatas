@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
+        <li class="breadcrumb-item">力学实验室</li>
+        <li class="breadcrumb-item active" aria-current="page">单轴压缩实验</li>
+    </ol>
+</nav>
+
+<div>
+    <form action="{% url 'search_rock' %}" method="get">
+        <div class="row col-xl-12">
+            <div class="col-xl-4">
+                <label for="rockId">岩石Id：</label>
+                <input type="text" id="rockId" name="rockId" placeholder="输入岩石Id"
+                       class="form-control" value="{{ rockId }}">
+            </div>
+            <div class="col-xl-4">
+                <br>
+                <input type="hidden" name="rockData" value="2-1">
+                <button type="submit" class="btn btn-primary">查询</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">添加</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<hr>
+{% if rocks %}
+<table class="table table-hover">
+    <thead>
+    <th>岩石ID</th>
+    <th>岩石名称</th>
+    <th>单轴抗压强度</th>
+    <th>弹性模量</th>
+    <th>泊松比</th>
+    <th>单轴破坏模式</th>
+    <th>单轴应力-应变曲线</th>
+    <th>单轴裂纹形态</th>
+
+    </thead>
+
+    <tbody>
+    {% for rock in rocks %}
+    <tr>
+        <td>{{ rock.key.rock_id }}</td>
+        <td>{{ rock.key.rock_name }}</td>
+        <td>{{ rock.uniaxialCompressiveStrength|convert_empty_string }}</td>
+        <td>{{ rock.elasticModulus|convert_empty_string }}</td>
+        <td>{{ rock.poissonsRatio|convert_empty_string }}</td>
+        <td>
+            <a href="#" data-toggle="modal" data-target="#imageModal" onclick="openModal('{{ rock.uniaxialFailureMode.url }}')">
+                <img src="{{ rock.uniaxialFailureMode.url }}" alt="单轴破坏模式" class="thumbnail-image">
+            </a>
+        </td>
+        <td>
+            <a href="#" data-toggle="modal" data-target="#imageModal" onclick="openModal('{{ rock.uniaxialStressStrainCurve.url }}')">
+                <img src="{{ rock.uniaxialStressStrainCurve.url }}" alt="单轴应力-应变曲线" class="thumbnail-image">
+            </a>
+        </td>
+        <td>
+            <a href="#" data-toggle="modal" data-target="#imageModal" onclick="openModal('{{ rock.uniaxialCrackMorphology.url }}')">
+                <img src="{{ rock.uniaxialCrackMorphology.url }}" alt="单轴裂纹形态" class="thumbnail-image">
+            </a>
+        </td>
+        <td><a href="#" onclick="confirmDelete('{{ rock.key.rock_id }}', '2-1')">删除</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+        {% else %}
+        <div class="alert alert-warning">
+            <strong>没有找到符合条件的岩石。</strong>
+        </div>
+        {% endif %}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="{% url 'addRock'%}?rockData=2-1" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-body">
+                    <label for="static-strength">岩石ID：</label>
+                    <input type="text" id="static-strength" name="rock_id" class="form-control">
+                    <label>岩石名称：</label>
+                    <div class="input-group">
+                        <select class="custom-select" id="inputGroupSelect01" name="rock_type">
+                            <option value="1">沉积岩</option>
+                            <option value="2">岩浆岩</option>
+                            <option value="3">变质岩</option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="岩石名称" name="rock_name">
+                    </div>
+                    <label for="uniaxialCompressiveStrength">单轴抗压强度：</label>
+                    <input type="text" id="uniaxialCompressiveStrength" name="uniaxialCompressiveStrength"
+                           placeholder="输入单轴抗压强度"
+                           class="form-control">
+                    <label for="elasticModulus">弹性模量：</label>
+                    <input type="text" id="elasticModulus" name="elasticModulus" placeholder="输入弹性模量"
+                           class="form-control">
+                    <label for="poissonsRatio">泊松比：</label>
+                    <input type="text" id="poissonsRatio" name="poissonsRatio" placeholder="输入泊松比"
+                           class="form-control">
+
+                    <div class="form-group">
+                        <label for="uniaxialFailureMode">单轴破环模式：</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="uniaxialFailureMode"
+                                   name="uniaxialFailureMode"
+                                   onchange="displayFileName(this)">
+                            <label class="custom-file-label" for="uniaxialFailureMode">选择文件</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="uniaxialStressStrainCurve">单轴应力-应变曲线：</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="uniaxialStressStrainCurve"
+                                   name="uniaxialStressStrainCurve"
+                                   onchange="displayFileName(this)">
+                            <label class="custom-file-label" for="uniaxialStressStrainCurve">选择文件</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="uniaxialCrackMorphology">单轴裂纹形态：</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="uniaxialCrackMorphology"
+                                   name="uniaxialCrackMorphology"
+                                   onchange="displayFileName(this)">
+                            <label class="custom-file-label" for="uniaxialCrackMorphology">选择文件</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function confirmDelete(rockId,rockType) {
+        if (confirm("确定要删除该岩石记录吗？")) {
+            // 发送删除请求
+            window.location.href = "{% url 'delete' %}?rock_id=" + rockId + '&rockType=' + rockType;
+        }
+    }
+
+    function displayFileName(input) {
+        const fileName = input.files[0].name;
+        const label = input.nextElementSibling;
+        label.innerText = fileName;
+    }
+
+
+</script>
+{% endblock %}

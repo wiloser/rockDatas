@@ -1,0 +1,10 @@
+
+python .\manage.py makemigrations
+python .\manage.py migrate
+
+// 开启局域网共享
+python manage.py runserver 0.0.0.0:8000
+
+//创建超级用户，只有超级用户才能登录入Django后台，通过网页注册的只能登录入网页，不能进入Django后台中
+//同时，在Django后台中手动添加的超级用户也是不管用的，只能通过命令行来添加超级用户
+python manage.py createsuperuser

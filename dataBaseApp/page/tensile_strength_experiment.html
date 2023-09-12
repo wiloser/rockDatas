@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
+        <li class="breadcrumb-item"><a href="#">力学实验库</a></li>
+        <li class="breadcrumb-item active" aria-current="page">抗拉强度实验</li>
+    </ol>
+</nav>
+<div>
+    <form action="{% url 'search_rock' %}" method="get">
+        <div class="row col-xl-12">
+            <div class="col-xl-4">
+                <label for="rockId">岩石Id：</label>
+                <input type="text" id="rockId" name="rockId" placeholder="输入岩石Id"
+                       class="form-control" value="{{ rockId }}">
+            </div>
+            <div class="col-xl-4">
+                <br>
+                <input type="hidden" name="rockData" value="2-3">
+                <button type="submit" class="btn btn-primary">查询</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">添加</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<hr>
+{% if rocks %}
+<table class="table table-hover">
+    <thead>
+    <th>岩石ID</th>
+    <th>岩石名称</th>
+    <th>抗拉强度</th>
+    <th>破坏荷载</th>
+    <th>抗拉强度破坏模式</th>
+    <th>抗拉强度轴向-荷载位移图</th>
+
+    </thead>
+
+    <tbody>
+    {% for rock in rocks %}
+    <tr>
+        <td>{{ rock.key.rock_id }}</td>
+        <td>{{ rock.key.rock_name }}</td>
+        <td>{{ rock.tensileStrength|convert_empty_string }}</td>
+        <td>{{ rock.tensileFailureLoad|convert_empty_string }}</td>
+        <td>
+            <a href="#" data-toggle="modal" data-target="#imageModal" onclick="openModal('{{ rock.tensileFailureMode.url }}')">
+                <img src="{{ rock.tensileFailureMode.url }}" alt="抗拉强度实验" class="thumbnail-image">
+            </a>
+        </td>
+        <td>
+            <a href="#" data-toggle="modal" data-target="#imageModal" onclick="openModal('{{ rock.tensileAxialLoad.url }}')">
+                <img src="{{ rock.tensileAxialLoad.url }}" alt="抗拉强度实验" class="thumbnail-image">
+            </a>
+        </td>
+        <td><a href="#" onclick="confirmDelete('{{ rock.key.rock_id }}','2-3')">删除</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+     {% else %}
+        <div class="alert alert-warning">
+            <strong>没有找到符合条件的岩石。</strong>
+        </div>
+        {% endif %}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="{% url 'addRock' %}?rockData=2-3" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-body">
+                    <label for="static-strength">岩石ID：</label>
+                    <input type="text" id="static-strength" name="rock_id" class="form-control">
+                    <label>岩石名称：</label>
+                    <div class="input-group">
+                        <select class="custom-select" id="inputGroupSelect01" name="rock_type">
+                            <option value="1">沉积岩</option>
+                            <option value="2">岩浆岩</option>
+                            <option value="3">变质岩</option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="岩石名称" name="rock_name">
+                    </div>
+                    <label for="tensileStrength">抗拉强度：</label>
+                    <input type="text" id="tensileStrength" name="tensileStrength" placeholder="输入"
+                           class="form-control">
+                    <label for="tensileFailureLoad"> 破坏荷载：</label>
+                    <input type="text" id="tensileFailureLoad" name="tensileFailureLoad" placeholder="输入"
+                           class="form-control">
+
+                    <div class="form-group">
+                        <label for="tensileFailureMode">抗拉强度破坏模式（图）：</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="tensileFailureMode"
+                                   name="tensileFailureMode"
+                                   onchange="displayFileName(this)">
+
+                            <label class="custom-file-label" for="tensileFailureMode">选择文件</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tensileAxialLoad">抗拉强度轴向-荷载位移图（图）：</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="tensileAxialLoad"
+                                   name="tensileAxialLoad"
+                                   onchange="displayFileName(this)">
+
+                            <label class="custom-file-label" for="tensileAxialLoad">选择文件</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(rockId,rockType) {
+        if (confirm("确定要删除该岩石记录吗？")) {
+            // 发送删除请求
+            window.location.href = "{% url 'delete' %}?rock_id=" + rockId + "&rockType=" + rockType;
+        }
+    }
+
+    function displayFileName(input) {
+        const fileName = input.files[0].name;
+        const label = input.nextElementSibling;
+        label.innerText = fileName;
+    }
+
+</script>
+{% endblock %}
