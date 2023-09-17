@@ -3,8 +3,12 @@
 
 {% block content %}
 
-<div class="alert alert-info">
-  <strong>暂未开放</strong>
-</div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
+        <li class="breadcrumb-item"><a href="#">力学实验库</a></li>
+        <li class="breadcrumb-item active" aria-current="page">直接剪切实验</li>
+    </ol>
+</nav>
 
 {% endblock %}

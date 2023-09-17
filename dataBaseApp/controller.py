@@ -91,15 +91,14 @@ def search_rocks(request):
 
 
 
-        match rock_type:
-            case "沉积岩":
-                selectIndex[0] = True
-            case "岩浆岩":
-                selectIndex[1] = True
-            case "变质岩":
-                selectIndex[2] = True
-            case _:
-                pass
+        if rock_type == "沉积岩":
+            selectIndex[0] = True
+        elif rock_type == "岩浆岩":
+            selectIndex[1] = True
+        elif rock_type == "变质岩":
+            selectIndex[2] = True
+        else:
+            pass
         static_strength = request.GET.get('static_strength')
         dynamic_strength = request.GET.get('dynamic_strength')
 
@@ -167,145 +166,145 @@ def search_rock(request):
     rockData = request.GET.get('rockData')
     rockId = request.GET.get('rockId')
     sorted_objects = []
-    match rockData:
-        case '2-1':
-            try:
-                rocks = Rock2.objects.all()
+    if rockData == '2-1':
+        try:
+            rocks = Rock2.objects.all()
+            for rock in rocks:
+                if rock.key.rock_id == rockId:
+                    sorted_objects.append(rock)
+            if sorted_objects == []:
                 for rock in rocks:
-                    if rock.key.rock_id == rockId:
-                        sorted_objects.append(rock)
-                if sorted_objects == []:
-                    for rock in rocks:
-                        if rock.key.rock_id[0] == rockId[0]:
-                            if len(rockId) == 1:
-                                sorted_objects.append(rock)
-                            elif rock.key.rock_id[1] == rockId[1]:
-                                sorted_objects.append(rock)
-            except:
-                sorted_objects = None
-            print(sorted_objects)
-            page = 'UniaxialCompressionExperimentInMechanicsLabPage'
-            return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
-        case '2-2':
-            try:
-                rocks = Rock3.objects.all()
-                for rock in rocks:
-                    if rock.key.rock_id == rockId:
-                        sorted_objects.append(rock)
-                if sorted_objects == []:
-                    for rock in rocks:
-                        if rock.key.rock_id[0] == rockId[0]:
-                            if len(rockId) == 1:
-                                sorted_objects.append(rock)
-                            elif rock.key.rock_id[1] == rockId[1]:
-                                sorted_objects.append(rock)
-            except:
-                sorted_objects = None
-            page = 'TriaxialCompressionExperimentInMechanicsLab'
-            return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
-        case '2-3':
-            try:
-                rocks = Rock4.objects.all()
-                for rock in rocks:
-                    if rock.key.rock_id == rockId:
-                        sorted_objects.append(rock)
-                if sorted_objects == []:
-                    for rock in rocks:
-                        if rock.key.rock_id[0] == rockId[0]:
-                            if len(rockId) == 1:
-                                sorted_objects.append(rock)
-                            elif rock.key.rock_id[1] == rockId[1]:
-                                sorted_objects.append(rock)
-            except:
-                sorted_objects = None
-            page = 'TensileStrengthExperimentInMechanicsLab'
-            return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
-        case '2-4':
-            try:
-                rocks = Rock5.objects.all()
-                for rock in rocks:
-                    if rock.key.rock_id == rockId:
-                        sorted_objects.append(rock)
-                if sorted_objects == []:
-                    for rock in rocks:
-                        if rock.key.rock_id[0] == rockId[0]:
-                            if len(rockId) == 1:
-                                sorted_objects.append(rock)
-                            elif rock.key.rock_id[1] == rockId[1]:
-                                sorted_objects.append(rock)
-            except:
-                sorted_objects = None
-            page = 'DirectShearExperimentInMechanicsLab'
-            return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
-        case '2-5':
-            try:
-                rocks = Rock6.objects.all()
-                for rock in rocks:
-                    if rock.key.rock_id == rockId:
-                        sorted_objects.append(rock)
-                if sorted_objects == []:
-                    for rock in rocks:
-                        if rock.key.rock_id[0] == rockId[0]:
-                            if len(rockId) == 1:
-                                sorted_objects.append(rock)
-                            elif rock.key.rock_id[1] == rockId[1]:
-                                sorted_objects.append(rock)
-            except:
-                sorted_objects = None
-            page = 'XRDDiffractionExperimentInMechanicsLab'
-            return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
-        case '3-1':
-            try:
-                rocks = Rock7.objects.all()
-                for rock in rocks:
-                    if rock.key.rock_id == rockId:
-                        sorted_objects.append(rock)
-                if sorted_objects == []:
-                    for rock in rocks:
-                        if rock.key.rock_id[0] == rockId[0]:
-                            if len(rockId) == 1:
-                                sorted_objects.append(rock)
-                            elif rock.key.rock_id[1] == rockId[1]:
-                                sorted_objects.append(rock)
-            except:
-                sorted_objects = None
-            page = 'OpenPitBlastingInEngineeringDatabase'
-            return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
-        case '3-2':
-            try:
-                rocks = Rock8.objects.all()
-                for rock in rocks:
-                    if rock.key.rock_id == rockId:
-                        sorted_objects.append(rock)
-                if sorted_objects == []:
-                    for rock in rocks:
-                        if rock.key.rock_id[0] == rockId[0]:
-                            if len(rockId) == 1:
-                                sorted_objects.append(rock)
-                            elif rock.key.rock_id[1] == rockId[1]:
-                                sorted_objects.append(rock)
-            except:
-                sorted_objects = None
-            page = 'TunnelingBlastingInEngineeringDatabase'
-            return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
-        case '3-3':
-            try:
-                rocks = Rock9.objects.all()
-                for rock in rocks:
-                    if rock.key.rock_id == rockId:
-                        sorted_objects.append(rock)
-                if sorted_objects == []:
-                    for rock in rocks:
-                        if rock.key.rock_id[0] == rockId[0]:
-                            if len(rockId) == 1:
-                                sorted_objects.append(rock)
-                            elif rock.key.rock_id[1] == rockId[1]:
-                                sorted_objects.append(rock)
-            except:
-                sorted_objects = None
-            page = 'RetreatBlastingInEngineeringDatabase'
-            return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
-        case _:
+                    if rock.key.rock_id[0] == rockId[0]:
+                        if len(rockId) == 1:
+                            sorted_objects.append(rock)
+                        elif rock.key.rock_id[1] == rockId[1]:
+                            sorted_objects.append(rock)
+        except:
             sorted_objects = None
-            page = 'RockPropertiesDatabase'
-            return render(request, pageName[page], {'rocks': sorted_objects})
+        print(sorted_objects)
+        page = 'UniaxialCompressionExperimentInMechanicsLabPage'
+        return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
+    elif rockData == '2-2':
+        try:
+            rocks = Rock3.objects.all()
+            for rock in rocks:
+                if rock.key.rock_id == rockId:
+                    sorted_objects.append(rock)
+            if sorted_objects == []:
+                for rock in rocks:
+                    if rock.key.rock_id[0] == rockId[0]:
+                        if len(rockId) == 1:
+                            sorted_objects.append(rock)
+                        elif rock.key.rock_id[1] == rockId[1]:
+                            sorted_objects.append(rock)
+        except:
+            sorted_objects = None
+        page = 'TriaxialCompressionExperimentInMechanicsLab'
+        return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
+    elif rockData == '2-3':
+        try:
+            rocks = Rock4.objects.all()
+            for rock in rocks:
+                if rock.key.rock_id == rockId:
+                    sorted_objects.append(rock)
+            if sorted_objects == []:
+                for rock in rocks:
+                    if rock.key.rock_id[0] == rockId[0]:
+                        if len(rockId) == 1:
+                            sorted_objects.append(rock)
+                        elif rock.key.rock_id[1] == rockId[1]:
+                            sorted_objects.append(rock)
+        except:
+            sorted_objects = None
+        page = 'TensileStrengthExperimentInMechanicsLab'
+        return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
+    elif rockData == '2-4':
+        try:
+            rocks = Rock5.objects.all()
+            for rock in rocks:
+                if rock.key.rock_id == rockId:
+                    sorted_objects.append(rock)
+            if sorted_objects == []:
+                for rock in rocks:
+                    if rock.key.rock_id[0] == rockId[0]:
+                        if len(rockId) == 1:
+                            sorted_objects.append(rock)
+                        elif rock.key.rock_id[1] == rockId[1]:
+                            sorted_objects.append(rock)
+        except:
+            sorted_objects = None
+        page = 'DirectShearExperimentInMechanicsLab'
+        return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
+    elif rockData == '2-5':
+        try:
+            rocks = Rock6.objects.all()
+            for rock in rocks:
+                if rock.key.rock_id == rockId:
+                    sorted_objects.append(rock)
+            if sorted_objects == []:
+                for rock in rocks:
+                    if rock.key.rock_id[0] == rockId[0]:
+                        if len(rockId) == 1:
+                            sorted_objects.append(rock)
+                        elif rock.key.rock_id[1] == rockId[1]:
+                            sorted_objects.append(rock)
+        except:
+            sorted_objects = None
+        page = 'XRDDiffractionExperimentInMechanicsLab'
+        return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
+    elif rockData == '3-1':
+        try:
+            rocks = Rock7.objects.all()
+            for rock in rocks:
+                if rock.key.rock_id == rockId:
+                    sorted_objects.append(rock)
+            if sorted_objects == []:
+                for rock in rocks:
+                    if rock.key.rock_id[0] == rockId[0]:
+                        if len(rockId) == 1:
+                            sorted_objects.append(rock)
+                        elif rock.key.rock_id[1] == rockId[1]:
+                            sorted_objects.append(rock)
+        except:
+            sorted_objects = None
+        page = 'OpenPitBlastingInEngineeringDatabase'
+        return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
+    if rockData == '3-2':
+        try:
+            rocks = Rock8.objects.all()
+            for rock in rocks:
+                if rock.key.rock_id == rockId:
+                    sorted_objects.append(rock)
+            if sorted_objects == []:
+                for rock in rocks:
+                    if rock.key.rock_id[0] == rockId[0]:
+                        if len(rockId) == 1:
+                            sorted_objects.append(rock)
+                        elif rock.key.rock_id[1] == rockId[1]:
+                            sorted_objects.append(rock)
+        except:
+            sorted_objects = None
+        page = 'TunnelingBlastingInEngineeringDatabase'
+        return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
+    if rockData == '3-3':
+        try:
+            rocks = Rock9.objects.all()
+            for rock in rocks:
+                if rock.key.rock_id == rockId:
+                    sorted_objects.append(rock)
+            if sorted_objects == []:
+                for rock in rocks:
+                    if rock.key.rock_id[0] == rockId[0]:
+                        if len(rockId) == 1:
+                            sorted_objects.append(rock)
+                        elif rock.key.rock_id[1] == rockId[1]:
+                            sorted_objects.append(rock)
+        except:
+            sorted_objects = None
+        page = 'RetreatBlastingInEngineeringDatabase'
+        return render(request, pageName[page], {'rocks': sorted_objects, 'rockId': rockId})
+    else:
+        sorted_objects = None
+        page = 'RockPropertiesDatabase'
+        return render(request, pageName[page], {'rocks': sorted_objects})
+

@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.storage import default_storage
+from django.http import HttpResponse
 
 def get_default_image():
     # 读取默认图片文件
@@ -68,12 +69,13 @@ pageName = {'homePage': 'rock_properties.html',
 
             # 大数据计算平台
             'Theoretical_Calculation': 'theoretical_Calculation.html',
-
             # 大数据分析
             'Big_Date': 'none.html',
 
-            # 矿山信息
-            'Mine_Date': 'none.html',
+            # 尖山地底下矿
+            'JianShanUndergroundMine': 'jianshan_underground_mine.html',
+            # 露天采矿
+            'OpenPit': 'open_pit.html',
             }
 
 
@@ -274,150 +276,149 @@ def addRock(request):
         except:
             pass
 
-        match rockData:
-            case '1':
-                # Create a new Rock1 object and associate it with the Rock object
-                rock1 = Rock1(key=rock,
-                              rockType=rock_type,
-                              rockDensity=rock_density,
-                              rockPorosity=rockPorosity,
-                              rockWaterAbsorption=rockWaterAbsorption,
-                              rockPermeabilityCoefficient=rockPermeabilityCoefficient,
-                              rockLongitudinalWaveVelocity=rockLongitudinalWaveVelocity,
-                              rockTransverseWaveVelocity=rockTransverseWaveVelocity,
-                              rockWaveImpedance=rockWaveImpedance,
-                              rockOrigin=rockOrigin, )
-                rock1.save()
-                rockDatas = Rock1.objects.all()
-                # Redirect to a success page or perform any additional operations
-                return render(request, pageName['RockPropertiesDatabaseSearch'], {'rocks': rockDatas})
-            case '2-1':
-                file_path = os.path.join('path', 'to', 'uniaxial', unique_filename)
-                print('cslog_uniaxialFailureMode:',type(uniaxialFailureMode))
-                uniaxialFailureModePath = default_storage.save(file_path+'1', uniaxialFailureMode)
-                uniaxialStressStrainCurvePath = default_storage.save(file_path+'2', uniaxialStressStrainCurve)
-                uniaxialCrackMorphologyPath = default_storage.save(file_path+'3', uniaxialCrackMorphology)
-                rock2 = Rock2(key=rock,
-                              uniaxialCompressiveStrength=uniaxialCompressiveStrength,
-                              elasticModulus=elasticModulus,
-                              poissonsRatio=poissonsRatio,
-                              uniaxialFailureMode=uniaxialFailureModePath,
-                              uniaxialStressStrainCurve=uniaxialStressStrainCurvePath,
-                              uniaxialCrackMorphology=uniaxialCrackMorphologyPath, )
-                rock2.save()
-                rockDatas = Rock2.objects.all()
-                # Redirect to a success page or perform any additional operations
-                return render(request, pageName['UniaxialCompressionExperimentInMechanicsLabPage'],
-                              {'rocks': rockDatas})
-            case '2-2':
-                file_path = os.path.join('path', 'to', 'triaxial', unique_filename)
-                triaxialFailureModePath = default_storage.save(file_path+'1', triaxialFailureMode)
-                triaxialStressStrainCurvePath = default_storage.save(file_path+'2', triaxialStressStrainCurve)
-                triaxialMohrStrengthPath = default_storage.save(file_path+'3', triaxialMohrStrength)
-                rock3 = Rock3(key=rock,
-                              triaxialCompressiveStrength=triaxialCompressiveStrength,
-                              rockCohesion=rockCohesion,
-                              rockInternalFrictionAngle=rockInternalFrictionAngle,
-                              youngModulus=youngModulus,
-                              poissonsRatio=poissonsRatio,
-                              triaxialFailureMode=triaxialFailureModePath,
-                              triaxialStressStrainCurve=triaxialStressStrainCurvePath,
-                              triaxialMohrStrength=triaxialMohrStrengthPath, )
-                rock3.save()
-                rockDatas = Rock3.objects.all()
-                # Redirect to a success page or perform any additional operations
-                return render(request, pageName['TriaxialCompressionExperimentInMechanicsLab'], {'rocks': rockDatas})
-            case '2-3':
-                file_path = os.path.join('path', 'to', 'tensile', unique_filename)
-                tensileFailureModePath = default_storage.save(file_path+'1', tensileFailureMode)
-                tensileAxialLoadPath = default_storage.save(file_path+'2', tensileAxialLoad)
+        if(rockData == '1'):
+            # Create a new Rock1 object and associate it with the Rock object
+            rock1 = Rock1(key=rock,
+                          rockType=rock_type,
+                          rockDensity=rock_density,
+                          rockPorosity=rockPorosity,
+                          rockWaterAbsorption=rockWaterAbsorption,
+                          rockPermeabilityCoefficient=rockPermeabilityCoefficient,
+                          rockLongitudinalWaveVelocity=rockLongitudinalWaveVelocity,
+                          rockTransverseWaveVelocity=rockTransverseWaveVelocity,
+                          rockWaveImpedance=rockWaveImpedance,
+                          rockOrigin=rockOrigin, )
+            rock1.save()
+            rockDatas = Rock1.objects.all()
+            # Redirect to a success page or perform any additional operations
+            return render(request, pageName['RockPropertiesDatabaseSearch'], {'rocks': rockDatas})
+        elif(rockData == '2-1'):
+            file_path = os.path.join('path', 'to', 'uniaxial', unique_filename)
+            print('cslog_uniaxialFailureMode:',type(uniaxialFailureMode))
+            uniaxialFailureModePath = default_storage.save(file_path+'1', uniaxialFailureMode)
+            uniaxialStressStrainCurvePath = default_storage.save(file_path+'2', uniaxialStressStrainCurve)
+            uniaxialCrackMorphologyPath = default_storage.save(file_path+'3', uniaxialCrackMorphology)
+            rock2 = Rock2(key=rock,
+                          uniaxialCompressiveStrength=uniaxialCompressiveStrength,
+                          elasticModulus=elasticModulus,
+                          poissonsRatio=poissonsRatio,
+                          uniaxialFailureMode=uniaxialFailureModePath,
+                          uniaxialStressStrainCurve=uniaxialStressStrainCurvePath,
+                          uniaxialCrackMorphology=uniaxialCrackMorphologyPath, )
+            rock2.save()
+            rockDatas = Rock2.objects.all()
+            # Redirect to a success page or perform any additional operations
+            return render(request, pageName['UniaxialCompressionExperimentInMechanicsLabPage'],
+                          {'rocks': rockDatas})
+        elif(rockData == '2-2'):
+            file_path = os.path.join('path', 'to', 'triaxial', unique_filename)
+            triaxialFailureModePath = default_storage.save(file_path+'1', triaxialFailureMode)
+            triaxialStressStrainCurvePath = default_storage.save(file_path+'2', triaxialStressStrainCurve)
+            triaxialMohrStrengthPath = default_storage.save(file_path+'3', triaxialMohrStrength)
+            rock3 = Rock3(key=rock,
+                          triaxialCompressiveStrength=triaxialCompressiveStrength,
+                          rockCohesion=rockCohesion,
+                          rockInternalFrictionAngle=rockInternalFrictionAngle,
+                          youngModulus=youngModulus,
+                          poissonsRatio=poissonsRatio,
+                          triaxialFailureMode=triaxialFailureModePath,
+                          triaxialStressStrainCurve=triaxialStressStrainCurvePath,
+                          triaxialMohrStrength=triaxialMohrStrengthPath, )
+            rock3.save()
+            rockDatas = Rock3.objects.all()
+            # Redirect to a success page or perform any additional operations
+            return render(request, pageName['TriaxialCompressionExperimentInMechanicsLab'], {'rocks': rockDatas})
+        elif(rockData == '2-3'):
+            file_path = os.path.join('path', 'to', 'tensile', unique_filename)
+            tensileFailureModePath = default_storage.save(file_path+'1', tensileFailureMode)
+            tensileAxialLoadPath = default_storage.save(file_path+'2', tensileAxialLoad)
 
-                rock4 = Rock4(key=rock,
-                              tensileStrength=tensileStrength,
-                              tensileFailureLoad=tensileFailureLoad,
-                              tensileFailureMode=tensileFailureModePath,
-                              tensileAxialLoad=tensileAxialLoadPath,
-                              )
-                rock4.save()
-                rockDatas = Rock4.objects.all()
-                # Redirect to a success page or perform any additional operations
-                return render(request, pageName['TensileStrengthExperimentInMechanicsLab'], {'rocks': rockDatas})
-            case '2-4':
-                file_path = os.path.join('path', 'to', 'shearStressShearDirectionPath', unique_filename)
-                shearStressShearDirectionPath = default_storage.save(file_path+'1', shearStressShearDirection)
-                rock5 = Rock5(key=rock,
-                              shearingStrength=shearingStrength,
-                              shearStressShearDirection=shearStressShearDirectionPath, )
-                rock5.save()
-                rockDatas = Rock5.objects.all()
-                # Redirect to a success page or perform any additional operations
-                return render(request, pageName['DirectShearExperimentInMechanicsLab'], {'rocks': rockDatas})
-            case '2-5':
-                file_path = os.path.join('path', 'to', ' xrd', unique_filename)
-                xrdPatternPath = default_storage.save(file_path+'1', xrdPattern)
-                xrdJadePath = default_storage.save(file_path+'2', xrdJade)
-                rock6 = Rock6(key=rock,
-                              xrdMineralContent=xrdMineralContent,
-                              xrdPattern=xrdPatternPath,
-                              xrdJade=xrdJadePath, )
-                rock6.save()
-                rockDatas = Rock6.objects.all()
-                # Redirect to a success page or perform any additional operations
-                return render(request, pageName['XRDDiffractionExperimentInMechanicsLab'], {'rocks': rockDatas})
-            case '3-1':
-                rock7 = Rock7(key=rock,
-                              rockStaticStrength=rockStaticStrength,
-                              rockProctorsCoefficient=rockProctorsCoefficient,
-                              rockDynamicStrength=rockDynamicStrength,
-                              surfaceHoleLayout=surfaceHoleLayout,
-                              surfaceBoreDiameter=surfaceBoreDiameter,
-                              surfaceHoleDepth=surfaceHoleDepth,
-                              surfaceDistance=surfaceDistance,
-                              surfaceArrayPitch=surfaceArrayPitch,
-                              surfaceSuperDeep=surfaceSuperDeep,
-                              surfaceExplosiveType=surfaceExplosiveType,
-                              surfaceSpecificCharge=surfaceSpecificCharge, )
-                rock7.save()
-                rockDatas = Rock7.objects.all()
-                # Redirect to a success page or perform any additional operations
-                return render(request, pageName['OpenPitBlastingInEngineeringDatabase'], {'rocks': rockDatas})
-            case '3-2':
-                rock8 = Rock8(key=rock,
-                              excavationSectionShape=excavationSectionShape,
-                              excavationSectionArea=excavationSectionArea,
-                              excavationCutForm=excavationCutForm,
-                              excavationHollowholeDiameter=excavationHollowholeDiameter,
-                              excavationBoreholeDiameter=excavationBoreholeDiameter,
-                              excavationBoreholeNumber=excavationBoreholeNumber,
-                              excavationCutCharge=excavationCutCharge,
-                              excavationExplosiveType=excavationExplosiveType,
-                              excavationSpecificCharge=excavationSpecificCharge,
-                              )
-                rock8.save()
-                rockDatas = Rock8.objects.all()
-                # Redirect to a success page or perform any additional operations
-                return render(request, pageName['TunnelingBlastingInEngineeringDatabase'], {'rocks': rockDatas})
-            case '3-3':
-                rock9 = Rock9(key=rock,
-                              stopeMethod=stopeMethod,
-                              stopeOreCaving=stopeOreCaving,
-                              stopeHoleLayout=stopeHoleLayout,
-                              stopeBoreholeDiameter=stopeBoreholeDiameter,
-                              stopeDistance=stopeDistance,
-                              stopeArrayPitch=stopeArrayPitch,
-                              stopeExplosiveType=stopeExplosiveType,
-                              stopeSpecificCharge=stopeSpecificCharge,
-                              stopeSublevelHeight=stopeSublevelHeight,
-                              stopeDriftInterval=stopeDriftInterval,
-                              stopeCollapseStepDistance=stopeCollapseStepDistance,
-                              stopeEdgeHoleAngle=stopeEdgeHoleAngle,
-                              )
-                rock9.save()
-                rockDatas = Rock9.objects.all()
-                # Redirect to a success page or perform any additional operations
-                return render(request, pageName['RetreatBlastingInEngineeringDatabase'], {'rocks': rockDatas})
-            case _:
-                return page_view(request)
+            rock4 = Rock4(key=rock,
+                          tensileStrength=tensileStrength,
+                          tensileFailureLoad=tensileFailureLoad,
+                          tensileFailureMode=tensileFailureModePath,
+                          tensileAxialLoad=tensileAxialLoadPath,
+                          )
+            rock4.save()
+            rockDatas = Rock4.objects.all()
+            # Redirect to a success page or perform any additional operations
+            return render(request, pageName['TensileStrengthExperimentInMechanicsLab'], {'rocks': rockDatas})
+        elif(rockData == '2-4'):
+            file_path = os.path.join('path', 'to', 'shearStressShearDirectionPath', unique_filename)
+            shearStressShearDirectionPath = default_storage.save(file_path+'1', shearStressShearDirection)
+            rock5 = Rock5(key=rock,
+                          shearingStrength=shearingStrength,
+                          shearStressShearDirection=shearStressShearDirectionPath, )
+            rock5.save()
+            rockDatas = Rock5.objects.all()
+            # Redirect to a success page or perform any additional operations
+            return render(request, pageName['DirectShearExperimentInMechanicsLab'], {'rocks': rockDatas})
+        elif(rockData == '2-5'):
+            file_path = os.path.join('path', 'to', ' xrd', unique_filename)
+            xrdPatternPath = default_storage.save(file_path+'1', xrdPattern)
+            xrdJadePath = default_storage.save(file_path+'2', xrdJade)
+            rock6 = Rock6(key=rock,
+                          xrdMineralContent=xrdMineralContent,
+                          xrdPattern=xrdPatternPath,
+                          xrdJade=xrdJadePath, )
+            rock6.save()
+            rockDatas = Rock6.objects.all()
+            # Redirect to a success page or perform any additional operations
+            return render(request, pageName['XRDDiffractionExperimentInMechanicsLab'], {'rocks': rockDatas})
+        elif(rockData == '3-1'):
+            rock7 = Rock7(key=rock,
+                          rockStaticStrength=rockStaticStrength,
+                          rockProctorsCoefficient=rockProctorsCoefficient,
+                          rockDynamicStrength=rockDynamicStrength,
+                          surfaceHoleLayout=surfaceHoleLayout,
+                          surfaceBoreDiameter=surfaceBoreDiameter,
+                          surfaceHoleDepth=surfaceHoleDepth,
+                          surfaceDistance=surfaceDistance,
+                          surfaceArrayPitch=surfaceArrayPitch,
+                          surfaceSuperDeep=surfaceSuperDeep,
+                          surfaceExplosiveType=surfaceExplosiveType,
+                          surfaceSpecificCharge=surfaceSpecificCharge, )
+            rock7.save()
+            rockDatas = Rock7.objects.all()
+            # Redirect to a success page or perform any additional operations
+            return render(request, pageName['OpenPitBlastingInEngineeringDatabase'], {'rocks': rockDatas})
+        elif(rockData == '3-2'):
+            rock8 = Rock8(key=rock,
+                          excavationSectionShape=excavationSectionShape,
+                          excavationSectionArea=excavationSectionArea,
+                          excavationCutForm=excavationCutForm,
+                          excavationHollowholeDiameter=excavationHollowholeDiameter,
+                          excavationBoreholeDiameter=excavationBoreholeDiameter,
+                          excavationBoreholeNumber=excavationBoreholeNumber,
+                          excavationCutCharge=excavationCutCharge,
+                          excavationExplosiveType=excavationExplosiveType,
+                          excavationSpecificCharge=excavationSpecificCharge,
+                          )
+            rock8.save()
+            rockDatas = Rock8.objects.all()
+            # Redirect to a success page or perform any additional operations
+            return render(request, pageName['TunnelingBlastingInEngineeringDatabase'], {'rocks': rockDatas})
+        elif(rockData == '3-3'):
+            rock9 = Rock9(key=rock,
+                          stopeMethod=stopeMethod,
+                          stopeOreCaving=stopeOreCaving,
+                          stopeHoleLayout=stopeHoleLayout,
+                          stopeBoreholeDiameter=stopeBoreholeDiameter,
+                          stopeDistance=stopeDistance,
+                          stopeArrayPitch=stopeArrayPitch,
+                          stopeExplosiveType=stopeExplosiveType,
+                          stopeSpecificCharge=stopeSpecificCharge,
+                          stopeSublevelHeight=stopeSublevelHeight,
+                          stopeDriftInterval=stopeDriftInterval,
+                          stopeCollapseStepDistance=stopeCollapseStepDistance,
+                          stopeEdgeHoleAngle=stopeEdgeHoleAngle,
+                          )
+            rock9.save()
+            rockDatas = Rock9.objects.all()
+            # Redirect to a success page or perform any additional operations
+            return render(request, pageName['RetreatBlastingInEngineeringDatabase'], {'rocks': rockDatas})
+        else:
+            return page_view(request)
     else:
         # Handle GET request
         return page_view(request)
@@ -546,3 +547,36 @@ def delete_singer(request):
     record.delete()
     rockDatas = Rock2.objects.all()
     return render(request, pageName['UniaxialCompressionExperimentInMechanicsLabPage'], {'rocks': rockDatas})
+
+
+def schema(request):
+    if request.method == 'POST':
+        pdf = request.FILES['pdf']
+        year = request.POST['year']
+        month = request.POST['month']
+        day = request.POST['day']
+        area = request.POST['area']
+        plat = request.POST['plat']
+        well = request.POST['well']
+        name = year + ',' + month + ',' + day + ',' + area + ',' + plat + ',' + well
+        schema = Schema(schema_name=name, pdf_file=pdf)
+        try:
+            schema.save()
+            return render(request, pageName['OpenPit'])
+        except:
+            pass
+        return render(request, pageName['OpenPit'])
+    if request.method == 'GET':
+        schemalist = Schema.objects.all()
+        result = []
+        for item in schemalist:
+            result.append({
+                'schema_name': item.schema_name,
+                'pdf': item.pdf_file.url,
+                'img1': item.image_file_vibration.url,
+                'img2': item.image_file_damage.url,
+                'img3': item.image_file_blast_heap.url,
+                'img4': item.image_file_wall_surface.url,
+            })
+        print(result)
+        return render(request, pageName['OpenPit'], {'schemas': result})
