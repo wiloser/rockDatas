@@ -551,27 +551,62 @@ def delete_singer(request):
 
 def schema(request):
     if request.method == 'POST':
-        pdf = request.FILES['pdf']
-        year = request.POST['year']
-        month = request.POST['month']
-        day = request.POST['day']
-        area = request.POST['area']
-        plat = request.POST['plat']
-        well = request.POST['well']
-        name = year + ',' + month + ',' + day + ',' + area + ',' + plat + ',' + well
-        schema = Schema(schema_name=name, pdf_file=pdf)
-        try:
-            schema.save()
-            return render(request, pageName['OpenPit'])
-        except:
-            pass
-        return render(request, pageName['OpenPit'])
+        type = request.GET['type']
+        if(type == "1-1"):
+            year = request.POST['year']
+            month = request.POST['month']
+            day = request.POST['day']
+            area = request.POST['area']
+            plat = request.POST['plat']
+            well = request.POST['well']
+            name = year + ',' + month + ',' + day + ',' + area + ',' + plat + ',' + well
+            pdf = request.FILES['pdf']
+            schema = Schema(schema_name=name, pdf_file=pdf)
+            try:
+                schema.save()
+                return render(request, pageName['OpenPit'])
+            except:
+                pass
+        elif(type == "1-2"):
+            schemaName = request.POST['schemaName']
+            oldSchema = Schema.objects.get(schema_name=schemaName)
+            if oldSchema:
+                velocity = request.POST['velocity']
+                img1 = request.FILES['img1-1']
+                img2 = request.FILES['img2-1']
+                img3 = request.FILES['img3-1']
+                img4 = request.FILES['img4-1']
+                oldSchema.image_file_vibration = img1
+                oldSchema.velocity = velocity
+                oldSchema.image_file_damage = img2
+                oldSchema.image_file_blast_heap = img3
+                oldSchema.image_file_wall_surface = img4
+                try:
+                    oldSchema.save()
+                    return render(request, pageName['OpenPit'])
+                except:
+                    pass
+        schemalist = Schema.objects.all()
+        result = []
+        for item in schemalist:
+            result.append({
+                'schema_name': item.schema_name,
+                'velocity': item.velocity or '',
+                'pdf': item.pdf_file.url,
+                'img1': item.image_file_vibration.url,
+                'img2': item.image_file_damage.url,
+                'img3': item.image_file_blast_heap.url,
+                'img4': item.image_file_wall_surface.url,
+            })
+        print(result)
+        return render(request, pageName['OpenPit'], {'schemas': result})
     if request.method == 'GET':
         schemalist = Schema.objects.all()
         result = []
         for item in schemalist:
             result.append({
                 'schema_name': item.schema_name,
+                'velocity': item.velocity or '',
                 'pdf': item.pdf_file.url,
                 'img1': item.image_file_vibration.url,
                 'img2': item.image_file_damage.url,

@@ -42,6 +42,8 @@ MIDDLEWARE = [
     # 'django.middleware.csrf.CsrfResponseMiddleware',
 ]
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 ROOT_URLCONF = "demo.urls"
 
 TEMPLATES = [

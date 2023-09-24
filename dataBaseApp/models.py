@@ -172,6 +172,7 @@ class Rock9(models.Model):
 class Schema(models.Model):
     schema_name = models.CharField(primary_key=True, max_length=255, verbose_name='方案名称')
     pdf_file = models.FileField(upload_to='pdf_files/', verbose_name='pdf文件')
+    velocity = models.CharField(max_length=255,  verbose_name='振动速度')
     image_file_vibration = models.ImageField(upload_to='images-vibration/', verbose_name='振动',default='path/to/default_image.jpg')
     image_file_damage = models.ImageField(upload_to='images-damage/', verbose_name='损伤',default='path/to/default_image.jpg')
     image_file_blast_heap = models.ImageField(upload_to='images-blast-heap/', verbose_name='爆堆',default='path/to/default_image.jpg')
