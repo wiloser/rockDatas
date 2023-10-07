@@ -586,6 +586,8 @@ def schema(request):
                     return render(request, pageName['OpenPit'])
                 except:
                     pass
+        elif(type == "1-3"):
+            pass
         schemalist = Schema.objects.all()
         result = []
         for item in schemalist:
