@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
+        <li class="breadcrumb-item active"> 大数据平台</li>
+        <li class="breadcrumb-item active" aria-current="page">理论计算</li>
+    </ol>
+</nav>
+
+<hr>
+
+<div class="row col-xl-12">
+    <div class="col-xl-4">
+        <label>岩石名称：</label>
+        <div class="input-group">
+            <select class="custom-select" id="inputGroupSelect01">
+                <option value="1">沉积岩</option>
+                <option value="2">火成岩</option>
+                <option value="3">变质岩</option>
+            </select>
+            <input type="text" class="form-control" placeholder="岩石名称">
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <label for="static-strength">静态强度：</label>
+        <input type="text" id="static-strength" name="static_strength" placeholder="输入静态强度"
+               class="form-control">
+    </div>
+    <div class="col-xl-4">
+        <label for="longitudinal-velocity">炸药类型</label>
+        <input type="text" id="" name="" placeholder="输入"
+               class="form-control">
+    </div>
+</div>
+<div class="row col-xl-12">
+    <div class="col-xl-4">
+        <label for="rock-density">岩石密度：</label>
+        <input type="text" id="rock-density" name="rock_density" placeholder="输入岩石密度"
+               class="form-control">
+    </div>
+    <div class="col-xl-4">
+        <label for="longitudinal-velocity">普氏系数</label>
+        <input type="text" id="" name="" placeholder="输入"
+               class="form-control">
+    </div>
+    <div class="col-xl-4">
+        <label for="longitudinal-velocity">分形维数D</label>
+        <input type="text" id="" name="" placeholder="输入"
+               class="form-control">
+    </div>
+</div>
+<div class="row col-xl-12">
+    <div class="col-xl-4">
+        <label for="energy_density">能耗密度：</label>
+        <input type="text" id="energy-density" name="energy_density" placeholder="输入能耗密度" class="form-control">
+    </div>
+    <div class="col-xl-4">
+        <label for="">辅助孔排距</label>
+        <input type="text" id="aux_hole_spacing" name="" placeholder="输入"
+               class="form-control">
+    </div>
+    <div class="col-xl-4">
+        <label for="">可爆性参数</label>
+        <input type="text" id="can_boom_parameter" name="" placeholder="输入"
+           class="form-control" >
+    </div>
+</div>
+<div class="row col-xl-12">
+     <div class="col-xl-4">
+        <label for="longitudinal-velocity">露天爆破能量利用率</label>
+        <div class="input-group">
+            <select class="custom-select" id="energy-utilization-rate">
+                <option value="0.5">50%</option>
+                <option value="0.6">60%</option>
+                <option value="0.7">70%</option>
+                <option value="0.8">80%</option>
+                <option value="0.9">90%</option>
+                <option value="1.0">100%</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <label for="">巷道面积</label>
+        <input type="text" id="roadway_area" name="" placeholder="输入"
+               class="form-control">
+    </div>
+    <div class="col-xl-4">
+        <label for="">膨胀系数</label>
+        <input type="text" id="swell_parameter" name="" placeholder="输入"
+               class="form-control" value="0.4">
+    </div>
+</div>
+<div class="row col-xl-12">
+    <div class="col-xl-4">
+        <label for="-velocity">单位炸药释能</label>
+        <div class="input-group"longitudinal>
+            <select class="custom-select" id="explosive-energy">
+                <option value="3600">3600</option>
+                <option value="3700">3700</option>
+                <option value="3800">3800</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <label for="">掏槽结构系数</label>
+        <input type="text" id="structural_coefficients" name="" placeholder="输入"
+           class="form-control" value="1">
+    </div>
+    <div class="col-xl-4">
+        <label for="">最小抵抗线</label>
+        <input type="text" id="minimum_line" name="" placeholder="输入"
+           class="form-control" >
+    </div>
+</div>
+
+<hr>
+<div class="row col-xl-12">
+    <div class="col-xl-4">
+        <div class="input-group">
+            <button type="submit" class="btn btn-secondary " id="open_pit_calculate_btn">露天炸药单耗</button>
+            <input type="text" id="open_pit_calculate_result" class="form-control" readonly>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="input-group">
+            <button type="submit" class="btn btn-secondary " id="excavation_calculate_btn">掘进炸药单耗</button>
+            <input type="text" id="excavation_calculate_result" class="form-control" readonly>
+        </div>
+    </div>
+    <div class="col-xl-4">
+        <div class="input-group">
+            <button type="submit" class="btn btn-secondary " id="retreat_calculate_btn">回采炸药单耗</button>
+            <input type="text" id="retreat_calculate_result" class="form-control" readonly>
+        </div>
+    </div>
+</div>
+
+<script>
+        //露天爆破炸药单耗计算
+        function calculateExplosiveConsumption() {
+            // 获取所需的输入值
+            var energyDensity = parseFloat(document.getElementById('energy-density').value);
+            var energyUtilizationRate = parseFloat(document.getElementById('energy-utilization-rate').value);
+            var explosiveEnergy = parseFloat(document.getElementById('explosive-energy').value);
+            // 计算炸药单耗
+            var explosiveConsumption = energyDensity / (energyUtilizationRate * explosiveEnergy);
+            if (Number.isNaN(explosiveConsumption))
+                alert("请至少输入能耗密度、露天爆破能量利用率、单位炸药释能！")
+            // 显示结果
+            else{
+                document.getElementById('can_boom_parameter').value = explosiveConsumption.toFixed(3);
+                document.getElementById('open_pit_calculate_result').value = explosiveConsumption.toFixed(3);
+            }
+        }
+
+        //掘进爆破炸药单耗计算
+        function calculate_excavation() {
+            // 获取所需的输入值
+            var roadway_area = parseFloat(document.getElementById('roadway_area').value);
+            var retreat_calculate_result = parseFloat(document.getElementById('can_boom_parameter').value);
+            var aux_hole_spacing = parseFloat(document.getElementById('aux_hole_spacing').value);
+            var structural_coefficients = parseFloat(document.getElementById('structural_coefficients').value);
+            if ( Number.isNaN(retreat_calculate_result))  {
+                var energyDensity_excavation = parseFloat(document.getElementById('energy-density').value);
+                var energyUtilizationRate_excavation = parseFloat(document.getElementById('energy-utilization-rate').value);
+                var explosiveEnergy_excavation = parseFloat(document.getElementById('explosive-energy').value);
+                retreat_calculate_result = energyDensity_excavation / (energyUtilizationRate_excavation * explosiveEnergy_excavation);
+                console.log("retreat_calculate_result->", retreat_calculate_result)
+            }
+            // 计算单耗，乘积系数为1
+            var excavation_calculate_result = 14 / roadway_area + ( 0.07 / aux_hole_spacing + retreat_calculate_result - 0.05 ) * structural_coefficients;
+            // 有结果的话再显示，无结果不展示，弹框提示
+            if (Number.isNaN(excavation_calculate_result)) {
+                alert("请至少输入能耗密度、露天爆破能量利用率、单位炸药释能、辅助孔排距、巷道面积！")
+            }
+            else{
+                document.getElementById('excavation_calculate_result').value = excavation_calculate_result.toFixed(3);
+            }
+
+        }
+         //回采爆破炸药单耗计算
+        function calculate_retreat() {
+            // 获取所需的输入值
+            var retreat_calculate_result = parseFloat(document.getElementById('can_boom_parameter').value);
+            var minimum_line = parseFloat(document.getElementById('minimum_line').value);
+            var swell_parameter = parseFloat(document.getElementById('swell_parameter').value);
+            // 计算单耗
+            var calculate_retreat_result = retreat_calculate_result + minimum_line * swell_parameter;
+            if (Number.isNaN(calculate_retreat_result))
+                alert("请至少输入能耗密度、露天爆破能量利用率、单位炸药释能、最小抵抗线、膨胀系数！")
+            // 显示结果
+            else{
+                document.getElementById('retreat_calculate_result').value = calculate_retreat_result.toFixed(3);
+            }
+        }
+        (function () {
+            document.getElementById('open_pit_calculate_btn').addEventListener('click', function () {
+                calculateExplosiveConsumption();
+            });
+            document.getElementById('excavation_calculate_btn').addEventListener('click', function () {
+                calculate_excavation();
+            });
+            document.getElementById('retreat_calculate_btn').addEventListener('click', function () {
+                calculate_retreat();
+            });
+        })();
+
+</script>
+
+{% endblock %}

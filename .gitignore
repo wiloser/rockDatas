@@ -1,0 +1,18 @@
+# 忽略数据库文件
+*.sqlite3
+
+# 忽略python环境
+/bin/
+/lib/
+
+# 忽略媒体文件夹
+/media/
+
+# 忽略静态文件夹
+/static/
+
+# 忽略一些自动生成的文件
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
