@@ -9,7 +9,7 @@
 /media/
 
 # 忽略静态文件夹
-/static/
+# /static/
 
 # 忽略一些自动生成的文件
 *.pyc
