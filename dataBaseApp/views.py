@@ -559,14 +559,17 @@ def schema(request):
             area = request.POST['area']
             plat = request.POST['plat']
             well = request.POST['well']
-            name = year + ',' + month + ',' + day + ',' + area + ',' + plat + ',' + well
-            pdf = request.FILES['pdf']
-            schema = Schema(schema_name=name, pdf_file=pdf)
-            try:
-                schema.save()
-                return render(request, pageName['OpenPit'])
-            except:
+            pdf_file = request.FILES.get('pdf', '')
+            if not year or not month or not day or not area or not plat or not well or not pdf_file:
                 pass
+            else:
+                name = year + ',' + month + ',' + day + ',' + area + ',' + plat + ',' + well
+                schema = Schema(schema_name=name, pdf_file=pdf_file)
+                try:
+                    schema.save()
+                    return render(request, pageName['OpenPit'])
+                except:
+                    pass
         elif(type == "1-2"):
             schemaName = request.POST['schemaName']
             oldSchema = Schema.objects.get(schema_name=schemaName)
