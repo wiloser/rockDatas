@@ -172,7 +172,7 @@ class Rock9(models.Model):
 class Schema(models.Model):
     schema_name = models.CharField(primary_key=True, max_length=255, verbose_name='方案名称')
     pdf_file = models.FileField(upload_to='pdf_files/', verbose_name='pdf文件')
-    velocity = models.CharField(max_length=255,  verbose_name='振动速度')
+    velocity = models.CharField(max_length=255, default='0', verbose_name='振动速度')
     image_file_vibration = models.ImageField(upload_to='images-vibration/', verbose_name='振动',default='path/to/default_image.jpg')
     image_file_damage = models.ImageField(upload_to='images-damage/', verbose_name='损伤',default='path/to/default_image.jpg')
     image_file_blast_heap = models.ImageField(upload_to='images-blast-heap/', verbose_name='爆堆',default='path/to/default_image.jpg')
@@ -182,3 +182,33 @@ class Schema(models.Model):
         app_label = 'dataBaseApp'
         verbose_name = '工程数据库中的露天采矿'
         verbose_name_plural = '工程数据库中的露天采矿'
+
+
+class Segmentation(models.Model):
+    seg_name = models.CharField(primary_key=True, max_length=255, verbose_name='分段名称')
+    tunnel_name = models.CharField(max_length=255, verbose_name='巷道名称')
+    image_img = models.ImageField(upload_to='images-img/', verbose_name='分段图片',default='path/to/default_image.jpg')
+
+    class Meta:
+        app_label = 'dataBaseApp'
+        verbose_name = '工程数据库中的地底下矿'
+        verbose_name_plural = '工程数据库中的地底下矿'
+
+
+class Tunnel(models.Model):
+    tunnel_name = models.CharField(primary_key=True, max_length=255, verbose_name='巷道名称')
+    tunnel1_name = models.CharField(max_length=255, verbose_name='巷道1名称')
+    tunnel2_name = models.CharField(max_length=255, verbose_name='巷道2名称')
+    tunnel3_name = models.CharField(max_length=255, verbose_name='巷道3名称')
+    tunnel4_name = models.CharField(max_length=255, verbose_name='巷道4名称')
+    tunnel5_name = models.CharField(max_length=255, verbose_name='巷道5名称')
+    tunnel6_name = models.CharField(max_length=255, verbose_name='巷道6名称')
+    tunnel7_name = models.CharField(max_length=255, verbose_name='巷道7名称')
+    tunnel8_name = models.CharField(max_length=255, verbose_name='巷道8名称')
+    tunnel9_name = models.CharField(max_length=255, verbose_name='巷道9名称')
+    tunnel10_name = models.CharField(max_length=255, verbose_name='巷道10名称')
+
+    class Meta:
+        app_label = 'dataBaseApp'
+        verbose_name = '工程数据库中的地底下矿2'
+        verbose_name_plural = '工程数据库中的地底下矿2'

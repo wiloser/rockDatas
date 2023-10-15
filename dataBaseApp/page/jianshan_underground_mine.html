@@ -1,214 +1,1008 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
-{% block content %}
+<style>
+  #tree-list ul {
+    list-style-type: none;
+  }
+
+  #tree-list > ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  #tree-list li::before {
+    content: '\25B6';
+    margin-right: 5px;
+    display: inline-block;
+    transform: rotate(90deg);
+  }
+
+  #tree-list li.closed::before {
+    transform: rotate(0deg);
+  }
+
+  #custom-menu {
+    display: none;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    position: absolute;
+  }
+
+  .table-KA {
+    border-collapse: collapse;
+    width: 30%;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+</style>
 
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
-        <li class="breadcrumb-item active"> 大数据平台</li>
-        <li class="breadcrumb-item active" aria-current="page">理论计算</li>
-    </ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
+    <li class="breadcrumb-item active">矿山信息库</li>
+    <li class="breadcrumb-item active" aria-current="page">尖山地底下矿</li>
+  </ol>
 </nav>
 
-<hr>
+<div class="row col-xl-12" style="flex: 1; gap: 20px">
+  <div class="d-flex flex-column" style="width: 500px; padding-bottom: 20px">
+    <div style="height: 100px">
+      <h3 style="color: #000">1.三维激光扫描</h3>
+      <div class="w-100 row justify-between align-center">
+        <h4
+          style="color: #333; margin: 0; margin-left: 15px; cursor: pointer"
+          id="panel-trigger-3"
+        >
+          界面展示
+        </h4>
+        <button
+          type="button"
+          class="btn btn-sm btn-primary"
+          data-toggle="modal"
+          data-target="#myModal3"
+        >
+          添加扫描结果
+        </button>
+      </div>
+    </div>
+    <div style="height: 150px">
+      <h3 style="color: #000">2.爆破振动数据计算与分析</h3>
+      <h6
+        style="color: #333; margin-left: 15px; cursor: pointer"
+        id="panel-trigger-1"
+      >
+        爆破振动计算页面
+      </h6>
+      <h6
+        style="color: #333; margin-left: 15px; cursor: pointer"
+        id="panel-trigger-2"
+      >
+        爆破振动参数拟合计算页面
+      </h6>
+    </div>
+    <div style="flex: 1; overflow: auto">
+      <h3 style="color: #000">3.矿山现场试验结果记录</h3>
+      <div class="w-100 row justify-between align-center">
+        <h4 style="color: #333; margin: 0; margin-left: 15px">方案查看</h4>
+        <button
+          type="button"
+          class="btn btn-sm btn-primary"
+          data-toggle="modal"
+          data-target="#myModal"
+        >
+          添加方案
+        </button>
+      </div>
+      <div id="tree-list" style="margin: 0; padding: 0"></div>
+    </div>
+  </div>
+  <div style="flex: 1">
+    <embed
+      id="pdf-panel"
+      type="application/pdf"
+      width="100%"
+      height="100%"
+      style="display: none"
+    />
+    <div id="effect-image" style="display: none" class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>振动波形</h5>
+          <img id="img1" alt="Image 1" class="img-fluid" />
+          <span>爆破振动速度峰值(cm/s)：</span>
+          <span id="v-1"></span>
+        </div>
+        <div class="col-md-6">
+          <h5>损伤情况</h5>
+          <img id="img2" alt="Image 2" class="img-fluid" />
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <h5>爆堆形态</h5>
+          <img id="img3" alt="Image 3" class="img-fluid" />
+        </div>
+        <div class="col-md-6">
+          <h5>壁面情况</h5>
+          <img id="img4" alt="Image 4" class="img-fluid" />
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-sm btn-primary mt-3"
+        data-toggle="modal"
+        data-target="#myModal2"
+      >
+        添加效果
+      </button>
+    </div>
+    <div id="panel-1" style="display: none">
+      <div class="row">
+        <img style="width: 70%" src="/static/image/img.png" />
+        <table class="table-KA">
+          <thead>
+            <tr>
+              <th>标号</th>
+              <th>K值</th>
+              <th>α值</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td id="t-1-1"></td>
+              <td id="t-1-2"></td>
+              <th id="t-1-3"></th>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td id="t-2-1"></td>
+              <td id="t-2-2"></td>
+              <th id="t-2-3">移除</th>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td id="t-3-1"></td>
+              <td id="t-3-2"></td>
+              <th id="t-3-3">移除</th>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td id="t-4-1"></td>
+              <td id="t-4-2"></td>
+              <th id="t-4-3">移除</th>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td id="t-5-1"></td>
+              <td id="t-5-2"></td>
+              <th id="t-5-3">移除</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="row mt-3">
+          <span>边坡系数：</span>
+          <select id="filed">
+            <option value="1">1分区</option>
+            <option value="2">2分区</option>
+            <option value="3">3分区</option>
+            <option value="4">4分区</option>
+            <option value="5">5分区</option>
+            <option value="6">6分区</option>
+            <option value="7">7分区</option>
+            <option value="8">8分区</option>
+          </select>
+        </div>
+        <div class="row" style="align-items: center; gap: 10px">
+          <span>输入参数：</span>
+          <span>K值</span>
+          <input id="KValue" />
+          <span>α值</span>
+          <input id="AValue" />
+          <button class="btn btn-primary btn-sm">插入</button>
+        </div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+          "
+        >
+          <div style="display: flex; flex-direction: column; width: 100%">
+            <h4 class="text-danger">振动速度计算:</h4>
+            <label>爆区位置输入</label>
+            <input id="input-1-1" />
+            <label class="mt-2">最大单响药量Q输入</label>
+            <input id="input-1-2" />
+            <label class="mt-2">距离R输入</label>
+            <input id="input-1-3" />
+            <label class="mt-2">振速V输出</label>
+            <input disabled id="out-1-4" />
+            <label class="text-warning mt-2">输出结果：</label>
+            <p id="out-1-5"></p>
+          </div>
+          <div style="display: flex; flex-direction: column; width: 100%">
+            <h4 class="text-danger">爆区距离计算:</h4>
+            <label>爆区位置输入</label>
+            <input id="input-2-1" />
+            <label class="mt-2">最大单响药量Q输入</label>
+            <input id="input-2-2" />
+            <label class="mt-2">临界振速V输入</label>
+            <input id="input-2-3" />
+            <label class="mt-2">R输出</label>
+            <input disabled id="out-2-4" />
+            <label class="text-warning mt-2">输出结果：</label>
+            <p id="out-2-5"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="panel-2" style="display: none">
+      <div class="row">
+        <img style="width: 70%" src="/static/image/img.png" />
+        <table class="table-KA">
+          <thead>
+            <tr>
+              <th>标号</th>
+              <th>K值</th>
+              <th>α值</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td id="t2-1-1"></td>
+              <td id="t2-1-2"></td>
+              <th id="t2-1-3"></th>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td id="t2-2-1"></td>
+              <td id="t2-2-2"></td>
+              <th id="t2-2-3">移除</th>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td id="t2-3-1"></td>
+              <td id="t2-3-2"></td>
+              <th id="t2-3-3">移除</th>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td id="t2-4-1"></td>
+              <td id="t2-4-2"></td>
+              <th id="t2-4-3">移除</th>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td id="t2-5-1"></td>
+              <td id="t2-5-2"></td>
+              <th id="t2-5-3">移除</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <form
+        action="{% url 'schema' %}?type=1-3"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div class="row mt-3">
+            <span>边坡系数：</span>
+            <select id="filed2" name="filed">
+              <option value="1">1分区</option>
+              <option value="2">2分区</option>
+              <option value="3">3分区</option>
+              <option value="4">4分区</option>
+              <option value="5">5分区</option>
+              <option value="6">6分区</option>
+              <option value="7">7分区</option>
+              <option value="8">8分区</option>
+            </select>
+          </div>
+          <div class="row" style="align-items: center; gap: 10px">
+            <span>参考输入：</span>
+            <table class="table-KA">
+              <thead>
+                <tr>
+                  <th>测振点位</th>
+                  <th>单响药量/kg</th>
+                  <th>爆心距/m</th>
+                  <th>振动速度/(cm/s)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>
+                    <input id="t3-1-1" name="t3-1-1" />
+                  </td>
+                  <td>
+                    <input id="t3-1-2" name="t3-1-2" />
+                  </td>
+                  <td>
+                    <input id="t3-1-3" name="t3-1-3" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>
+                    <input id="t3-2-1" name="t3-2-1" />
+                  </td>
+                  <td>
+                    <input id="t3-2-2" name="t3-2-2" />
+                  </td>
+                  <td>
+                    <input id="t3-2-3" name="t3-2-3" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>
+                    <input id="t3-3-1" name="t3-3-1" />
+                  </td>
+                  <td>
+                    <input id="t3-3-2" name="t3-3-2" />
+                  </td>
+                  <td>
+                    <input id="t3-3-3" name="t3-3-3" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><input id="t3-4-1" /></td>
+                  <td><input id="t3-4-2" /></td>
+                  <td><input id="t3-4-3" /></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><input id="t3-5-1" /></td>
+                  <td><input id="t3-5-2" /></td>
+                  <td><input id="t3-5-3" /></td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><input id="t3-6-1" /></td>
+                  <td><input id="t3-6-2" /></td>
+                  <td><input id="t3-6-3" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+      </form>
+    </div>
+    <div id="panel-3">
+      <div class="row" style="gap: 20px">
+        <img style="width: 45%" src="/static/image/undergroundmine.jpg" />
+        <img style="width: 45%" id="seg-img" />
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div class="row mt-3">
+          <span>分段名称：</span>
+          <select id="seg-select"></select>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary ml-3"
+            data-toggle="modal"
+            data-target="#myModal4"
+          >
+            添加巷道数据
+          </button>
+        </div>
+        <div class="row">
+          <label for="showTunnel">巷道名称：</label>
+          <input type="text" id="showTunnel" />
+        </div>
+        <div class="row">
+          <label for="showTunnel1">岩石名称：</label>
+          <span type="text" id="showTunnel1"></span>
+        </div>
+        <div class="row">
+          <label for="showTunnel2">密度：</label>
+          <span type="text" id="showTunnel2"></span>
+        </div>
+        <div class="row">
+          <label for="showTunnel3">静态抗压强度：</label>
+          <span type="text" id="showTunnel3"></span>
+        </div>
+        <div class="row">
+          <label for="showTunnel4">静态抗拉强度：</label>
+          <span type="text" id="showTunnel4"></span>
+        </div>
+        <div class="row">
+          <label for="showTunnel5">孔隙率：</label>
+          <span type="text" id="showTunnel5"></span>
+        </div>
+        <div class="row">
+          <label for="showTunnel6">渗透率：</label>
+          <span type="text" id="showTunnel6"></span>
+        </div>
+        <div class="row">
+          <label for="showTunnel7">泊松比：</label>
+          <span type="text" id="showTunnel7"></span>
+        </div>
+        <div class="row">
+          <label for="showTunnel8">弹性模量：</label>
+          <span type="text" id="showTunnel8"></span>
+        </div>
+        <div class="row">
+          <label for="showTunnel9">普氏系数：</label>
+          <span type="text" id="showTunnel9"></span>
+        </div>
+        <div class="row">
+          <label for="showTunnel10">炸药单耗：</label>
+          <span type="text" id="showTunnel10"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div class="row col-xl-12">
-    <div class="col-xl-4">
-        <label>岩石名称：</label>
-        <div class="input-group">
-            <select class="custom-select" id="inputGroupSelect01">
-                <option value="1">沉积岩</option>
-                <option value="2">火成岩</option>
-                <option value="3">变质岩</option>
-            </select>
-            <input type="text" class="form-control" placeholder="岩石名称">
+<div
+  class="modal fade"
+  id="myModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <form
+      action="{% url 'schema' %}?type=1-1"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-body">
+          <label for="year">年：</label>
+          <input type="text" id="year" name="year" class="form-control" />
+          <label for="month">月：</label>
+          <input type="text" id="month" name="month" class="form-control" />
+          <label for="day">日：</label>
+          <input type="text" id="day" name="day" class="form-control" />
+          <label for="area">区域：</label>
+          <input type="text" id="area" name="area" class="form-control" />
+          <label for="plat">平台：</label>
+          <input type="text" id="plat" name="plat" class="form-control" />
+          <label for="well">钻井：</label>
+          <input type="text" id="well" name="well" class="form-control" />
+          <div class="form-group">
+            <label for="pdf">方案PDF ：</label>
+            <div class="custom-file">
+              <input
+                type="file"
+                id="pdf"
+                name="pdf"
+                placeholder="请选中pdf文件"
+                class="form-control"
+                onchange="displayFileName(this)"
+              />
+
+              <label class="custom-file-label" for="pdf">选择文件</label>
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="col-xl-4">
-        <label for="static-strength">静态强度：</label>
-        <input type="text" id="static-strength" name="static_strength" placeholder="输入静态强度"
-               class="form-control">
-    </div>
-    <div class="col-xl-4">
-        <label for="longitudinal-velocity">炸药类型</label>
-        <input type="text" id="" name="" placeholder="输入"
-               class="form-control">
-    </div>
-</div>
-<div class="row col-xl-12">
-    <div class="col-xl-4">
-        <label for="rock-density">岩石密度：</label>
-        <input type="text" id="rock-density" name="rock_density" placeholder="输入岩石密度"
-               class="form-control">
-    </div>
-    <div class="col-xl-4">
-        <label for="longitudinal-velocity">普氏系数</label>
-        <input type="text" id="" name="" placeholder="输入"
-               class="form-control">
-    </div>
-    <div class="col-xl-4">
-        <label for="longitudinal-velocity">分形维数D</label>
-        <input type="text" id="" name="" placeholder="输入"
-               class="form-control">
-    </div>
-</div>
-<div class="row col-xl-12">
-    <div class="col-xl-4">
-        <label for="energy_density">能耗密度：</label>
-        <input type="text" id="energy-density" name="energy_density" placeholder="输入能耗密度" class="form-control">
-    </div>
-    <div class="col-xl-4">
-        <label for="">辅助孔排距</label>
-        <input type="text" id="aux_hole_spacing" name="" placeholder="输入"
-               class="form-control">
-    </div>
-    <div class="col-xl-4">
-        <label for="">可爆性参数</label>
-        <input type="text" id="can_boom_parameter" name="" placeholder="输入"
-           class="form-control" >
-    </div>
-</div>
-<div class="row col-xl-12">
-     <div class="col-xl-4">
-        <label for="longitudinal-velocity">露天爆破能量利用率</label>
-        <div class="input-group">
-            <select class="custom-select" id="energy-utilization-rate">
-                <option value="0.5">50%</option>
-                <option value="0.6">60%</option>
-                <option value="0.7">70%</option>
-                <option value="0.8">80%</option>
-                <option value="0.9">90%</option>
-                <option value="1.0">100%</option>
-            </select>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            关闭
+          </button>
+          <button type="submit" class="btn btn-primary">提交</button>
         </div>
-    </div>
-    <div class="col-xl-4">
-        <label for="">巷道面积</label>
-        <input type="text" id="roadway_area" name="" placeholder="输入"
-               class="form-control">
-    </div>
-    <div class="col-xl-4">
-        <label for="">膨胀系数</label>
-        <input type="text" id="swell_parameter" name="" placeholder="输入"
-               class="form-control" value="0.4">
-    </div>
-</div>
-<div class="row col-xl-12">
-    <div class="col-xl-4">
-        <label for="-velocity">单位炸药释能</label>
-        <div class="input-group"longitudinal>
-            <select class="custom-select" id="explosive-energy">
-                <option value="3600">3600</option>
-                <option value="3700">3700</option>
-                <option value="3800">3800</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-xl-4">
-        <label for="">掏槽结构系数</label>
-        <input type="text" id="structural_coefficients" name="" placeholder="输入"
-           class="form-control" value="1">
-    </div>
-    <div class="col-xl-4">
-        <label for="">最小抵抗线</label>
-        <input type="text" id="minimum_line" name="" placeholder="输入"
-           class="form-control" >
-    </div>
+      </div>
+    </form>
+  </div>
 </div>
 
-<hr>
-<div class="row col-xl-12">
-    <div class="col-xl-4">
-        <div class="input-group">
-            <button type="submit" class="btn btn-secondary " id="open_pit_calculate_btn">露天炸药单耗</button>
-            <input type="text" id="open_pit_calculate_result" class="form-control" readonly>
+<div
+  class="modal fade"
+  id="myModal2"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <form
+      action="{% url 'schema' %}?type=1-2"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-body">
+          <input
+            style="display: none"
+            type="text"
+            id="schemaName"
+            name="schemaName"
+            class="form-control"
+          />
+          <div class="form-group">
+            <label for="img1-1">振动波形 ：</label>
+            <div class="custom-file">
+              <input
+                type="file"
+                id="img1-1"
+                name="img1-1"
+                placeholder="请选中图片文件"
+                class="form-control"
+                onchange="displayFileName(this)"
+              />
+
+              <label class="custom-file-label" for="img1-1">选择文件</label>
+            </div>
+          </div>
+          <label for="velocity">振速(cm/s)：</label>
+          <input
+            type="text"
+            id="velocity"
+            name="velocity"
+            class="form-control"
+          />
+          <div class="form-group">
+            <label for="img2-1">损伤情况 ：</label>
+            <div class="custom-file">
+              <input
+                type="file"
+                id="img2-1"
+                name="img2-1"
+                placeholder="请选中图片文件"
+                class="form-control"
+                onchange="displayFileName(this)"
+              />
+
+              <label class="custom-file-label" for="img2-1">选择文件</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="img3-1">爆堆形状 ：</label>
+            <div class="custom-file">
+              <input
+                type="file"
+                id="img3-1"
+                name="img3-1"
+                placeholder="请选中图片文件"
+                class="form-control"
+                onchange="displayFileName(this)"
+              />
+
+              <label class="custom-file-label" for="img3-1">选择文件</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="img4-1">壁面情况 ：</label>
+            <div class="custom-file">
+              <input
+                type="file"
+                id="img4-1"
+                name="img4-1"
+                placeholder="请选中图片文件"
+                class="form-control"
+                onchange="displayFileName(this)"
+              />
+
+              <label class="custom-file-label" for="img4-1">选择文件</label>
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="col-xl-4">
-        <div class="input-group">
-            <button type="submit" class="btn btn-secondary " id="excavation_calculate_btn">掘进炸药单耗</button>
-            <input type="text" id="excavation_calculate_result" class="form-control" readonly>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            关闭
+          </button>
+          <button type="submit" class="btn btn-primary">提交</button>
         </div>
-    </div>
-    <div class="col-xl-4">
-        <div class="input-group">
-            <button type="submit" class="btn btn-secondary " id="retreat_calculate_btn">回采炸药单耗</button>
-            <input type="text" id="retreat_calculate_result" class="form-control" readonly>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="myModal3"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <form
+      action="{% url 'schema' %}?type=2-1"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-body">
+          <label for="segmentation">分段名称：</label>
+          <input
+            type="text"
+            id="segmentation"
+            name="segmentation"
+            class="form-control"
+          />
+          <div class="form-group">
+            <label for="img1-2">分段图片 ：</label>
+            <div class="custom-file">
+              <input
+                type="file"
+                id="img1-2"
+                name="img1-2"
+                placeholder="请选中图片文件"
+                class="form-control"
+                onchange="displayFileName(this)"
+              />
+
+              <label class="custom-file-label" for="img1-2">选择文件</label>
+            </div>
+          </div>
         </div>
-    </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            关闭
+          </button>
+          <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="myModal4"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <form
+      action="{% url 'schema' %}?type=2-2"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-body">
+          <label style="display: none" for="seg-input">分段名称：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="seg-input"
+            name="seg-input"
+            class="form-control"
+          />
+          <label for="tunnel">巷道名称：</label>
+          <input type="text" id="tunnel" name="tunnel" class="form-control" />
+          <label for="tunnel1">岩石名称：</label>
+          <input type="text" id="tunnel1" name="tunnel1" class="form-control" />
+          <label for="tunnel2">密度：</label>
+          <input type="text" id="tunnel2" name="tunnel2" class="form-control" />
+          <label for="tunnel3">静态抗压强度：</label>
+          <input type="text" id="tunnel3" name="tunnel3" class="form-control" />
+          <label for="tunnel4">静态抗拉强度：</label>
+          <input type="text" id="tunnel4" name="tunnel4" class="form-control" />
+          <label for="tunnel5">孔隙率：</label>
+          <input type="text" id="tunnel5" name="tunnel5" class="form-control" />
+          <label for="tunnel6">渗透率：</label>
+          <input type="text" id="tunnel6" name="tunnel6" class="form-control" />
+          <label for="tunnel7">泊松比：</label>
+          <input type="text" id="tunnel7" name="tunnel7" class="form-control" />
+          <label for="tunnel8">弹性模量：</label>
+          <input type="text" id="tunnel8" name="tunnel8" class="form-control" />
+          <label for="tunnel9">普氏系数：</label>
+          <input type="text" id="tunnel9" name="tunnel9" class="form-control" />
+          <label for="tunnel10">炸药单耗：</label>
+          <input
+            type="text"
+            id="tunnel10"
+            name="tunnel10"
+            class="form-control"
+          />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            关闭
+          </button>
+          <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script>
-        //露天爆破炸药单耗计算
-        function calculateExplosiveConsumption() {
-            // 获取所需的输入值
-            var energyDensity = parseFloat(document.getElementById('energy-density').value);
-            var energyUtilizationRate = parseFloat(document.getElementById('energy-utilization-rate').value);
-            var explosiveEnergy = parseFloat(document.getElementById('explosive-energy').value);
-            // 计算炸药单耗
-            var explosiveConsumption = energyDensity / (energyUtilizationRate * explosiveEnergy);
-            if (Number.isNaN(explosiveConsumption))
-                alert("请至少输入能耗密度、露天爆破能量利用率、单位炸药释能！")
-            // 显示结果
-            else{
-                document.getElementById('can_boom_parameter').value = explosiveConsumption.toFixed(3);
-                document.getElementById('open_pit_calculate_result').value = explosiveConsumption.toFixed(3);
-            }
-        }
+  var AValue = document.getElementById('AValue');
+  var KValue = document.getElementById('KValue');
+  var input11 = document.getElementById('input-1-1');
+  var input12 = document.getElementById('input-1-2');
+  var input13 = document.getElementById('input-1-3');
+  var out14 = document.getElementById('out-1-4');
+  var out15 = document.getElementById('out-1-5');
+  var input21 = document.getElementById('input-2-1');
+  var input22 = document.getElementById('input-2-2');
+  var input23 = document.getElementById('input-2-3');
+  var out24 = document.getElementById('out-2-4');
+  var out25 = document.getElementById('out-2-5');
+  input11.addEventListener('change', change)
+  input12.addEventListener('change', change)
+  input13.addEventListener('change', change)
+  input21.addEventListener('change', change)
+  input22.addEventListener('change', change)
+  input23.addEventListener('change', change)
+  function change() {
+      if(input12.value && input13.value) {
+          out14.value = (Math.pow(Math.pow(input12.value, 1 / 3) / input13.value, AValue.value) * KValue.value).toFixed(2)
+          out15.innerText = ''
+          out15.innerText = input11.value + '平台的最大单响药量' + input12.value + 'KG的中深孔爆破方案距离爆区' + input13.value + 'm的' +
+          '最大爆破振动速度预计为' + out14.value + 'cm/s，预裂爆破方案最大爆破振动速度预计为' + (Number(out14.value) * 0.4).toFixed(2) + 'cm/s至'
+           + (Number(out14.value) * 0.6).toFixed(2) + 'cm/s之间'
+      }
+      if(input22.value && input23.value && out14.value) {
+          out24.value = (Math.pow(input22.value, 1 / 3) / Math.pow(out14.value / KValue.value, AValue.value)).toFixed(2)
+          var min = (Math.pow(input22.value, 1 / 3) / Math.pow(out14.value * 0.6 / KValue.value, AValue.value)).toFixed(2)
+          var max = (Math.pow(input22.value, 1 / 3) / Math.pow(out14.value * 0.4 / KValue.value, AValue.value)).toFixed(2)
+          out25.innerText = ''
+          out25.innerText = input21.value + '平台的最大单响药量' + input22.value + 'KG的中深孔爆破方案，控制爆破振动速度在' + (Number(out14.value)).toFixed(2)
+           + 'cm/s的距离为' + out24.value + 'm，预裂爆破方案最大距离预计为' + min + 'm至' + max + 'm之间'
+      }
+  }
 
-        //掘进爆破炸药单耗计算
-        function calculate_excavation() {
-            // 获取所需的输入值
-            var roadway_area = parseFloat(document.getElementById('roadway_area').value);
-            var retreat_calculate_result = parseFloat(document.getElementById('can_boom_parameter').value);
-            var aux_hole_spacing = parseFloat(document.getElementById('aux_hole_spacing').value);
-            var structural_coefficients = parseFloat(document.getElementById('structural_coefficients').value);
-            if ( Number.isNaN(retreat_calculate_result))  {
-                var energyDensity_excavation = parseFloat(document.getElementById('energy-density').value);
-                var energyUtilizationRate_excavation = parseFloat(document.getElementById('energy-utilization-rate').value);
-                var explosiveEnergy_excavation = parseFloat(document.getElementById('explosive-energy').value);
-                retreat_calculate_result = energyDensity_excavation / (energyUtilizationRate_excavation * explosiveEnergy_excavation);
-                console.log("retreat_calculate_result->", retreat_calculate_result)
-            }
-            // 计算单耗，乘积系数为1
-            var excavation_calculate_result = 14 / roadway_area + ( 0.07 / aux_hole_spacing + retreat_calculate_result - 0.05 ) * structural_coefficients;
-            // 有结果的话再显示，无结果不展示，弹框提示
-            if (Number.isNaN(excavation_calculate_result)) {
-                alert("请至少输入能耗密度、露天爆破能量利用率、单位炸药释能、辅助孔排距、巷道面积！")
-            }
-            else{
-                document.getElementById('excavation_calculate_result').value = excavation_calculate_result.toFixed(3);
-            }
+  var KAList = [
+      {k: 102.47, a: 1.41},
+      {k: 88.11, a: 1.37},
+      {k: 128.09, a: 1.5},
+      {k: 121.92, a: 1.5},
+      {k: 86.41, a: 1.36},
+      {k: 108.68, a: 1.48},
+      {k: 87.46, a: 1.37},
+      {k: 98.68, a: 1.43},
+  ]
+  const t11 = document.getElementById('t-1-1')
+  const t12 = document.getElementById('t-1-2')
+  KValue.value = KAList[0].k
+  AValue.value = KAList[0].a
+  t11.innerText = KAList[0].k
+  t12.innerText = KAList[0].a
+  filedSelect = document.getElementById('filed')
+  filedSelect.addEventListener('change', (e) => {
+      KValue.value = KAList[Number(e.target.value) - 1].k
+      AValue.value = KAList[Number(e.target.value) - 1].a
+      t11.innerText = KAList[Number(e.target.value) - 1].k
+      t12.innerText = KAList[Number(e.target.value) - 1].a
+  })
 
-        }
-         //回采爆破炸药单耗计算
-        function calculate_retreat() {
-            // 获取所需的输入值
-            var retreat_calculate_result = parseFloat(document.getElementById('can_boom_parameter').value);
-            var minimum_line = parseFloat(document.getElementById('minimum_line').value);
-            var swell_parameter = parseFloat(document.getElementById('swell_parameter').value);
-            // 计算单耗
-            var calculate_retreat_result = retreat_calculate_result + minimum_line * swell_parameter;
-            if (Number.isNaN(calculate_retreat_result))
-                alert("请至少输入能耗密度、露天爆破能量利用率、单位炸药释能、最小抵抗线、膨胀系数！")
-            // 显示结果
-            else{
-                document.getElementById('retreat_calculate_result').value = calculate_retreat_result.toFixed(3);
-            }
-        }
-        (function () {
-            document.getElementById('open_pit_calculate_btn').addEventListener('click', function () {
-                calculateExplosiveConsumption();
-            });
-            document.getElementById('excavation_calculate_btn').addEventListener('click', function () {
-                calculate_excavation();
-            });
-            document.getElementById('retreat_calculate_btn').addEventListener('click', function () {
-                calculate_retreat();
-            });
-        })();
 
+
+
+  var schemas = {{ schemas|safe }}
+  var pdfPanel = document.getElementById('pdf-panel');
+  var img = document.getElementById('effect-image');
+  var img1 = document.getElementById('img1');
+  var img2 = document.getElementById('img2');
+  var img3 = document.getElementById('img3');
+  var img4 = document.getElementById('img4');
+  var panelTrigger1 = document.getElementById('panel-trigger-1');
+  var panelTrigger2 = document.getElementById('panel-trigger-2');
+  var panelTrigger3 = document.getElementById('panel-trigger-3');
+  var panel1 = document.getElementById('panel-1');
+  var panel2 = document.getElementById('panel-2');
+  var panel3 = document.getElementById('panel-3');
+  var modalButton = document.getElementById('modal-button-2');
+  var schemaName = document.getElementById('schemaName');
+  var v1DOM = document.getElementById('v-1')
+  panelTrigger1.addEventListener('click', () => {
+      panel1.style.display = 'block'
+      panel2.style.display = 'none'
+      panel3.style.display = 'none'
+      img.style.display = 'none'
+      pdfPanel.style.display = 'none'
+  })
+  panelTrigger2.addEventListener('click', () => {
+      panel1.style.display = 'none'
+      panel2.style.display = 'block'
+      panel3.style.display = 'none'
+      img.style.display = 'none'
+      pdfPanel.style.display = 'none'
+  })
+  panelTrigger3.addEventListener('click', () => {
+      panel1.style.display = 'none'
+      panel2.style.display = 'none'
+      panel3.style.display = 'block'
+      img.style.display = 'none'
+      pdfPanel.style.display = 'none'
+  })
+  let data = []
+  schemas.forEach(schema => {
+      const [year, month, day, area, plat, well] = schema.schema_name.split(',')
+      let yearNode = data.find(item => item.id === year+'年') || {id: year+'年', children: []}
+      let monthNode = yearNode.children.find(item => item.id === month+'月') || {id: month+'月', children: []}
+      const node = {
+          id: day + '日' + area + '区域' + plat + '平台' + well + '钻井',
+          schema: year + ',' + month + ',' + day+',' + area + ',' + plat + ',' + well,
+          v1: schema.velocity,
+          isLeaf: true, pdf: schema.pdf,
+          img21: schema.img1,img22: schema.img2,img23: schema.img3,img24: schema.img4
+      }
+      monthNode.children = monthNode.children.concat(node)
+      let oldMonthNode = yearNode.children.find(item => item.id === month+'月')
+      if(!oldMonthNode) {
+          yearNode.children = yearNode.children.concat(monthNode)
+      } else {
+          oldMonthNode = monthNode
+      }
+      let oldYearNode = data.find(item => item.id === year+'年')
+      if(!oldYearNode) {
+          data = data.concat(yearNode)
+      } else {
+          oldYearNode = yearNode
+      }
+  })
+
+  function buildTree(parent, items) {
+      const ul = document.createElement('ul');
+      parent.appendChild(ul);
+      items.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item.id;
+          ul.appendChild(li);
+          if(item.isLeaf) {
+              // 末端处理事件
+              li.addEventListener('click', showPdf(item))
+          } else {
+              li.addEventListener('click', (e) => {
+                  if(e.target.className === '') {
+                      e.target.classList.add("closed");
+                      if(e.target.childNodes[1]) {
+                          e.target.childNodes[1].style.display = 'none'
+                      }
+                  } else {
+                      e.target.classList.remove('closed')
+                      if(e.target.childNodes[1]) {
+                          e.target.childNodes[1].style.display = 'block'
+                      }
+                  }
+                  e.preventDefault()
+                  e.stopPropagation()
+              })
+          }
+
+          if (item.children) {
+              buildTree(li, item.children);
+          }
+      });
+  }
+
+  let clickTimer = null
+
+  function showPdf(item) {
+      const {schema, v1, pdf, img21, img22, img23, img24}  = item
+      return function show() {
+          if (!clickTimer) {
+               clickTimer = setTimeout(function() {
+                  // 单击事件处理逻辑
+                  console.log("单击事件触发了");
+                  clickTimer = null;
+
+                  img.style.display = 'none'
+                  pdfPanel.style.display = 'block'
+                  panel1.style.display = 'none'
+                  panel2.style.display = 'none'
+                  panel3.style.display = 'none'
+                  pdfPanel.src = window.location.origin +  pdf
+              }, 250); // 设置计时器时间间隔，单位为毫秒
+          } else {
+              clearTimeout(clickTimer);
+              console.log("双击事件触发了");
+              clickTimer = null;
+
+              schemaName.value = schema
+              img1.src=img21
+              img2.src=img22
+              img3.src=img23
+              img4.src=img24
+              v1DOM.innerText = v1
+              img.style.display = 'block'
+              pdfPanel.style.display = 'none'
+              panel1.style.display = 'none'
+              panel2.style.display = 'none'
+              panel3.style.display = 'none'
+          }
+      }
+  }
+
+  const tree = document.getElementById('tree-list');
+  buildTree(tree, data);
+
+
+
+  function displayFileName(input) {
+      const fileName = input.files[0].name;
+      const label = input.nextElementSibling;
+      label.innerText = fileName;
+  }
+
+
+
+  var segmentations = {{ segmentations|safe }}
+  var segSelect = document.getElementById('seg-select')
+  segmentations.forEach(seg => {
+    const op = document.createElement('option')
+    op.innerHTML = seg.seg_name
+    op.value = seg.seg_name
+    segSelect.appendChild(op)
+  })
+  const img21 = document.getElementById('seg-img')
+  const segInput = document.getElementById('seg-input')
+  segInput.value = segmentations[0].seg_name
+  img21.src = segmentations[0].img_seg
+  segSelect.addEventListener('change', (e) => {
+    img21.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
+    segInput.value = e.target.value
+  })
+
+
+
+  var tunnels = {{ tunnels|safe }}
+  const showTunnel = document.getElementById('showTunnel')
+  const showTunnel1 = document.getElementById('showTunnel1')
+  const showTunnel2 = document.getElementById('showTunnel2')
+  const showTunnel3 = document.getElementById('showTunnel3')
+  const showTunnel4 = document.getElementById('showTunnel4')
+  const showTunnel5 = document.getElementById('showTunnel5')
+  const showTunnel6 = document.getElementById('showTunnel6')
+  const showTunnel7 = document.getElementById('showTunnel7')
+  const showTunnel8 = document.getElementById('showTunnel8')
+  const showTunnel9 = document.getElementById('showTunnel9')
+  const showTunnel10 = document.getElementById('showTunnel10')
+  showTunnel.addEventListener('input', (e) => {
+    const data = tunnels.find(tunnel => tunnel.tunnel_name === segSelect.value + ',' + e.target.value)
+    if(data) {
+      showTunnel1.innerText = data.tunnel_name1
+      showTunnel2.innerText = data.tunnel_name2
+      showTunnel3.innerText = data.tunnel_name3
+      showTunnel4.innerText = data.tunnel_name4
+      showTunnel5.innerText = data.tunnel_name5
+      showTunnel6.innerText = data.tunnel_name6
+      showTunnel7.innerText = data.tunnel_name7
+      showTunnel8.innerText = data.tunnel_name8
+      showTunnel9.innerText = data.tunnel_name9
+      showTunnel10.innerText = data.tunnel_name10
+    }
+    else {
+      showTunnel1.innerText = ''
+      showTunnel2.innerText = ''
+      showTunnel3.innerText = ''
+      showTunnel4.innerText = ''
+      showTunnel5.innerText = ''
+      showTunnel6.innerText = ''
+      showTunnel7.innerText = ''
+      showTunnel8.innerText = ''
+      showTunnel9.innerText = ''
+      showTunnel10.innerText = ''
+    }
+  })
 </script>
 
 {% endblock %}

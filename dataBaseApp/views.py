@@ -589,11 +589,58 @@ def schema(request):
                     # return render(request, pageName['OpenPit'])
                 except:
                     pass
-        elif(type == "1-3"):
-            pass
-        schemalist = Schema.objects.all()
+        elif(type == "2-1"):
+            segmentation = request.POST['segmentation']
+            img12 = request.FILES['img1-2']
+            if not segmentation or not img12:
+                pass
+            else:
+                seg = Segmentation(seg_name=segmentation, image_img=img12)
+                try:
+                    seg.save()
+                    # return render(request, pageName['OpenPit'])
+                except:
+                    pass
+
+        elif(type == "2-2"):
+            segInput = request.POST['seg-input']
+            tunnel = request.POST['tunnel']
+            tunnel1 = request.POST['tunnel1']
+            tunnel2 = request.POST['tunnel2']
+            tunnel3 = request.POST['tunnel3']
+            tunnel4 = request.POST['tunnel4']
+            tunnel5 = request.POST['tunnel5']
+            tunnel6 = request.POST['tunnel6']
+            tunnel7 = request.POST['tunnel7']
+            tunnel8 = request.POST['tunnel8']
+            tunnel9 = request.POST['tunnel9']
+            tunnel10 = request.POST['tunnel10']
+            print('>>>>>>>>>>', segInput, tunnel, not segInput or not tunnel or not tunnel1 or not tunnel2 or not tunnel3 or not tunnel4 or not tunnel5 or not tunnel6 or not tunnel7 or not tunnel8 or not tunnel9 or not tunnel10)
+            if not segInput or not tunnel or not tunnel1 or not tunnel2 or not tunnel3 or not tunnel4 or not tunnel5 or not tunnel6 or not tunnel7 or not tunnel8 or not tunnel9 or not tunnel10:
+                pass
+            else:
+                tunnelData = Tunnel(
+                    tunnel_name = segInput + ',' + tunnel, 
+                    tunnel1_name = tunnel1,
+                    tunnel2_name = tunnel2,
+                    tunnel3_name = tunnel3,
+                    tunnel4_name = tunnel4,
+                    tunnel5_name = tunnel5,
+                    tunnel6_name = tunnel6,
+                    tunnel7_name = tunnel7,
+                    tunnel8_name = tunnel8,
+                    tunnel9_name = tunnel9,
+                    tunnel10_name = tunnel10,
+                )
+                try:
+                    tunnelData.save()
+                    # return render(request, pageName['OpenPit'])
+                except:
+                    pass
+
+        schemaList = Schema.objects.all()
         result = []
-        for item in schemalist:
+        for item in schemaList:
             result.append({
                 'schema_name': item.schema_name,
                 'velocity': item.velocity or '',
@@ -604,11 +651,38 @@ def schema(request):
                 'img4': item.image_file_wall_surface.url,
             })
         print(result)
-        return render(request, pageName['OpenPit'], {'schemas': result})
+        result2 = []
+        for item in Segmentation.objects.all():
+            result2.append({
+                'seg_name': item.seg_name,
+                'img_seg': item.image_img.url,
+            })
+        print(result2)
+        result3 = []
+        for item in Tunnel.objects.all():
+            result3.append({
+                'tunnel_name': item.tunnel_name,
+                'tunnel_name1': item.tunnel1_name,
+                'tunnel_name2': item.tunnel2_name,
+                'tunnel_name3': item.tunnel3_name,
+                'tunnel_name4': item.tunnel4_name,
+                'tunnel_name5': item.tunnel5_name,
+                'tunnel_name6': item.tunnel6_name,
+                'tunnel_name7': item.tunnel7_name,
+                'tunnel_name8': item.tunnel8_name,
+                'tunnel_name9': item.tunnel9_name,
+                'tunnel_name10': item.tunnel10_name,
+            })
+        print(result3)
+        if(type != "2-1" and type != '2-2'):
+            return render(request, pageName['OpenPit'], {'schemas': result})
+        else:
+            return render(request, pageName['JianShanUndergroundMine'], {'schemas': result, 'segmentations': result2, 'tunnels': result3})
     if request.method == 'GET':
-        schemalist = Schema.objects.all()
+        schemaList = Schema.objects.all()
+        pageParam = request.GET.get('param1', '')
         result = []
-        for item in schemalist:
+        for item in schemaList:
             result.append({
                 'schema_name': item.schema_name,
                 'velocity': item.velocity or '',
@@ -619,4 +693,30 @@ def schema(request):
                 'img4': item.image_file_wall_surface.url,
             })
         print(result)
-        return render(request, pageName['OpenPit'], {'schemas': result})
+        if not pageParam:
+            return render(request, pageName['OpenPit'], {'schemas': result})
+        else:
+            result2 = []
+            for item in Segmentation.objects.all():
+                result2.append({
+                    'seg_name': item.seg_name,
+                    'img_seg': item.image_img.url,
+                })
+            print(result2)
+            result3 = []
+            for item in Tunnel.objects.all():
+                result3.append({
+                    'tunnel_name': item.tunnel_name,
+                    'tunnel_name1': item.tunnel1_name,
+                    'tunnel_name2': item.tunnel2_name,
+                    'tunnel_name3': item.tunnel3_name,
+                    'tunnel_name4': item.tunnel4_name,
+                    'tunnel_name5': item.tunnel5_name,
+                    'tunnel_name6': item.tunnel6_name,
+                    'tunnel_name7': item.tunnel7_name,
+                    'tunnel_name8': item.tunnel8_name,
+                    'tunnel_name9': item.tunnel9_name,
+                    'tunnel_name10': item.tunnel10_name,
+                })
+            print(result3, '>>>>>>>>>>')
+            return render(request, pageName['JianShanUndergroundMine'], {'schemas': result, 'segmentations': result2, 'tunnels': result3})
