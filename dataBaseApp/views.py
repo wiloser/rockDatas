@@ -567,7 +567,7 @@ def schema(request):
                 schema = Schema(schema_name=name, pdf_file=pdf_file)
                 try:
                     schema.save()
-                    return render(request, pageName['OpenPit'])
+                    # return render(request, pageName['OpenPit'])
                 except:
                     pass
         elif(type == "1-2"):
@@ -586,7 +586,7 @@ def schema(request):
                 oldSchema.image_file_wall_surface = img4
                 try:
                     oldSchema.save()
-                    return render(request, pageName['OpenPit'])
+                    # return render(request, pageName['OpenPit'])
                 except:
                     pass
         elif(type == "1-3"):
