@@ -72,7 +72,7 @@ pageName = {'homePage': 'rock_properties.html',
             # 大数据分析
             'Big_Date': 'none.html',
 
-            # 尖山地底下矿
+            # 尖山地底矿
             'JianShanUndergroundMine': 'jianshan_underground_mine.html',
             # 露天采矿
             'OpenPit': 'open_pit.html',
@@ -721,11 +721,15 @@ def schema(request):
                 'img3': item.image_file_blast_heap.url,
                 'img4': item.image_file_wall_surface.url,
             })
-        if(type != "2-1" and type != '2-2' and type != '3-1'):
+        if(type != "2-1" and type != '2-2' and type != '3-1' and type != '3-2'):
             return render(request, pageName['OpenPit'], {'schemas': result})
         else:
             return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'segmentations': result2, 'tunnels': result3})
     if request.method == 'GET':
+        # Schema.objects.all().delete()
+        # Schema2.objects.all().delete()
+        # Segmentation.objects.all().delete()
+        # Tunnel.objects.all().delete()
         schemaList = Schema.objects.all()
         pageParam = request.GET.get('param1', '')
         result = []
