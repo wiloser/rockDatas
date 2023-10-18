@@ -183,6 +183,20 @@ class Schema(models.Model):
         verbose_name = '工程数据库中的露天采矿'
         verbose_name_plural = '工程数据库中的露天采矿'
 
+class Schema2(models.Model):
+    schema_name = models.CharField(primary_key=True, max_length=255, verbose_name='方案名称')
+    pdf_file = models.FileField(upload_to='pdf_files/', verbose_name='pdf文件')
+    velocity = models.CharField(max_length=255, default='0', verbose_name='振动速度')
+    image_file_vibration = models.ImageField(upload_to='images-vibration/', verbose_name='振动',default='path/to/default_image.jpg')
+    image_file_damage = models.ImageField(upload_to='images-damage/', verbose_name='损伤',default='path/to/default_image.jpg')
+    image_file_blast_heap = models.ImageField(upload_to='images-blast-heap/', verbose_name='爆堆',default='path/to/default_image.jpg')
+    image_file_wall_surface = models.ImageField(upload_to='images-wall-surface/', verbose_name='壁面' ,default='path/to/default_image.jpg')
+
+    class Meta:
+        app_label = 'dataBaseApp'
+        verbose_name = '工程数据库中的露天采矿'
+        verbose_name_plural = '工程数据库中的露天采矿'
+
 
 class Segmentation(models.Model):
     seg_name = models.CharField(primary_key=True, max_length=255, verbose_name='分段名称')

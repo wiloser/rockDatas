@@ -570,9 +570,45 @@ def schema(request):
                     # return render(request, pageName['OpenPit'])
                 except:
                     pass
+        elif(type == "3-1"):
+            year = request.POST['year']
+            month = request.POST['month']
+            day = request.POST['day']
+            area = request.POST['area']
+            plat = request.POST['plat']
+            well = request.POST['well']
+            pdf_file = request.FILES.get('pdf', '')
+            if not year or not month or not day or not area or not plat or not well or not pdf_file:
+                pass
+            else:
+                name = year + ',' + month + ',' + day + ',' + area + ',' + plat + ',' + well
+                schema = Schema2(schema_name=name, pdf_file=pdf_file)
+                try:
+                    schema.save()
+                except:
+                    pass
         elif(type == "1-2"):
             schemaName = request.POST['schemaName']
             oldSchema = Schema.objects.get(schema_name=schemaName)
+            if oldSchema:
+                velocity = request.POST['velocity']
+                img1 = request.FILES['img1-1']
+                img2 = request.FILES['img2-1']
+                img3 = request.FILES['img3-1']
+                img4 = request.FILES['img4-1']
+                oldSchema.image_file_vibration = img1
+                oldSchema.velocity = velocity
+                oldSchema.image_file_damage = img2
+                oldSchema.image_file_blast_heap = img3
+                oldSchema.image_file_wall_surface = img4
+                try:
+                    oldSchema.save()
+                    # return render(request, pageName['OpenPit'])
+                except:
+                    pass
+        elif(type == "3-2"):
+            schemaName = request.POST['schemaName']
+            oldSchema = Schema2.objects.get(schema_name=schemaName)
             if oldSchema:
                 velocity = request.POST['velocity']
                 img1 = request.FILES['img1-1']
@@ -673,10 +709,22 @@ def schema(request):
                 'tunnel_name10': item.tunnel10_name,
             })
         print(result3)
-        if(type != "2-1" and type != '2-2'):
+        result4 = []
+        schemaList4 = Schema2.objects.all()
+        for item in schemaList4:
+            result4.append({
+                'schema_name': item.schema_name,
+                'velocity': item.velocity or '',
+                'pdf': item.pdf_file.url,
+                'img1': item.image_file_vibration.url,
+                'img2': item.image_file_damage.url,
+                'img3': item.image_file_blast_heap.url,
+                'img4': item.image_file_wall_surface.url,
+            })
+        if(type != "2-1" and type != '2-2' and type != '3-1'):
             return render(request, pageName['OpenPit'], {'schemas': result})
         else:
-            return render(request, pageName['JianShanUndergroundMine'], {'schemas': result, 'segmentations': result2, 'tunnels': result3})
+            return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'segmentations': result2, 'tunnels': result3})
     if request.method == 'GET':
         schemaList = Schema.objects.all()
         pageParam = request.GET.get('param1', '')
@@ -695,6 +743,19 @@ def schema(request):
         if not pageParam:
             return render(request, pageName['OpenPit'], {'schemas': result})
         else:
+            result4 = []
+            schemaList4 = Schema2.objects.all()
+            for item in schemaList4:
+                result4.append({
+                    'schema_name': item.schema_name,
+                    'velocity': item.velocity or '',
+                    'pdf': item.pdf_file.url,
+                    'img1': item.image_file_vibration.url,
+                    'img2': item.image_file_damage.url,
+                    'img3': item.image_file_blast_heap.url,
+                    'img4': item.image_file_wall_surface.url,
+                })
+            print(result4)
             result2 = []
             for item in Segmentation.objects.all():
                 result2.append({
@@ -717,5 +778,4 @@ def schema(request):
                     'tunnel_name9': item.tunnel9_name,
                     'tunnel_name10': item.tunnel10_name,
                 })
-            print(result3, '>>>>>>>>>>')
-            return render(request, pageName['JianShanUndergroundMine'], {'schemas': result, 'segmentations': result2, 'tunnels': result3})
+            return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'segmentations': result2, 'tunnels': result3})

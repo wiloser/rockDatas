@@ -475,7 +475,7 @@
 >
   <div class="modal-dialog modal-dialog-centered">
     <form
-      action="{% url 'schema' %}?type=1-1"
+      action="{% url 'schema' %}?type=3-1"
       method="post"
       enctype="multipart/form-data"
     >
@@ -488,11 +488,11 @@
           <input type="text" id="month" name="month" class="form-control" />
           <label for="day">日：</label>
           <input type="text" id="day" name="day" class="form-control" />
-          <label for="area">区域：</label>
+          <label for="area">分段：</label>
           <input type="text" id="area" name="area" class="form-control" />
-          <label for="plat">平台：</label>
+          <label for="plat">近路：</label>
           <input type="text" id="plat" name="plat" class="form-control" />
-          <label for="well">钻井：</label>
+          <label for="well">排数：</label>
           <input type="text" id="well" name="well" class="form-control" />
           <div class="form-group">
             <label for="pdf">方案PDF ：</label>
@@ -531,7 +531,7 @@
 >
   <div class="modal-dialog modal-dialog-centered">
     <form
-      action="{% url 'schema' %}?type=1-2"
+      action="{% url 'schema' %}?type=3-2"
       method="post"
       enctype="multipart/form-data"
     >
@@ -846,7 +846,7 @@
       let yearNode = data.find(item => item.id === year+'年') || {id: year+'年', children: []}
       let monthNode = yearNode.children.find(item => item.id === month+'月') || {id: month+'月', children: []}
       const node = {
-          id: day + '日' + area + '区域' + plat + '平台' + well + '钻井',
+          id: day + '日' + area + '分段' + plat + '近路' + well + '排数',
           schema: year + ',' + month + ',' + day+',' + area + ',' + plat + ',' + well,
           v1: schema.velocity,
           isLeaf: true, pdf: schema.pdf,
@@ -962,8 +962,8 @@
   })
   const img21 = document.getElementById('seg-img')
   const segInput = document.getElementById('seg-input')
-  segInput.value = segmentations[0].seg_name
-  img21.src = segmentations[0].img_seg
+  segInput.value = segmentations?.[0]?.seg_name || ''
+  img21.src = segmentations?.[0]?.img_seg || ''
   segSelect.addEventListener('change', (e) => {
     img21.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
     segInput.value = e.target.value
