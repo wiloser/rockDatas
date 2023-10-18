@@ -615,8 +615,7 @@ def schema(request):
             tunnel8 = request.POST['tunnel8']
             tunnel9 = request.POST['tunnel9']
             tunnel10 = request.POST['tunnel10']
-            print('>>>>>>>>>>', segInput, tunnel, not segInput or not tunnel or not tunnel1 or not tunnel2 or not tunnel3 or not tunnel4 or not tunnel5 or not tunnel6 or not tunnel7 or not tunnel8 or not tunnel9 or not tunnel10)
-            if not segInput or not tunnel or not tunnel1 or not tunnel2 or not tunnel3 or not tunnel4 or not tunnel5 or not tunnel6 or not tunnel7 or not tunnel8 or not tunnel9 or not tunnel10:
+            if not segInput or not tunnel:
                 pass
             else:
                 tunnelData = Tunnel(
