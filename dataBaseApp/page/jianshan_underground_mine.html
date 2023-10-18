@@ -412,6 +412,13 @@
         <div class="row">
           <label for="showTunnel">巷道名称：</label>
           <input type="text" id="showTunnel" />
+          <button
+            type="button"
+            class="btn btn-sm btn-primary ml-3"
+            id="tunnelQuery"
+          >
+            查询
+          </button>
         </div>
         <div class="row">
           <label for="showTunnel1">岩石名称：</label>
@@ -966,6 +973,7 @@
 
   var tunnels = {{ tunnels|safe }}
   const showTunnel = document.getElementById('showTunnel')
+  const tunnelQuery = document.getElementById('tunnelQuery')
   const showTunnel1 = document.getElementById('showTunnel1')
   const showTunnel2 = document.getElementById('showTunnel2')
   const showTunnel3 = document.getElementById('showTunnel3')
@@ -976,8 +984,8 @@
   const showTunnel8 = document.getElementById('showTunnel8')
   const showTunnel9 = document.getElementById('showTunnel9')
   const showTunnel10 = document.getElementById('showTunnel10')
-  showTunnel.addEventListener('input', (e) => {
-    const data = tunnels.find(tunnel => tunnel.tunnel_name === segSelect.value + ',' + e.target.value)
+  tunnelQuery.addEventListener('click', () => {
+    const data = tunnels.find(tunnel => tunnel.tunnel_name === segSelect.value + ',' + showTunnel.value)
     if(data) {
       showTunnel1.innerText = data.tunnel_name1
       showTunnel2.innerText = data.tunnel_name2
