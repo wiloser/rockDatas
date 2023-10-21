@@ -369,6 +369,17 @@
   </div>
 </div>
 
+<button
+  style="position: fixed; top: -100px"
+  id="deleteButton"
+  type="button"
+  class="btn btn-sm btn-primary"
+  data-toggle="modal"
+  data-target="#myModal3"
+>
+  删除方案
+</button>
+
 <div
   class="modal fade"
   id="myModal"
@@ -528,6 +539,54 @@
   </div>
 </div>
 
+<div
+  class="modal fade"
+  id="myModal3"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <form
+      action="{% url 'schema' %}?type=1-3"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-body">
+          <label style="display: none" for="schemaName2">方案名：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="schemaName2"
+            name="schemaName2"
+            class="form-control"
+          />
+          <div
+            style="
+              width: 300px;
+              height: 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            "
+          >
+            确认删除选中方案吗？
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            关闭
+          </button>
+          <button type="submit" class="btn btn-primary">确认</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
   var AValue = document.getElementById('AValue');
   var KValue = document.getElementById('KValue');
@@ -541,6 +600,8 @@
   var input23 = document.getElementById('input-2-3');
   var out24 = document.getElementById('out-2-4');
   var out25 = document.getElementById('out-2-5');
+  var deleteButton = document.getElementById('deleteButton')
+  var schemaName2 = document.getElementById('schemaName2')
   input11.addEventListener('change', change)
   input12.addEventListener('change', change)
   input13.addEventListener('change', change)
@@ -655,6 +716,19 @@
           if(item.isLeaf) {
               // 末端处理事件
               li.addEventListener('click', showPdf(item))
+              const button = document.createElement('button');
+              button.innerText = '删除'
+              button.classList.add('btn')
+              button.classList.add('btn-sm')
+              button.classList.add('btn-primary')
+              button.addEventListener('click', () => {
+                deleteButton.click()
+                schemaName2.value = item.schema
+              })
+              ul.style.display="flex"
+              ul.style.alignItems="center"
+              ul.style.gap="10px"
+              ul.appendChild(button)
           } else {
               li.addEventListener('click', (e) => {
                   if(e.target.className === '') {

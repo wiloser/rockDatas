@@ -72,7 +72,7 @@ pageName = {'homePage': 'rock_properties.html',
             # 大数据分析
             'Big_Date': 'none.html',
 
-            # 尖山地底矿
+            # 尖山地下矿
             'JianShanUndergroundMine': 'jianshan_underground_mine.html',
             # 露天采矿
             'OpenPit': 'open_pit.html',
@@ -625,6 +625,22 @@ def schema(request):
                     # return render(request, pageName['OpenPit'])
                 except:
                     pass
+        elif(type == "1-3"):
+            schemaName2 = request.POST['schemaName2']
+            deleteSchema = Schema.objects.get(schema_name=schemaName2) or ''
+            try:
+                if deleteSchema:
+                    deleteSchema.delete()
+            except:
+                pass
+        elif(type == "3-3"):
+            schemaName2 = request.POST['schemaName2']
+            deleteSchema = Schema2.objects.get(schema_name=schemaName2) or ''
+            try:
+                if deleteSchema:
+                    deleteSchema.delete()
+            except:
+                pass
         elif(type == "2-1"):
             segmentation = request.POST['segmentation']
             img12 = request.FILES['img1-2']
@@ -721,7 +737,7 @@ def schema(request):
                 'img3': item.image_file_blast_heap.url,
                 'img4': item.image_file_wall_surface.url,
             })
-        if(type != "2-1" and type != '2-2' and type != '3-1' and type != '3-2'):
+        if(type != "2-1" and type != '2-2' and type != '3-1' and type != '3-2' and type != '3-3'):
             return render(request, pageName['OpenPit'], {'schemas': result})
         else:
             return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'segmentations': result2, 'tunnels': result3})
