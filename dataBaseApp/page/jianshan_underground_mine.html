@@ -55,13 +55,13 @@
   </ol>
 </nav>
 
-<div class="row col-xl-12" style="flex: 1; gap: 20px">
-  <div class="d-flex flex-column" style="width: 500px; padding-bottom: 20px">
+<div class="row col-xl-12" style="flex: 1; gap: 30px">
+  <div class="d-flex flex-column" style="width: 320px; padding-bottom: 20px">
     <div style="height: 100px">
       <h3 style="color: #000">1.三维激光扫描</h3>
       <div class="w-100 row justify-between align-center">
         <h4
-          style="color: #333; margin: 0; margin-left: 15px; cursor: pointer"
+          style="color: #666; margin: 0; margin-left: 15px; cursor: pointer"
           id="panel-trigger-3"
         >
           界面展示
@@ -78,23 +78,17 @@
     </div>
     <div style="height: 150px">
       <h3 style="color: #000">2.爆破振动数据计算与分析</h3>
-      <h6
-        style="color: #333; margin-left: 15px; cursor: pointer"
-        id="panel-trigger-1"
-      >
+      <h4 style="color: #666; cursor: pointer" id="panel-trigger-1">
         爆破振动计算页面
-      </h6>
-      <h6
-        style="color: #333; margin-left: 15px; cursor: pointer"
-        id="panel-trigger-2"
-      >
+      </h4>
+      <h4 style="color: #666; cursor: pointer" id="panel-trigger-2">
         爆破振动参数拟合计算页面
-      </h6>
+      </h4>
     </div>
-    <div style="flex: 1; overflow: auto">
+    <div style="flex: 1; overflow: auto; margin-top: 20px">
       <h3 style="color: #000">3.矿山现场试验结果记录</h3>
       <div class="w-100 row justify-between align-center">
-        <h4 style="color: #333; margin: 0; margin-left: 15px">方案查看</h4>
+        <h4 style="color: #666; margin: 0; margin-left: 15px">方案查看</h4>
         <button
           type="button"
           class="btn btn-sm btn-primary"
@@ -104,9 +98,10 @@
           添加方案
         </button>
       </div>
-      <div id="tree-list" style="margin: 0; padding: 0"></div>
+      <div id="tree-list" style="margin: 0; padding: 0; color: #999"></div>
     </div>
   </div>
+  <div style="width: 3px; height: 100%; background-color: red"></div>
   <div style="flex: 1">
     <embed
       id="pdf-panel"
@@ -150,12 +145,9 @@
       </button>
     </div>
     <div id="panel-1" style="display: none">
-      <div class="row">
-        <img
-          style="width: 70%; object-fit: contain"
-          src="/static/image/img.png"
-        />
-        <table class="table-KA">
+      <div class="row" style="gap: 30px">
+        <img style="max-width: 60%" src="/static/image/img.png" />
+        <table class="table-KA" style="flex: 1">
           <thead>
             <tr>
               <th>标号</th>
@@ -258,9 +250,9 @@
       </div>
     </div>
     <div id="panel-2" style="display: none">
-      <div class="row">
-        <img style="width: 70%" src="/static/image/img.png" />
-        <table class="table-KA">
+      <div class="row" style="gap: 30px">
+        <img style="max-width: 60%" src="/static/image/img.png" />
+        <table class="table-KA" style="flex: 1">
           <thead>
             <tr>
               <th>标号</th>
@@ -397,12 +389,12 @@
       </form>
     </div>
     <div id="panel-3">
-      <div class="row" style="gap: 20px">
+      <div class="row" style="gap: 20px; height: 300px">
         <img
-          style="width: 45%; object-fit: contain"
+          style="height: 100%; object-fit: contain"
           src="/static/image/undergroundmine.jpg"
         />
-        <img style="width: 45%; object-fit: contain" id="seg-img" />
+        <img style="height: 100%; object-fit: contain" id="seg-img" />
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px">
         <div class="row mt-3">
