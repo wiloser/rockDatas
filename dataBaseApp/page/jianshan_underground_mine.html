@@ -173,25 +173,65 @@
               <td>2</td>
               <td id="t-2-1"></td>
               <td id="t-2-2"></td>
-              <th id="t-2-3">移除</th>
+              <th>
+                <button
+                  id="t-2-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>3</td>
               <td id="t-3-1"></td>
               <td id="t-3-2"></td>
-              <th id="t-3-3">移除</th>
+              <th>
+                <button
+                  id="t-3-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>4</td>
               <td id="t-4-1"></td>
               <td id="t-4-2"></td>
-              <th id="t-4-3">移除</th>
+              <th>
+                <button
+                  id="t-4-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>5</td>
               <td id="t-5-1"></td>
               <td id="t-5-2"></td>
-              <th id="t-5-3">移除</th>
+              <th>
+                <button
+                  id="t-5-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
           </tbody>
         </table>
@@ -216,7 +256,14 @@
           <input id="KValue" />
           <span>α值</span>
           <input id="AValue" />
-          <button class="btn btn-primary btn-sm">插入</button>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary"
+            data-toggle="modal"
+            data-target="#myModal6"
+          >
+            插入
+          </button>
         </div>
         <div
           style="
@@ -803,9 +850,143 @@
   </div>
 </div>
 
+<div
+  class="modal fade"
+  id="myModal6"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <form
+      action="{% url 'schema' %}?type=3-4"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-body">
+          <label style="display: none" for="part">分区：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="part"
+            name="part"
+            class="form-control"
+          />
+          <label style="display: none" for="KValue2">K：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="KValue2"
+            name="KValue2"
+            class="form-control"
+          />
+          <label style="display: none" for="AValue2">A：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="AValue2"
+            name="AValue2"
+            class="form-control"
+          />
+          <div
+            style="
+              width: 300px;
+              height: 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            "
+          >
+            确认插入此值？
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            关闭
+          </button>
+          <button type="submit" class="btn btn-primary">确认</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="myModal7"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <form
+      action="{% url 'schema' %}?type=3-5"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-body">
+          <label style="display: none" for="part2">分区：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="part2"
+            name="part2"
+            class="form-control"
+          />
+          <label style="display: none" for="KValue3">K：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="KValue3"
+            name="KValue3"
+            class="form-control"
+          />
+          <label style="display: none" for="AValue3">A：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="AValue3"
+            name="AValue3"
+            class="form-control"
+          />
+          <div
+            style="
+              width: 300px;
+              height: 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            "
+          >
+            确认删除此值？
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            关闭
+          </button>
+          <button type="submit" class="btn btn-primary">确认</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
   var AValue = document.getElementById('AValue');
   var KValue = document.getElementById('KValue');
+  var part = document.getElementById('part');
+  var part2 = document.getElementById('part2');
+  var AValue2 = document.getElementById('AValue2');
+  var KValue2 = document.getElementById('KValue2');
+  var AValue3 = document.getElementById('AValue3');
+  var KValue3 = document.getElementById('KValue3');
   var input11 = document.getElementById('input-1-1');
   var input12 = document.getElementById('input-1-2');
   var input13 = document.getElementById('input-1-3');
@@ -818,6 +999,37 @@
   var out25 = document.getElementById('out-2-5');
   var deleteButton = document.getElementById('deleteButton')
   var schemaName2 = document.getElementById('schemaName2')
+
+  var t21 = document.getElementById('t-2-1')
+  var t22 = document.getElementById('t-2-2')
+  var t23 = document.getElementById('t-2-3')
+  var t31 = document.getElementById('t-3-1')
+  var t32 = document.getElementById('t-3-2')
+  var t33 = document.getElementById('t-3-3')
+  var t41 = document.getElementById('t-4-1')
+  var t42 = document.getElementById('t-4-2')
+  var t43 = document.getElementById('t-4-3')
+  var t51 = document.getElementById('t-5-1')
+  var t52 = document.getElementById('t-5-2')
+  var t53 = document.getElementById('t-5-3')
+  filedSelect = document.getElementById('filed')
+  t23.addEventListener('click', (e) => {
+    KValue3.value = t21.textContent
+    AValue3.value = t22.textContent
+  })
+  t33.addEventListener('click', () => {
+    KValue3.value = t31.textContent
+    AValue3.value = t32.textContent
+  })
+  t43.addEventListener('click', () => {
+    KValue3.value = t41.textContent
+    AValue3.value = t42.textContent
+  })
+  t53.addEventListener('click', () => {
+    KValue3.value = t51.textContent
+    AValue3.value = t52.textContent
+  })
+
   input11.addEventListener('change', change)
   input12.addEventListener('change', change)
   input13.addEventListener('change', change)
@@ -854,16 +1066,95 @@
   ]
   const t11 = document.getElementById('t-1-1')
   const t12 = document.getElementById('t-1-2')
+
+  var KA = {{ KA|safe }}
+  KA.forEach(item => {
+    const [part, v1, v2] = item.value.split('_')
+    if(part === filedSelect.value) {
+      if(!t21.textContent) {
+        t21.textContent = v1
+        t22.textContent = v2
+      }
+      else if(!t31.textContent) {
+        t31.textContent = v1
+        t32.textContent = v2
+      }
+      else if(!t41.textContent) {
+        t41.textContent = v1
+        t42.textContent = v2
+      }
+      else if(!t51.textContent) {
+        t51.textContent = v1
+        t52.textContent = v2
+      }
+    }
+  })
   KValue.value = KAList[0].k
   AValue.value = KAList[0].a
   t11.innerText = KAList[0].k
   t12.innerText = KAList[0].a
-  filedSelect = document.getElementById('filed')
+
+
+  KValue2.value = KAList[0].k
+  AValue2.value = KAList[0].a
+  KValue3.value = KAList[0].k
+  AValue3.value = KAList[0].a
+
+  KValue.addEventListener('change', () => {
+    KValue2.value = KValue.value
+  })
+  AValue.addEventListener('change', () => {
+    AValue2.value = AValue.value
+  })
+
+  part.value = filedSelect.value
+  part2.value = filedSelect.value
+
   filedSelect.addEventListener('change', (e) => {
-      KValue.value = KAList[Number(e.target.value) - 1].k
-      AValue.value = KAList[Number(e.target.value) - 1].a
-      t11.innerText = KAList[Number(e.target.value) - 1].k
-      t12.innerText = KAList[Number(e.target.value) - 1].a
+    part.value = e.target.value
+    part2.value = e.target.value
+    KValue.value = KAList[Number(e.target.value) - 1].k
+    AValue.value = KAList[Number(e.target.value) - 1].a
+    KValue2.value = KAList[Number(e.target.value) - 1].k
+    AValue2.value = KAList[Number(e.target.value) - 1].a
+    KValue3.value = KAList[Number(e.target.value) - 1].k
+    AValue3.value = KAList[Number(e.target.value) - 1].a
+    t11.innerText = KAList[Number(e.target.value) - 1].k
+    t12.innerText = KAList[Number(e.target.value) - 1].a
+
+
+    t21.textContent = ''
+    t22.textContent = ''
+    t31.textContent = ''
+    t32.textContent = ''
+    t41.textContent = ''
+    t42.textContent = ''
+    t51.textContent = ''
+    t52.textContent = ''
+
+    KA.forEach(item => {
+    const [part, v1, v2] = item.value.split('_')
+    if(part === filedSelect.value) {
+      if(!t21.textContent) {
+        t21.textContent = v1
+        t22.textContent = v2
+      }
+      else if(!t31.textContent) {
+        t31.textContent = v1
+        t32.textContent = v2
+      }
+      else if(!t41.textContent) {
+        t41.textContent = v1
+        t42.textContent = v2
+      }
+      else if(!t51.textContent) {
+        t51.textContent = v1
+        t52.textContent = v2
+      }
+    }
+  })
+
+
   })
 
 

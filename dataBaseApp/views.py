@@ -633,6 +633,44 @@ def schema(request):
                     deleteSchema.delete()
             except:
                 pass
+        elif(type == "1-4"):
+            part = request.POST['part']
+            KValue2 = request.POST['KValue2']
+            AValue2 = request.POST['AValue2']
+            oldValue = KA(k_a_value=part+'_'+KValue2+'_'+AValue2)
+            
+            try:
+                oldValue.save()
+            except:
+                pass
+        elif(type == "3-4"):
+            part = request.POST['part']
+            KValue2 = request.POST['KValue2']
+            AValue2 = request.POST['AValue2']
+            oldValue = KA2(k_a_value=part+'_'+KValue2+'_'+AValue2)
+            
+            try:
+                oldValue.save()
+            except:
+                pass
+        elif(type == "1-5"):
+            part = request.POST['part2']
+            KValue3 = request.POST['KValue3']
+            AValue3 = request.POST['AValue3']
+            oldValue = KA.objects.get(k_a_value=part+'_'+KValue3+'_'+AValue3)
+            try:
+                oldValue.delete()
+            except:
+                pass
+        elif(type == "3-5"):
+            part = request.POST['part2']
+            KValue3 = request.POST['KValue3']
+            AValue3 = request.POST['AValue3']
+            oldValue = KA2.objects.get(k_a_value=part+'_'+KValue3+'_'+AValue3)
+            try:
+                oldValue.delete()
+            except:
+                pass
         elif(type == "3-3"):
             schemaName2 = request.POST['schemaName2']
             deleteSchema = Schema2.objects.get(schema_name=schemaName2) or ''
@@ -737,10 +775,24 @@ def schema(request):
                 'img3': item.image_file_blast_heap.url,
                 'img4': item.image_file_wall_surface.url,
             })
-        if(type != "2-1" and type != '2-2' and type != '3-1' and type != '3-2' and type != '3-3'):
-            return render(request, pageName['OpenPit'], {'schemas': result})
+        result5 = []
+        schemaList5 = KA.objects.all()
+        for item in schemaList5:
+            result5.append({
+                'value': item.k_a_value,
+            })
+        print(result5)
+        result6 = []
+        schemaList6 = KA2.objects.all()
+        for item in schemaList6:
+            result6.append({
+                'value': item.k_a_value,
+            })
+        print(result6)
+        if(type != "2-1" and type != '2-2' and type != '3-1' and type != '3-2' and type != '3-3' and type != '3-4' and type != '3-5'):
+            return render(request, pageName['OpenPit'], {'schemas': result, 'KA': result5})
         else:
-            return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'segmentations': result2, 'tunnels': result3})
+            return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'KA': result6, 'segmentations': result2, 'tunnels': result3})
     if request.method == 'GET':
         # Schema.objects.all().delete()
         # Schema2.objects.all().delete()
@@ -760,8 +812,22 @@ def schema(request):
                 'img4': item.image_file_wall_surface.url,
             })
         print(result)
+        result5 = []
+        schemaList5 = KA.objects.all()
+        for item in schemaList5:
+            result5.append({
+                'value': item.k_a_value,
+            })
+        print(result5)
+        result6 = []
+        schemaList6 = KA2.objects.all()
+        for item in schemaList6:
+            result6.append({
+                'value': item.k_a_value,
+            })
+        print(result6)
         if not pageParam:
-            return render(request, pageName['OpenPit'], {'schemas': result})
+            return render(request, pageName['OpenPit'], {'schemas': result, 'KA': result5})
         else:
             result4 = []
             schemaList4 = Schema2.objects.all()
@@ -798,4 +864,4 @@ def schema(request):
                     'tunnel_name9': item.tunnel9_name,
                     'tunnel_name10': item.tunnel10_name,
                 })
-            return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'segmentations': result2, 'tunnels': result3})
+            return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'KA': result6, 'segmentations': result2, 'tunnels': result3})

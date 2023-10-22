@@ -226,3 +226,21 @@ class Tunnel(models.Model):
         app_label = 'dataBaseApp'
         verbose_name = '工程数据库中的地底下矿2'
         verbose_name_plural = '工程数据库中的地底下矿2'
+
+
+class KA(models.Model):
+    k_a_value = models.CharField(primary_key=True, max_length=255, verbose_name='KA值') # 分区_k_a
+
+    class Meta:
+        app_label = 'dataBaseApp'
+        verbose_name = '工程数据库中的KA值'
+        verbose_name_plural = '工程数据库中的KA值'
+
+
+class KA2(models.Model):
+    k_a_value = models.CharField(primary_key=True, max_length=255, verbose_name='KA值') # 分区_k_a
+
+    class Meta:
+        app_label = 'dataBaseApp'
+        verbose_name = '工程数据库中的KA值'
+        verbose_name_plural = '工程数据库中的KA值'
