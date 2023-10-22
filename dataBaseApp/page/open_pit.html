@@ -58,14 +58,17 @@
 <div class="row col-xl-12" style="flex: 1; gap: 20px">
   <div class="d-flex flex-column" style="width: 320px; padding-bottom: 20px">
     <div style="height: 150px">
-      <h3 style="color: #000">1.爆破振动数据计算分析</h3>
-      <h4 style="color: #666" id="panel-trigger-1">爆破振动计算页面</h4>
-      <h4 style="color: #666" id="panel-trigger-2">爆破振动参数拟合计算页面</h4>
+      <h4 style="color: #000">> 爆破振动数据计算分析</h4>
+      <h6 style="color: #666" id="panel-trigger-1">爆破振动计算页面</h6>
+      <h6 style="color: #666" id="panel-trigger-2">爆破振动参数拟合计算页面</h6>
     </div>
     <div style="flex: 1; overflow: auto">
-      <h3 style="color: #000">2.矿山现场试验结果记录</h3>
-      <div class="w-100 row justify-between align-center">
-        <h4 style="color: #666; margin: 0; margin-left: 15px">方案查看</h4>
+      <h4 style="color: #000">> 矿山现场试验结果记录</h4>
+      <div
+        class="w-100 row justify-between align-center"
+        style="align-items: center; gap: 20px"
+      >
+        <h6 style="color: #666; margin: 0; margin-left: 15px">方案查看</h6>
         <button
           type="button"
           class="btn btn-sm btn-primary"
@@ -78,8 +81,8 @@
       <div id="tree-list" style="margin: 0; padding: 0; color: #999"></div>
     </div>
   </div>
-  <div style="width: 3px; height: 100%; background-color: red"></div>
-  <div style="flex: 1">
+  <div style="width: 3px; height: 100%; background-color: #e9ecef"></div>
+  <div style="flex: 1; margin-left: 30px">
     <embed
       id="pdf-panel"
       type="application/pdf"
@@ -142,25 +145,61 @@
               <td>2</td>
               <td id="t-2-1"></td>
               <td id="t-2-2"></td>
-              <th id="t-2-3">移除</th>
+              <th id="t-2-3">
+                <button
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal5"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>3</td>
               <td id="t-3-1"></td>
               <td id="t-3-2"></td>
-              <th id="t-3-3">移除</th>
+              <th id="t-3-3">
+                <button
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal5"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>4</td>
               <td id="t-4-1"></td>
               <td id="t-4-2"></td>
-              <th id="t-4-3">移除</th>
+              <th id="t-4-3">
+                <button
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal5"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>5</td>
               <td id="t-5-1"></td>
               <td id="t-5-2"></td>
-              <th id="t-5-3">移除</th>
+              <th id="t-5-3">
+                <button
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal5"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
           </tbody>
         </table>
@@ -185,7 +224,14 @@
           <input id="KValue" />
           <span>α值</span>
           <input id="AValue" />
-          <button class="btn btn-primary btn-sm">插入</button>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary"
+            data-toggle="modal"
+            data-target="#myModal4"
+          >
+            插入
+          </button>
         </div>
         <div
           style="
@@ -247,25 +293,61 @@
               <td>2</td>
               <td id="t2-2-1"></td>
               <td id="t2-2-2"></td>
-              <th id="t2-2-3">移除</th>
+              <th id="t2-2-3">
+                <button
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>3</td>
               <td id="t2-3-1"></td>
               <td id="t2-3-2"></td>
-              <th id="t2-3-3">移除</th>
+              <th id="t2-3-3">
+                <button
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>4</td>
               <td id="t2-4-1"></td>
               <td id="t2-4-2"></td>
-              <th id="t2-4-3">移除</th>
+              <th id="t2-4-3">
+                <button
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>5</td>
               <td id="t2-5-1"></td>
               <td id="t2-5-2"></td>
-              <th id="t2-5-3">移除</th>
+              <th id="t2-5-3">
+                <button
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
           </tbody>
         </table>
@@ -303,7 +385,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>1</td>
+                  <td><div style="width: 80px">1</div></td>
                   <td>
                     <input id="t3-1-1" name="t3-1-1" />
                   </td>
@@ -584,9 +666,75 @@
   </div>
 </div>
 
+<div
+  class="modal fade"
+  id="myModal4"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <form
+      action="{% url 'schema' %}?type=1-4"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-body">
+          <label style="display: none" for="part">分区：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="part"
+            name="part"
+            class="form-control"
+          />
+          <label style="display: none" for="KValue2">K：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="KValue2"
+            name="KValue2"
+            class="form-control"
+          />
+          <label style="display: none" for="AValue2">A：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="AValue2"
+            name="AValue2"
+            class="form-control"
+          />
+          <div
+            style="
+              width: 300px;
+              height: 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            "
+          >
+            确认插入此值？
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            关闭
+          </button>
+          <button type="submit" class="btn btn-primary">确认</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 <script>
   var AValue = document.getElementById('AValue');
   var KValue = document.getElementById('KValue');
+  var part = document.getElementById('part');
+  var AValue2 = document.getElementById('AValue2');
+  var KValue2 = document.getElementById('KValue2');
   var input11 = document.getElementById('input-1-1');
   var input12 = document.getElementById('input-1-2');
   var input13 = document.getElementById('input-1-3');
@@ -641,10 +789,13 @@
   t12.innerText = KAList[0].a
   filedSelect = document.getElementById('filed')
   filedSelect.addEventListener('change', (e) => {
-      KValue.value = KAList[Number(e.target.value) - 1].k
-      AValue.value = KAList[Number(e.target.value) - 1].a
-      t11.innerText = KAList[Number(e.target.value) - 1].k
-      t12.innerText = KAList[Number(e.target.value) - 1].a
+    part.value = e.target.value
+    KValue.value = KAList[Number(e.target.value) - 1].k
+    AValue.value = KAList[Number(e.target.value) - 1].a
+    KValue2.value = KAList[Number(e.target.value) - 1].k
+    AValue2.value = KAList[Number(e.target.value) - 1].a
+    t11.innerText = KAList[Number(e.target.value) - 1].k
+    t12.innerText = KAList[Number(e.target.value) - 1].a
   })
 
 

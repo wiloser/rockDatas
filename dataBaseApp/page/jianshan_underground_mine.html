@@ -58,14 +58,17 @@
 <div class="row col-xl-12" style="flex: 1; gap: 30px">
   <div class="d-flex flex-column" style="width: 320px; padding-bottom: 20px">
     <div style="height: 100px">
-      <h3 style="color: #000">1.三维激光扫描</h3>
-      <div class="w-100 row justify-between align-center">
-        <h4
+      <h4 style="color: #000">> 三维激光扫描</h4>
+      <div
+        class="w-100 row justify-between align-center"
+        style="align-items: center; gap: 20px"
+      >
+        <h6
           style="color: #666; margin: 0; margin-left: 15px; cursor: pointer"
           id="panel-trigger-3"
         >
           界面展示
-        </h4>
+        </h6>
         <button
           type="button"
           class="btn btn-sm btn-primary"
@@ -77,18 +80,21 @@
       </div>
     </div>
     <div style="height: 150px">
-      <h3 style="color: #000">2.爆破振动数据计算与分析</h3>
-      <h4 style="color: #666; cursor: pointer" id="panel-trigger-1">
+      <h4 style="color: #000">> 爆破振动数据计算与分析</h4>
+      <h6 style="color: #666; cursor: pointer" id="panel-trigger-1">
         爆破振动计算页面
-      </h4>
-      <h4 style="color: #666; cursor: pointer" id="panel-trigger-2">
+      </h6>
+      <h6 style="color: #666; cursor: pointer" id="panel-trigger-2">
         爆破振动参数拟合计算页面
-      </h4>
+      </h6>
     </div>
     <div style="flex: 1; overflow: auto; margin-top: 20px">
-      <h3 style="color: #000">3.矿山现场试验结果记录</h3>
-      <div class="w-100 row justify-between align-center">
-        <h4 style="color: #666; margin: 0; margin-left: 15px">方案查看</h4>
+      <h4 style="color: #000">> 矿山现场试验结果记录</h4>
+      <div
+        class="w-100 row justify-between align-center"
+        style="align-items: center; gap: 20px"
+      >
+        <h6 style="color: #666; margin: 0; margin-left: 15px">方案查看</h6>
         <button
           type="button"
           class="btn btn-sm btn-primary"
@@ -101,8 +107,8 @@
       <div id="tree-list" style="margin: 0; padding: 0; color: #999"></div>
     </div>
   </div>
-  <div style="width: 3px; height: 100%; background-color: red"></div>
-  <div style="flex: 1">
+  <div style="width: 3px; height: 100%; background-color: #e9ecef"></div>
+  <div style="flex: 1; margin-left: 20px">
     <embed
       id="pdf-panel"
       type="application/pdf"
@@ -328,7 +334,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>1</td>
+                  <td><div style="width: 80px">1</div></td>
                   <td>
                     <input id="t3-1-1" name="t3-1-1" />
                   </td>
