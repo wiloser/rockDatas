@@ -5,6 +5,9 @@
     list-style-type: none;
   }
 
+  #tree-list ul {
+    padding-left: 20px;
+  }
   #tree-list > ul {
     margin: 0;
     padding: 0;
@@ -55,7 +58,10 @@
   </ol>
 </nav>
 
-<div class="row col-xl-12" style="flex: 1; gap: 30px">
+<div
+  class="row col-xl-12"
+  style="flex: 1; gap: 30px; flex-wrap: nowrap; overflow: auto"
+>
   <div class="d-flex flex-column" style="width: 320px; padding-bottom: 20px">
     <div style="height: 100px">
       <h4 style="color: #000">> 三维激光扫描</h4>
@@ -64,7 +70,14 @@
         style="align-items: center; gap: 20px"
       >
         <h6
-          style="color: #666; margin: 0; margin-left: 15px; cursor: pointer"
+          style="
+            color: #666;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            margin: 0;
+            margin-left: 15px;
+            cursor: pointer;
+          "
           id="panel-trigger-3"
         >
           界面展示
@@ -81,10 +94,26 @@
     </div>
     <div style="height: 150px">
       <h4 style="color: #000">> 爆破振动数据计算与分析</h4>
-      <h6 style="color: #666; cursor: pointer" id="panel-trigger-1">
+      <h6
+        style="
+          color: #666;
+          text-decoration: underline;
+          text-decoration-thickness: 2px;
+          cursor: pointer;
+        "
+        id="panel-trigger-1"
+      >
         爆破振动计算页面
       </h6>
-      <h6 style="color: #666; cursor: pointer" id="panel-trigger-2">
+      <h6
+        style="
+          color: #666;
+          text-decoration: underline;
+          text-decoration-thickness: 2px;
+          cursor: pointer;
+        "
+        id="panel-trigger-2"
+      >
         爆破振动参数拟合计算页面
       </h6>
     </div>
@@ -442,7 +471,7 @@
       </form>
     </div>
     <div id="panel-3">
-      <div class="row" style="gap: 20px; height: 300px">
+      <div style="gap: 20px; height: 300px; display: flex; flex-wrap: nowrap">
         <img
           style="height: 100%; object-fit: contain"
           src="/static/image/undergroundmine.jpg"
@@ -474,44 +503,52 @@
           </button>
         </div>
         <div class="row">
-          <label for="showTunnel1">岩石名称：</label>
-          <span type="text" id="showTunnel1"></span>
+          <div class="col-md-4">
+            <label for="showTunnel1">岩石名称：</label>
+            <span type="text" id="showTunnel1"></span>
+          </div>
+          <div class="col-md-4">
+            <label for="showTunnel2">密度：</label>
+            <span type="text" id="showTunnel2"></span>
+          </div>
+          <div class="col-md-4">
+            <label for="showTunnel3">静态抗压强度：</label>
+            <span type="text" id="showTunnel3"></span>
+          </div>
         </div>
         <div class="row">
-          <label for="showTunnel2">密度：</label>
-          <span type="text" id="showTunnel2"></span>
+          <div class="col-md-4">
+            <label for="showTunnel4">静态抗拉强度：</label>
+            <span type="text" id="showTunnel4"></span>
+          </div>
+          <div class="col-md-4">
+            <label for="showTunnel5">孔隙率：</label>
+            <span type="text" id="showTunnel5"></span>
+          </div>
+          <div class="col-md-4">
+            <label for="showTunnel6">渗透率：</label>
+            <span type="text" id="showTunnel6"></span>
+          </div>
         </div>
         <div class="row">
-          <label for="showTunnel3">静态抗压强度：</label>
-          <span type="text" id="showTunnel3"></span>
+          <div class="col-md-4">
+            <label for="showTunnel7">泊松比：</label>
+            <span type="text" id="showTunnel7"></span>
+          </div>
+          <div class="col-md-4">
+            <label for="showTunnel8">弹性模量：</label>
+            <span type="text" id="showTunnel8"></span>
+          </div>
+          <div class="col-md-4">
+            <label for="showTunnel9">普氏系数：</label>
+            <span type="text" id="showTunnel9"></span>
+          </div>
         </div>
         <div class="row">
-          <label for="showTunnel4">静态抗拉强度：</label>
-          <span type="text" id="showTunnel4"></span>
-        </div>
-        <div class="row">
-          <label for="showTunnel5">孔隙率：</label>
-          <span type="text" id="showTunnel5"></span>
-        </div>
-        <div class="row">
-          <label for="showTunnel6">渗透率：</label>
-          <span type="text" id="showTunnel6"></span>
-        </div>
-        <div class="row">
-          <label for="showTunnel7">泊松比：</label>
-          <span type="text" id="showTunnel7"></span>
-        </div>
-        <div class="row">
-          <label for="showTunnel8">弹性模量：</label>
-          <span type="text" id="showTunnel8"></span>
-        </div>
-        <div class="row">
-          <label for="showTunnel9">普氏系数：</label>
-          <span type="text" id="showTunnel9"></span>
-        </div>
-        <div class="row">
-          <label for="showTunnel10">炸药单耗：</label>
-          <span type="text" id="showTunnel10"></span>
+          <div class="col-md-4">
+            <label for="showTunnel10">炸药单耗：</label>
+            <span type="text" id="showTunnel10"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -1234,6 +1271,8 @@
           if(item.isLeaf) {
               // 末端处理事件
               li.addEventListener('click', showPdf(item))
+              li.style.textDecoration = 'underline'
+              li.style.textDecorationThickness = '2px'
               const button = document.createElement('button');
               button.innerText = '删除'
               button.classList.add('btn')

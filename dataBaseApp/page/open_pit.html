@@ -5,6 +5,9 @@
     list-style-type: none;
   }
 
+  #tree-list ul {
+    padding-left: 20px;
+  }
   #tree-list > ul {
     margin: 0;
     padding: 0;
@@ -59,8 +62,26 @@
   <div class="d-flex flex-column" style="width: 320px; padding-bottom: 20px">
     <div style="height: 150px">
       <h4 style="color: #000">> 爆破振动数据计算分析</h4>
-      <h6 style="color: #666" id="panel-trigger-1">爆破振动计算页面</h6>
-      <h6 style="color: #666" id="panel-trigger-2">爆破振动参数拟合计算页面</h6>
+      <h6
+        style="
+          color: #666;
+          text-decoration: underline;
+          text-decoration-thickness: 2px;
+        "
+        id="panel-trigger-1"
+      >
+        爆破振动计算页面
+      </h6>
+      <h6
+        style="
+          color: #666;
+          text-decoration: underline;
+          text-decoration-thickness: 2px;
+        "
+        id="panel-trigger-2"
+      >
+        爆破振动参数拟合计算页面
+      </h6>
     </div>
     <div style="flex: 1; overflow: auto">
       <h4 style="color: #000">> 矿山现场试验结果记录</h4>
@@ -1037,6 +1058,8 @@
           if(item.isLeaf) {
               // 末端处理事件
               li.addEventListener('click', showPdf(item))
+              li.style.textDecoration = 'underline'
+              li.style.textDecorationThickness = '2px'
               const button = document.createElement('button');
               button.innerText = '删除'
               button.classList.add('btn')
