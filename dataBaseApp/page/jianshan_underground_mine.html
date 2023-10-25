@@ -73,7 +73,7 @@
           style="
             color: #666;
             text-decoration: underline;
-            text-decoration-thickness: 2px;
+            text-decoration-thickness: 1px;
             margin: 0;
             margin-left: 15px;
             cursor: pointer;
@@ -98,7 +98,7 @@
         style="
           color: #666;
           text-decoration: underline;
-          text-decoration-thickness: 2px;
+          text-decoration-thickness: 1px;
           cursor: pointer;
         "
         id="panel-trigger-1"
@@ -109,7 +109,7 @@
         style="
           color: #666;
           text-decoration: underline;
-          text-decoration-thickness: 2px;
+          text-decoration-thickness: 1px;
           cursor: pointer;
         "
         id="panel-trigger-2"
@@ -473,10 +473,10 @@
     <div id="panel-3">
       <div style="gap: 20px; height: 300px; display: flex; flex-wrap: nowrap">
         <img
-          style="height: 100%; object-fit: contain"
+          style="height: 100%; object-fit: contain; flex: 1"
           src="/static/image/undergroundmine.jpg"
         />
-        <img style="height: 100%; object-fit: contain" id="seg-img" />
+        <img style="height: 100%; object-fit: contain; flex: 1" id="seg-img" />
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px">
         <div class="row mt-3">
@@ -1272,7 +1272,7 @@
               // 末端处理事件
               li.addEventListener('click', showPdf(item))
               li.style.textDecoration = 'underline'
-              li.style.textDecorationThickness = '2px'
+              li.style.textDecorationThickness = '1px'
               const button = document.createElement('button');
               button.innerText = '删除'
               button.classList.add('btn')
