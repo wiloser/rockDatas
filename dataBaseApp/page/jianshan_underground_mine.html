@@ -562,6 +562,14 @@
           >
             查询
           </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-warning ml-3"
+            data-toggle="modal"
+            data-target="#myModal8"
+          >
+            删除
+          </button>
         </div>
         <div
           style="
@@ -1164,6 +1172,66 @@
     </div>
   </div>
 
+  <div
+    class="modal fade"
+    id="myModal8"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <form
+        action="{% url 'schema' %}?type=3-6"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-body">
+            <label style="display: none" for="seg-input2">分段名称：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="seg-input2"
+              name="seg-input2"
+              class="form-control"
+            />
+            <label style="display: none" for="tunnel20">巷道：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="tunnel20"
+              name="tunnel20"
+              class="form-control"
+            />
+            <div
+              style="
+                width: 300px;
+                height: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              确认删除此巷道吗？
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button type="submit" class="btn btn-primary">确认</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     var AValue = document.getElementById('AValue');
     var KValue = document.getElementById('KValue');
@@ -1529,19 +1597,11 @@
     const img21 = document.getElementById('seg-img')
     const img212 = document.getElementById('seg-img2')
     const segInput = document.getElementById('seg-input')
+    const segInput2 = document.getElementById('seg-input2')
     segInput.value = segmentations?.[0]?.seg_name || ''
+    segInput2.value = segmentations?.[0]?.seg_name || ''
     img21.src = segmentations?.[0]?.img_seg || ''
     img212.src = segmentations?.[0]?.img_seg || ''
-    segSelect.addEventListener('change', (e) => {
-      img21.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
-      segInput.value = e.target.value
-    })
-    segSelect2.addEventListener('change', (e) => {
-      img212.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
-      // segInput.value = e.target.value
-    })
-
-
 
     var tunnels = {{ tunnels|safe }}
     const showTunnel = document.getElementById('showTunnel')
@@ -1557,17 +1617,42 @@
     const showTunnel8 = document.getElementById('showTunnel8')
     const showTunnel9 = document.getElementById('showTunnel9')
     const showTunnel10 = document.getElementById('showTunnel10')
-    tunnels.forEach(seg => {
-      const op = document.createElement('option')
-      op.innerHTML = seg.tunnel_name.split(',')[1]
-      op.value = seg.tunnel_name.split(',')[1]
-      showTunnel.appendChild(op)
+
+
+
+
+    segSelect.addEventListener('change', (e) => {
+      img21.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
+      segInput.value = e.target.value
+      segInput2.value = e.target.value
+      tunnels.forEach(seg => {
+        const op = document.createElement('option')
+        if(seg.tunnel_name.split(',')[0] !== e.target.value) return
+        op.innerHTML = seg.tunnel_name.split(',')[1]
+        op.value = seg.tunnel_name.split(',')[1]
+        showTunnel.appendChild(op)
+      })
+
     })
-    tunnels.forEach(seg => {
-      const op = document.createElement('option')
-      op.innerHTML = seg.tunnel_name.split(',')[1]
-      op.value = seg.tunnel_name.split(',')[1]
-      showTunnel20.appendChild(op)
+    segSelect2.addEventListener('change', (e) => {
+      img212.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
+      // segInput.value = e.target.value
+      tunnels.forEach(seg => {
+        const op = document.createElement('option')
+        if(seg.tunnel_name.split(',')[0] !== e.target.value) return
+        op.innerHTML = seg.tunnel_name.split(',')[1]
+        op.value = seg.tunnel_name.split(',')[1]
+        showTunnel20.appendChild(op)
+      })
+    })
+
+
+
+
+
+    tunnel20.value = showTunnel.value
+    showTunnel.addEventListener('change', (e) => {
+      tunnel20.value = e.target.value
     })
     tunnelQuery.addEventListener('click', () => {
       const data = tunnels.find(tunnel => tunnel.tunnel_name === segSelect.value + ',' + showTunnel.value)
