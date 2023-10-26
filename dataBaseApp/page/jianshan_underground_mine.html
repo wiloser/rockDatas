@@ -98,7 +98,7 @@
         style="
           color: #666;
           text-decoration: underline;
-          text-underline-offset:0.3em;
+          text-underline-offset: 0.3em;
           text-decoration-thickness: 1px;
           margin-left: 23px;
           cursor: pointer;
@@ -111,7 +111,7 @@
         style="
           color: #666;
           text-decoration: underline;
-          text-underline-offset:0.3em;
+          text-underline-offset: 0.3em;
           text-decoration-thickness: 1px;
           cursor: pointer;
           margin-left: 23px;
@@ -137,7 +137,10 @@
           添加方案
         </button>
       </div>
-      <div id="tree-list" style="padding: 0; margin-left: 16px; color: #999"></div>
+      <div
+        id="tree-list"
+        style="padding: 0; margin-left: 16px; color: #999"
+      ></div>
     </div>
   </div>
   <div style="width: 3px; height: 100%; background-color: #e9ecef"></div>
@@ -151,23 +154,49 @@
     />
     <div id="effect-image" style="display: none" class="container">
       <div class="row">
-        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 30px" >
+        <div
+          class="col-md-6"
+          style="height: 250px; width: 300px; margin-bottom: 30px"
+        >
           <h5>振动监测</h5>
-          <img id="img1" alt="Image 1" class="img-fluid" style="height: 100%; width: 100%; object-fit: contain"/>
+          <img
+            id="img1"
+            alt="Image 1"
+            class="img-fluid"
+            style="height: 100%; width: 100%; object-fit: contain"
+          />
         </div>
-        <div class="col-md-6" style = "height: 250px; width: 300px">
+        <div class="col-md-6" style="height: 250px; width: 300px">
           <h5>悬顶扫描</h5>
-          <img id="img2" alt="Image 2" class="img-fluid" style="height: 100%; width: 100%; object-fit: contain" />
+          <img
+            id="img2"
+            alt="Image 2"
+            class="img-fluid"
+            style="height: 100%; width: 100%; object-fit: contain"
+          />
         </div>
       </div>
       <div class="row mt-3">
-        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 30px">
+        <div
+          class="col-md-6"
+          style="height: 250px; width: 300px; margin-bottom: 30px"
+        >
           <h5>爆堆形态</h5>
-          <img id="img3" alt="Image 3" class="img-fluid" style="height: 100%; width: 100%; object-fit: contain"/>
+          <img
+            id="img3"
+            alt="Image 3"
+            class="img-fluid"
+            style="height: 100%; width: 100%; object-fit: contain"
+          />
         </div>
-        <div class="col-md-6" style = "height: 250px; width: 300px">
+        <div class="col-md-6" style="height: 250px; width: 300px">
           <h5>眉线破坏</h5>
-          <img id="img4" alt="Image 4" class="img-fluid" style="height: 100%; width: 100%; object-fit: contain"/>
+          <img
+            id="img4"
+            alt="Image 4"
+            class="img-fluid"
+            style="height: 100%; width: 100%; object-fit: contain"
+          />
         </div>
       </div>
       <div class="row mt-3" style="margin-left: 5px">
@@ -186,7 +215,7 @@
     </div>
     <div id="panel-1" style="display: none">
       <div class="row" style="gap: 30px">
-        <img style="max-width: 60%" src="/static/image/img.png" />
+        <img style="width: 60%" id="seg-img2" />
         <table class="table-KA" style="flex: 1">
           <thead>
             <tr>
@@ -271,7 +300,7 @@
         </table>
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px">
-        <div class="row mt-3">
+        <div class="row mt-3" style="display: none">
           <span>边坡系数：</span>
           <select id="filed">
             <option value="1">1分区</option>
@@ -283,6 +312,14 @@
             <option value="7">7分区</option>
             <option value="8">8分区</option>
           </select>
+        </div>
+        <div class="row mt-3">
+          <span>分段名称：</span>
+          <select id="seg-select2"></select>
+        </div>
+        <div class="row">
+          <label for="showTunnel20">巷道名称：</label>
+          <select id="showTunnel20"></select>
         </div>
         <div class="row" style="align-items: center; gap: 10px">
           <span>输入参数：</span>
@@ -299,16 +336,16 @@
             插入
           </button>
         </div>
-        <div style="height: 2px;
-              width: 100%;
-              background-color: #e9ecef;
-              margin-left: -25px;
-              margin-bottom: 20px;
-              margin-top: 15px;
-              "
-        >
-
-        </div>
+        <div
+          style="
+            height: 2px;
+            width: 100%;
+            background-color: #e9ecef;
+            margin-left: -25px;
+            margin-bottom: 20px;
+            margin-top: 15px;
+          "
+        ></div>
         <div
           style="
             display: flex;
@@ -485,8 +522,17 @@
         </div>
       </form>
     </div>
-    <div id="panel-3" >
-      <div style="gap: 15px; margin-left: -15px; height: 250px; width: 280px; display: flex; flex-wrap: nowrap">
+    <div id="panel-3">
+      <div
+        style="
+          gap: 15px;
+          margin-left: -15px;
+          height: 250px;
+          width: 280px;
+          display: flex;
+          flex-wrap: nowrap;
+        "
+      >
         <img
           style="height: 100%; object-fit: contain; flex: 1"
           src="/static/image/undergroundmine.jpg"
@@ -517,7 +563,14 @@
             查询
           </button>
         </div>
-        <div style="height: 2px; width: 100%; background-color: #e9ecef; margin-left: -25px"></div>
+        <div
+          style="
+            height: 2px;
+            width: 100%;
+            background-color: #e9ecef;
+            margin-left: -25px;
+          "
+        ></div>
         <div class="row">
           <div class="col-md-4">
             <label for="showTunnel1">岩石名称：</label>
@@ -566,892 +619,1020 @@
             <span type="text" id="showTunnel10"></span>
           </div>
         </div>
-        <div style="height: 2px; width: 100%; background-color: #e9ecef; margin-left: -25px">
+        <div
+          style="
+            height: 2px;
+            width: 100%;
+            background-color: #e9ecef;
+            margin-left: -25px;
+          "
+        ></div>
       </div>
     </div>
   </div>
-</div>
 
-<button
-  style="position: fixed; top: -100px"
-  id="deleteButton"
-  type="button"
-  class="btn btn-sm btn-primary"
-  data-toggle="modal"
-  data-target="#myModal5"
->
-  删除方案
-</button>
+  <button
+    style="position: fixed; top: -100px"
+    id="deleteButton"
+    type="button"
+    class="btn btn-sm btn-primary"
+    data-toggle="modal"
+    data-target="#myModal5"
+  >
+    删除方案
+  </button>
 
-<div
-  class="modal fade"
-  id="myModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <form
-      action="{% url 'schema' %}?type=3-1"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      {% csrf_token %}
-      <div class="modal-content">
-        <div class="modal-body">
-          <label for="year">年：</label>
-          <input type="text" id="year" name="year" class="form-control" />
-          <label for="month">月：</label>
-          <input type="text" id="month" name="month" class="form-control" />
-          <label for="day">日：</label>
-          <input type="text" id="day" name="day" class="form-control" />
-          <label for="area">分段：</label>
-          <input type="text" id="area" name="area" class="form-control" />
-          <label for="plat">近路：</label>
-          <input type="text" id="plat" name="plat" class="form-control" />
-          <label for="well">排数：</label>
-          <input type="text" id="well" name="well" class="form-control" />
-          <div class="form-group">
-            <label for="pdf">方案PDF ：</label>
-            <div class="custom-file">
-              <input
-                type="file"
-                id="pdf"
-                name="pdf"
-                placeholder="请选中pdf文件"
-                class="form-control"
-                onchange="displayFileName(this)"
-              />
+  <div
+    class="modal fade"
+    id="myModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <form
+        action="{% url 'schema' %}?type=3-1"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-body">
+            <label for="year">年：</label>
+            <input type="text" id="year" name="year" class="form-control" />
+            <label for="month">月：</label>
+            <input type="text" id="month" name="month" class="form-control" />
+            <label for="day">日：</label>
+            <input type="text" id="day" name="day" class="form-control" />
+            <label for="area">分段：</label>
+            <input type="text" id="area" name="area" class="form-control" />
+            <label for="plat">近路：</label>
+            <input type="text" id="plat" name="plat" class="form-control" />
+            <label for="well">排数：</label>
+            <input type="text" id="well" name="well" class="form-control" />
+            <div class="form-group">
+              <label for="pdf">方案PDF ：</label>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  id="pdf"
+                  name="pdf"
+                  placeholder="请选中pdf文件"
+                  class="form-control"
+                  onchange="displayFileName(this)"
+                />
 
-              <label class="custom-file-label" for="pdf">选择文件</label>
+                <label class="custom-file-label" for="pdf">选择文件</label>
+              </div>
             </div>
           </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button type="submit" class="btn btn-primary">提交</button>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            关闭
-          </button>
-          <button type="submit" class="btn btn-primary">提交</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-</div>
 
-<div
-  class="modal fade"
-  id="myModal2"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <form
-      action="{% url 'schema' %}?type=3-2"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      {% csrf_token %}
-      <div class="modal-content">
-        <div class="modal-body">
-          <input
-            style="display: none"
-            type="text"
-            id="schemaName"
-            name="schemaName"
-            class="form-control"
-          />
-          <div class="form-group">
-            <label for="img1-1">振动监测 ：</label>
-            <div class="custom-file">
-              <input
-                type="file"
-                id="img1-1"
-                name="img1-1"
-                placeholder="请选中图片文件"
-                class="form-control"
-                onchange="displayFileName(this)"
-              />
+  <div
+    class="modal fade"
+    id="myModal2"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <form
+        action="{% url 'schema' %}?type=3-2"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-body">
+            <input
+              style="display: none"
+              type="text"
+              id="schemaName"
+              name="schemaName"
+              class="form-control"
+            />
+            <div class="form-group">
+              <label for="img1-1">振动监测 ：</label>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  id="img1-1"
+                  name="img1-1"
+                  placeholder="请选中图片文件"
+                  class="form-control"
+                  onchange="displayFileName(this)"
+                />
 
-              <label class="custom-file-label" for="img1-1">选择文件</label>
+                <label class="custom-file-label" for="img1-1">选择文件</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="img2-1">悬顶扫描 ：</label>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  id="img2-1"
+                  name="img2-1"
+                  placeholder="请选中图片文件"
+                  class="form-control"
+                  onchange="displayFileName(this)"
+                />
+
+                <label class="custom-file-label" for="img2-1">选择文件</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="img3-1">爆堆形态 ：</label>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  id="img3-1"
+                  name="img3-1"
+                  placeholder="请选中图片文件"
+                  class="form-control"
+                  onchange="displayFileName(this)"
+                />
+
+                <label class="custom-file-label" for="img3-1">选择文件</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="img4-1">眉线破坏 ：</label>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  id="img4-1"
+                  name="img4-1"
+                  placeholder="请选中图片文件"
+                  class="form-control"
+                  onchange="displayFileName(this)"
+                />
+                <label class="custom-file-label" for="img4-1">选择文件</label>
+              </div>
+            </div>
+            <label for="velocity">试验结果：</label>
+            <input
+              type="text"
+              id="velocity"
+              name="velocity"
+              class="form-control"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button type="submit" class="btn btn-primary">提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="myModal3"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <form
+        action="{% url 'schema' %}?type=2-1"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-body">
+            <label for="segmentation">分段名称：</label>
+            <input
+              type="text"
+              id="segmentation"
+              name="segmentation"
+              class="form-control"
+            />
+            <div class="form-group">
+              <label for="img1-2">分段图片 ：</label>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  id="img1-2"
+                  name="img1-2"
+                  placeholder="请选中图片文件"
+                  class="form-control"
+                  onchange="displayFileName(this)"
+                />
+
+                <label class="custom-file-label" for="img1-2">选择文件</label>
+              </div>
             </div>
           </div>
-          <div class="form-group">
-            <label for="img2-1">悬顶扫描 ：</label>
-            <div class="custom-file">
-              <input
-                type="file"
-                id="img2-1"
-                name="img2-1"
-                placeholder="请选中图片文件"
-                class="form-control"
-                onchange="displayFileName(this)"
-              />
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button type="submit" class="btn btn-primary">提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
-              <label class="custom-file-label" for="img2-1">选择文件</label>
+  <div
+    class="modal fade"
+    id="myModal4"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <form
+        action="{% url 'schema' %}?type=2-2"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-body">
+            <label style="display: none" for="seg-input">分段名称：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="seg-input"
+              name="seg-input"
+              class="form-control"
+            />
+            <label for="tunnel">巷道名称：</label>
+            <input type="text" id="tunnel" name="tunnel" class="form-control" />
+            <label for="tunnel1">岩石名称：</label>
+            <input
+              type="text"
+              id="tunnel1"
+              name="tunnel1"
+              class="form-control"
+            />
+            <label for="tunnel2">密度：</label>
+            <input
+              type="text"
+              id="tunnel2"
+              name="tunnel2"
+              class="form-control"
+            />
+            <label for="tunnel3">静态抗压强度：</label>
+            <input
+              type="text"
+              id="tunnel3"
+              name="tunnel3"
+              class="form-control"
+            />
+            <label for="tunnel4">静态抗拉强度：</label>
+            <input
+              type="text"
+              id="tunnel4"
+              name="tunnel4"
+              class="form-control"
+            />
+            <label for="tunnel5">孔隙率：</label>
+            <input
+              type="text"
+              id="tunnel5"
+              name="tunnel5"
+              class="form-control"
+            />
+            <label for="tunnel6">渗透率：</label>
+            <input
+              type="text"
+              id="tunnel6"
+              name="tunnel6"
+              class="form-control"
+            />
+            <label for="tunnel7">泊松比：</label>
+            <input
+              type="text"
+              id="tunnel7"
+              name="tunnel7"
+              class="form-control"
+            />
+            <label for="tunnel8">弹性模量：</label>
+            <input
+              type="text"
+              id="tunnel8"
+              name="tunnel8"
+              class="form-control"
+            />
+            <label for="tunnel9">普氏系数：</label>
+            <input
+              type="text"
+              id="tunnel9"
+              name="tunnel9"
+              class="form-control"
+            />
+            <label for="tunnel10">炸药单耗：</label>
+            <input
+              type="text"
+              id="tunnel10"
+              name="tunnel10"
+              class="form-control"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button type="submit" class="btn btn-primary">提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="myModal5"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <form
+        action="{% url 'schema' %}?type=3-3"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-body">
+            <label style="display: none" for="schemaName2">方案名：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="schemaName2"
+              name="schemaName2"
+              class="form-control"
+            />
+            <div
+              style="
+                width: 300px;
+                height: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              确认删除选中方案吗？
             </div>
           </div>
-          <div class="form-group">
-            <label for="img3-1">爆堆形态 ：</label>
-            <div class="custom-file">
-              <input
-                type="file"
-                id="img3-1"
-                name="img3-1"
-                placeholder="请选中图片文件"
-                class="form-control"
-                onchange="displayFileName(this)"
-              />
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button type="submit" class="btn btn-primary">确认</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
-              <label class="custom-file-label" for="img3-1">选择文件</label>
+  <div
+    class="modal fade"
+    id="myModal6"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <form
+        action="{% url 'schema' %}?type=3-4"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-body">
+            <label style="display: none" for="part">分区：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="part"
+              name="part"
+              class="form-control"
+            />
+            <label style="display: none" for="KValue2">K：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="KValue2"
+              name="KValue2"
+              class="form-control"
+            />
+            <label style="display: none" for="AValue2">A：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="AValue2"
+              name="AValue2"
+              class="form-control"
+            />
+            <div
+              style="
+                width: 300px;
+                height: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              确认插入此值？
             </div>
           </div>
-          <div class="form-group">
-            <label for="img4-1">眉线破坏 ：</label>
-            <div class="custom-file">
-              <input
-                type="file"
-                id="img4-1"
-                name="img4-1"
-                placeholder="请选中图片文件"
-                class="form-control"
-                onchange="displayFileName(this)"
-              />
-              <label class="custom-file-label" for="img4-1">选择文件</label>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button type="submit" class="btn btn-primary">确认</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="myModal7"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <form
+        action="{% url 'schema' %}?type=3-5"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-body">
+            <label style="display: none" for="part2">分区：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="part2"
+              name="part2"
+              class="form-control"
+            />
+            <label style="display: none" for="KValue3">K：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="KValue3"
+              name="KValue3"
+              class="form-control"
+            />
+            <label style="display: none" for="AValue3">A：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="AValue3"
+              name="AValue3"
+              class="form-control"
+            />
+            <div
+              style="
+                width: 300px;
+                height: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              确认删除此值？
             </div>
           </div>
-          <label for="velocity">试验结果：</label>
-          <input
-            type="text"
-            id="velocity"
-            name="velocity"
-            class="form-control"
-          />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            关闭
-          </button>
-          <button type="submit" class="btn btn-primary">提交</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="myModal3"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <form
-      action="{% url 'schema' %}?type=2-1"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      {% csrf_token %}
-      <div class="modal-content">
-        <div class="modal-body">
-          <label for="segmentation">分段名称：</label>
-          <input
-            type="text"
-            id="segmentation"
-            name="segmentation"
-            class="form-control"
-          />
-          <div class="form-group">
-            <label for="img1-2">分段图片 ：</label>
-            <div class="custom-file">
-              <input
-                type="file"
-                id="img1-2"
-                name="img1-2"
-                placeholder="请选中图片文件"
-                class="form-control"
-                onchange="displayFileName(this)"
-              />
-
-              <label class="custom-file-label" for="img1-2">选择文件</label>
-            </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button type="submit" class="btn btn-primary">确认</button>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            关闭
-          </button>
-          <button type="submit" class="btn btn-primary">提交</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-</div>
 
-<div
-  class="modal fade"
-  id="myModal4"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <form
-      action="{% url 'schema' %}?type=2-2"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      {% csrf_token %}
-      <div class="modal-content">
-        <div class="modal-body">
-          <label style="display: none" for="seg-input">分段名称：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="seg-input"
-            name="seg-input"
-            class="form-control"
-          />
-          <label for="tunnel">巷道名称：</label>
-          <input type="text" id="tunnel" name="tunnel" class="form-control" />
-          <label for="tunnel1">岩石名称：</label>
-          <input type="text" id="tunnel1" name="tunnel1" class="form-control" />
-          <label for="tunnel2">密度：</label>
-          <input type="text" id="tunnel2" name="tunnel2" class="form-control" />
-          <label for="tunnel3">静态抗压强度：</label>
-          <input type="text" id="tunnel3" name="tunnel3" class="form-control" />
-          <label for="tunnel4">静态抗拉强度：</label>
-          <input type="text" id="tunnel4" name="tunnel4" class="form-control" />
-          <label for="tunnel5">孔隙率：</label>
-          <input type="text" id="tunnel5" name="tunnel5" class="form-control" />
-          <label for="tunnel6">渗透率：</label>
-          <input type="text" id="tunnel6" name="tunnel6" class="form-control" />
-          <label for="tunnel7">泊松比：</label>
-          <input type="text" id="tunnel7" name="tunnel7" class="form-control" />
-          <label for="tunnel8">弹性模量：</label>
-          <input type="text" id="tunnel8" name="tunnel8" class="form-control" />
-          <label for="tunnel9">普氏系数：</label>
-          <input type="text" id="tunnel9" name="tunnel9" class="form-control" />
-          <label for="tunnel10">炸药单耗：</label>
-          <input
-            type="text"
-            id="tunnel10"
-            name="tunnel10"
-            class="form-control"
-          />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            关闭
-          </button>
-          <button type="submit" class="btn btn-primary">提交</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+  <script>
+    var AValue = document.getElementById('AValue');
+    var KValue = document.getElementById('KValue');
+    var part = document.getElementById('part');
+    var part2 = document.getElementById('part2');
+    var AValue2 = document.getElementById('AValue2');
+    var KValue2 = document.getElementById('KValue2');
+    var AValue3 = document.getElementById('AValue3');
+    var KValue3 = document.getElementById('KValue3');
+    var input11 = document.getElementById('input-1-1');
+    var input12 = document.getElementById('input-1-2');
+    var input13 = document.getElementById('input-1-3');
+    var out14 = document.getElementById('out-1-4');
+    var out15 = document.getElementById('out-1-5');
+    var input21 = document.getElementById('input-2-1');
+    var input22 = document.getElementById('input-2-2');
+    var input23 = document.getElementById('input-2-3');
+    var out24 = document.getElementById('out-2-4');
+    var out25 = document.getElementById('out-2-5');
+    var deleteButton = document.getElementById('deleteButton')
+    var schemaName2 = document.getElementById('schemaName2')
 
-<div
-  class="modal fade"
-  id="myModal5"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <form
-      action="{% url 'schema' %}?type=3-3"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      {% csrf_token %}
-      <div class="modal-content">
-        <div class="modal-body">
-          <label style="display: none" for="schemaName2">方案名：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="schemaName2"
-            name="schemaName2"
-            class="form-control"
-          />
-          <div
-            style="
-              width: 300px;
-              height: 200px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            "
-          >
-            确认删除选中方案吗？
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            关闭
-          </button>
-          <button type="submit" class="btn btn-primary">确认</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+    var t21 = document.getElementById('t-2-1')
+    var t22 = document.getElementById('t-2-2')
+    var t23 = document.getElementById('t-2-3')
+    var t31 = document.getElementById('t-3-1')
+    var t32 = document.getElementById('t-3-2')
+    var t33 = document.getElementById('t-3-3')
+    var t41 = document.getElementById('t-4-1')
+    var t42 = document.getElementById('t-4-2')
+    var t43 = document.getElementById('t-4-3')
+    var t51 = document.getElementById('t-5-1')
+    var t52 = document.getElementById('t-5-2')
+    var t53 = document.getElementById('t-5-3')
+    filedSelect = document.getElementById('filed')
+    t23.addEventListener('click', (e) => {
+      KValue3.value = t21.textContent
+      AValue3.value = t22.textContent
+    })
+    t33.addEventListener('click', () => {
+      KValue3.value = t31.textContent
+      AValue3.value = t32.textContent
+    })
+    t43.addEventListener('click', () => {
+      KValue3.value = t41.textContent
+      AValue3.value = t42.textContent
+    })
+    t53.addEventListener('click', () => {
+      KValue3.value = t51.textContent
+      AValue3.value = t52.textContent
+    })
 
-<div
-  class="modal fade"
-  id="myModal6"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <form
-      action="{% url 'schema' %}?type=3-4"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      {% csrf_token %}
-      <div class="modal-content">
-        <div class="modal-body">
-          <label style="display: none" for="part">分区：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="part"
-            name="part"
-            class="form-control"
-          />
-          <label style="display: none" for="KValue2">K：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="KValue2"
-            name="KValue2"
-            class="form-control"
-          />
-          <label style="display: none" for="AValue2">A：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="AValue2"
-            name="AValue2"
-            class="form-control"
-          />
-          <div
-            style="
-              width: 300px;
-              height: 200px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            "
-          >
-            确认插入此值？
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            关闭
-          </button>
-          <button type="submit" class="btn btn-primary">确认</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="myModal7"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <form
-      action="{% url 'schema' %}?type=3-5"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      {% csrf_token %}
-      <div class="modal-content">
-        <div class="modal-body">
-          <label style="display: none" for="part2">分区：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="part2"
-            name="part2"
-            class="form-control"
-          />
-          <label style="display: none" for="KValue3">K：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="KValue3"
-            name="KValue3"
-            class="form-control"
-          />
-          <label style="display: none" for="AValue3">A：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="AValue3"
-            name="AValue3"
-            class="form-control"
-          />
-          <div
-            style="
-              width: 300px;
-              height: 200px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            "
-          >
-            确认删除此值？
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            关闭
-          </button>
-          <button type="submit" class="btn btn-primary">确认</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<script>
-  var AValue = document.getElementById('AValue');
-  var KValue = document.getElementById('KValue');
-  var part = document.getElementById('part');
-  var part2 = document.getElementById('part2');
-  var AValue2 = document.getElementById('AValue2');
-  var KValue2 = document.getElementById('KValue2');
-  var AValue3 = document.getElementById('AValue3');
-  var KValue3 = document.getElementById('KValue3');
-  var input11 = document.getElementById('input-1-1');
-  var input12 = document.getElementById('input-1-2');
-  var input13 = document.getElementById('input-1-3');
-  var out14 = document.getElementById('out-1-4');
-  var out15 = document.getElementById('out-1-5');
-  var input21 = document.getElementById('input-2-1');
-  var input22 = document.getElementById('input-2-2');
-  var input23 = document.getElementById('input-2-3');
-  var out24 = document.getElementById('out-2-4');
-  var out25 = document.getElementById('out-2-5');
-  var deleteButton = document.getElementById('deleteButton')
-  var schemaName2 = document.getElementById('schemaName2')
-
-  var t21 = document.getElementById('t-2-1')
-  var t22 = document.getElementById('t-2-2')
-  var t23 = document.getElementById('t-2-3')
-  var t31 = document.getElementById('t-3-1')
-  var t32 = document.getElementById('t-3-2')
-  var t33 = document.getElementById('t-3-3')
-  var t41 = document.getElementById('t-4-1')
-  var t42 = document.getElementById('t-4-2')
-  var t43 = document.getElementById('t-4-3')
-  var t51 = document.getElementById('t-5-1')
-  var t52 = document.getElementById('t-5-2')
-  var t53 = document.getElementById('t-5-3')
-  filedSelect = document.getElementById('filed')
-  t23.addEventListener('click', (e) => {
-    KValue3.value = t21.textContent
-    AValue3.value = t22.textContent
-  })
-  t33.addEventListener('click', () => {
-    KValue3.value = t31.textContent
-    AValue3.value = t32.textContent
-  })
-  t43.addEventListener('click', () => {
-    KValue3.value = t41.textContent
-    AValue3.value = t42.textContent
-  })
-  t53.addEventListener('click', () => {
-    KValue3.value = t51.textContent
-    AValue3.value = t52.textContent
-  })
-
-  input11.addEventListener('change', change)
-  input12.addEventListener('change', change)
-  input13.addEventListener('change', change)
-  input21.addEventListener('change', change)
-  input22.addEventListener('change', change)
-  input23.addEventListener('change', change)
-  function change() {
-      if(input12.value && input13.value) {
-          out14.value = (Math.pow(Math.pow(input12.value, 1 / 3) / input13.value, AValue.value) * KValue.value).toFixed(2)
-          out15.innerText = ''
-          out15.innerText = input11.value + '平台的最大单响药量' + input12.value + 'KG的中深孔爆破方案距离爆区' + input13.value + 'm的' +
-          '最大爆破振动速度预计为' + out14.value + 'cm/s，预裂爆破方案最大爆破振动速度预计为' + (Number(out14.value) * 0.4).toFixed(2) + 'cm/s至'
-           + (Number(out14.value) * 0.6).toFixed(2) + 'cm/s之间'
-      }
-      if(input22.value && input23.value && out14.value) {
-          out24.value = (Math.pow(input22.value, 1 / 3) / Math.pow(out14.value / KValue.value, AValue.value)).toFixed(2)
-          var min = (Math.pow(input22.value, 1 / 3) / Math.pow(out14.value * 0.6 / KValue.value, AValue.value)).toFixed(2)
-          var max = (Math.pow(input22.value, 1 / 3) / Math.pow(out14.value * 0.4 / KValue.value, AValue.value)).toFixed(2)
-          out25.innerText = ''
-          out25.innerText = input21.value + '平台的最大单响药量' + input22.value + 'KG的中深孔爆破方案，控制爆破振动速度在' + (Number(out14.value)).toFixed(2)
-           + 'cm/s的距离为' + out24.value + 'm，预裂爆破方案最大距离预计为' + min + 'm至' + max + 'm之间'
-      }
-  }
-
-  var KAList = [
-      {k: 102.47, a: 1.41},
-      {k: 88.11, a: 1.37},
-      {k: 128.09, a: 1.5},
-      {k: 121.92, a: 1.5},
-      {k: 86.41, a: 1.36},
-      {k: 108.68, a: 1.48},
-      {k: 87.46, a: 1.37},
-      {k: 98.68, a: 1.43},
-  ]
-  const t11 = document.getElementById('t-1-1')
-  const t12 = document.getElementById('t-1-2')
-
-  var KA = {{ KA|safe }}
-  KA.forEach(item => {
-    const [part, v1, v2] = item.value.split('_')
-    if(part === filedSelect.value) {
-      if(!t21.textContent) {
-        t21.textContent = v1
-        t22.textContent = v2
-      }
-      else if(!t31.textContent) {
-        t31.textContent = v1
-        t32.textContent = v2
-      }
-      else if(!t41.textContent) {
-        t41.textContent = v1
-        t42.textContent = v2
-      }
-      else if(!t51.textContent) {
-        t51.textContent = v1
-        t52.textContent = v2
-      }
+    input11.addEventListener('change', change)
+    input12.addEventListener('change', change)
+    input13.addEventListener('change', change)
+    input21.addEventListener('change', change)
+    input22.addEventListener('change', change)
+    input23.addEventListener('change', change)
+    function change() {
+        if(input12.value && input13.value) {
+            out14.value = (Math.pow(Math.pow(input12.value, 1 / 3) / input13.value, AValue.value) * KValue.value).toFixed(2)
+            out15.innerText = ''
+            out15.innerText = input11.value + '平台的最大单响药量' + input12.value + 'KG的中深孔爆破方案距离爆区' + input13.value + 'm的' +
+            '最大爆破振动速度预计为' + out14.value + 'cm/s，预裂爆破方案最大爆破振动速度预计为' + (Number(out14.value) * 0.4).toFixed(2) + 'cm/s至'
+             + (Number(out14.value) * 0.6).toFixed(2) + 'cm/s之间'
+        }
+        if(input22.value && input23.value && out14.value) {
+            out24.value = (Math.pow(input22.value, 1 / 3) / Math.pow(out14.value / KValue.value, AValue.value)).toFixed(2)
+            var min = (Math.pow(input22.value, 1 / 3) / Math.pow(out14.value * 0.6 / KValue.value, AValue.value)).toFixed(2)
+            var max = (Math.pow(input22.value, 1 / 3) / Math.pow(out14.value * 0.4 / KValue.value, AValue.value)).toFixed(2)
+            out25.innerText = ''
+            out25.innerText = input21.value + '平台的最大单响药量' + input22.value + 'KG的中深孔爆破方案，控制爆破振动速度在' + (Number(out14.value)).toFixed(2)
+             + 'cm/s的距离为' + out24.value + 'm，预裂爆破方案最大距离预计为' + min + 'm至' + max + 'm之间'
+        }
     }
-  })
-  KValue.value = KAList[0].k
-  AValue.value = KAList[0].a
-  t11.innerText = KAList[0].k
-  t12.innerText = KAList[0].a
 
+    var KAList = [
+        {k: 100, a: 1.45},
+        {k: 88.11, a: 1.37},
+        {k: 128.09, a: 1.5},
+        {k: 121.92, a: 1.5},
+        {k: 86.41, a: 1.36},
+        {k: 108.68, a: 1.48},
+        {k: 87.46, a: 1.37},
+        {k: 98.68, a: 1.43},
+    ]
+    const t11 = document.getElementById('t-1-1')
+    const t12 = document.getElementById('t-1-2')
 
-  KValue2.value = KAList[0].k
-  AValue2.value = KAList[0].a
-  KValue3.value = KAList[0].k
-  AValue3.value = KAList[0].a
-
-  KValue.addEventListener('change', () => {
-    KValue2.value = KValue.value
-  })
-  AValue.addEventListener('change', () => {
-    AValue2.value = AValue.value
-  })
-
-  part.value = filedSelect.value
-  part2.value = filedSelect.value
-
-  filedSelect.addEventListener('change', (e) => {
-    part.value = e.target.value
-    part2.value = e.target.value
-    KValue.value = KAList[Number(e.target.value) - 1].k
-    AValue.value = KAList[Number(e.target.value) - 1].a
-    KValue2.value = KAList[Number(e.target.value) - 1].k
-    AValue2.value = KAList[Number(e.target.value) - 1].a
-    KValue3.value = KAList[Number(e.target.value) - 1].k
-    AValue3.value = KAList[Number(e.target.value) - 1].a
-    t11.innerText = KAList[Number(e.target.value) - 1].k
-    t12.innerText = KAList[Number(e.target.value) - 1].a
-
-
-    t21.textContent = ''
-    t22.textContent = ''
-    t31.textContent = ''
-    t32.textContent = ''
-    t41.textContent = ''
-    t42.textContent = ''
-    t51.textContent = ''
-    t52.textContent = ''
-
+    var KA = {{ KA|safe }}
     KA.forEach(item => {
-    const [part, v1, v2] = item.value.split('_')
-    if(part === filedSelect.value) {
-      if(!t21.textContent) {
-        t21.textContent = v1
-        t22.textContent = v2
+      const [part, v1, v2] = item.value.split('_')
+      if(part === filedSelect.value) {
+        if(!t21.textContent) {
+          t21.textContent = v1
+          t22.textContent = v2
+        }
+        else if(!t31.textContent) {
+          t31.textContent = v1
+          t32.textContent = v2
+        }
+        else if(!t41.textContent) {
+          t41.textContent = v1
+          t42.textContent = v2
+        }
+        else if(!t51.textContent) {
+          t51.textContent = v1
+          t52.textContent = v2
+        }
       }
-      else if(!t31.textContent) {
-        t31.textContent = v1
-        t32.textContent = v2
+    })
+    KValue.value = KAList[0].k
+    AValue.value = KAList[0].a
+    t11.innerText = KAList[0].k
+    t12.innerText = KAList[0].a
+
+
+    KValue2.value = KAList[0].k
+    AValue2.value = KAList[0].a
+    KValue3.value = KAList[0].k
+    AValue3.value = KAList[0].a
+
+    KValue.addEventListener('change', () => {
+      KValue2.value = KValue.value
+    })
+    AValue.addEventListener('change', () => {
+      AValue2.value = AValue.value
+    })
+
+    part.value = filedSelect.value
+    part2.value = filedSelect.value
+
+    filedSelect.addEventListener('change', (e) => {
+      part.value = e.target.value
+      part2.value = e.target.value
+      KValue.value = KAList[Number(e.target.value) - 1].k
+      AValue.value = KAList[Number(e.target.value) - 1].a
+      KValue2.value = KAList[Number(e.target.value) - 1].k
+      AValue2.value = KAList[Number(e.target.value) - 1].a
+      KValue3.value = KAList[Number(e.target.value) - 1].k
+      AValue3.value = KAList[Number(e.target.value) - 1].a
+      t11.innerText = KAList[Number(e.target.value) - 1].k
+      t12.innerText = KAList[Number(e.target.value) - 1].a
+
+
+      t21.textContent = ''
+      t22.textContent = ''
+      t31.textContent = ''
+      t32.textContent = ''
+      t41.textContent = ''
+      t42.textContent = ''
+      t51.textContent = ''
+      t52.textContent = ''
+
+      KA.forEach(item => {
+      const [part, v1, v2] = item.value.split('_')
+      if(part === filedSelect.value) {
+        if(!t21.textContent) {
+          t21.textContent = v1
+          t22.textContent = v2
+        }
+        else if(!t31.textContent) {
+          t31.textContent = v1
+          t32.textContent = v2
+        }
+        else if(!t41.textContent) {
+          t41.textContent = v1
+          t42.textContent = v2
+        }
+        else if(!t51.textContent) {
+          t51.textContent = v1
+          t52.textContent = v2
+        }
       }
-      else if(!t41.textContent) {
-        t41.textContent = v1
-        t42.textContent = v2
-      }
-      else if(!t51.textContent) {
-        t51.textContent = v1
-        t52.textContent = v2
-      }
+    })
+
+
+    })
+
+
+
+
+    var schemas = {{ schemas|safe }}
+    var pdfPanel = document.getElementById('pdf-panel');
+    var img = document.getElementById('effect-image');
+    var img1 = document.getElementById('img1');
+    var img2 = document.getElementById('img2');
+    var img3 = document.getElementById('img3');
+    var img4 = document.getElementById('img4');
+    var panelTrigger1 = document.getElementById('panel-trigger-1');
+    var panelTrigger2 = document.getElementById('panel-trigger-2');
+    var panelTrigger3 = document.getElementById('panel-trigger-3');
+    var panel1 = document.getElementById('panel-1');
+    var panel2 = document.getElementById('panel-2');
+    var panel3 = document.getElementById('panel-3');
+    var modalButton = document.getElementById('modal-button-2');
+    var schemaName = document.getElementById('schemaName');
+    var v1DOM = document.getElementById('v-1')
+    panelTrigger1.addEventListener('click', () => {
+        panel1.style.display = 'block'
+        panel2.style.display = 'none'
+        panel3.style.display = 'none'
+        img.style.display = 'none'
+        pdfPanel.style.display = 'none'
+    })
+    panelTrigger2.addEventListener('click', () => {
+        panel1.style.display = 'none'
+        panel2.style.display = 'block'
+        panel3.style.display = 'none'
+        img.style.display = 'none'
+        pdfPanel.style.display = 'none'
+    })
+    panelTrigger3.addEventListener('click', () => {
+        panel1.style.display = 'none'
+        panel2.style.display = 'none'
+        panel3.style.display = 'block'
+        img.style.display = 'none'
+        pdfPanel.style.display = 'none'
+    })
+    let data = []
+    schemas.forEach(schema => {
+        const [year, month, day, area, plat, well] = schema.schema_name.split(',')
+        let yearNode = data.find(item => item.id === year+'年') || {id: year+'年', children: []}
+        let monthNode = yearNode.children.find(item => item.id === month+'月') || {id: month+'月', children: []}
+        const node = {
+            id: day + '日' + area + '分段' + plat + '近路' + well + '排数',
+            schema: year + ',' + month + ',' + day+',' + area + ',' + plat + ',' + well,
+            v1: schema.velocity,
+            isLeaf: true, pdf: schema.pdf,
+            img21: schema.img1,img22: schema.img2,img23: schema.img3,img24: schema.img4
+        }
+        monthNode.children = monthNode.children.concat(node)
+        let oldMonthNode = yearNode.children.find(item => item.id === month+'月')
+        if(!oldMonthNode) {
+            yearNode.children = yearNode.children.concat(monthNode)
+        } else {
+            oldMonthNode = monthNode
+        }
+        let oldYearNode = data.find(item => item.id === year+'年')
+        if(!oldYearNode) {
+            data = data.concat(yearNode)
+        } else {
+            oldYearNode = yearNode
+        }
+    })
+
+    function buildTree(parent, items) {
+        const ul = document.createElement('ul');
+        parent.appendChild(ul);
+        items.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item.id;
+            ul.appendChild(li);
+            if(item.isLeaf) {
+                // 末端处理事件
+                li.addEventListener('click', showPdf(item))
+                li.style.textDecoration = 'underline'
+                li.style.textUnderlineOffset = '0.3em'
+                li.style.textDecorationThickness = '1px'
+                const button = document.createElement('button');
+                button.innerText = '删除'
+                button.classList.add('btn')
+                button.classList.add('btn-sm')
+                button.classList.add('btn-primary')
+                button.addEventListener('click', () => {
+                  deleteButton.click()
+                  schemaName2.value = item.schema
+                })
+                ul.style.display="flex"
+                ul.style.alignItems="center"
+                ul.style.gap="10px"
+                ul.appendChild(button)
+            } else {
+                li.addEventListener('click', (e) => {
+                    if(e.target.className === '') {
+                        e.target.classList.add("closed");
+                        if(e.target.childNodes[1]) {
+                            e.target.childNodes[1].style.display = 'none'
+                        }
+                    } else {
+                        e.target.classList.remove('closed')
+                        if(e.target.childNodes[1]) {
+                            e.target.childNodes[1].style.display = 'block'
+                        }
+                    }
+                    e.preventDefault()
+                    e.stopPropagation()
+                })
+            }
+
+            if (item.children) {
+                buildTree(li, item.children);
+            }
+        });
     }
-  })
+
+    let clickTimer = null
+
+    function showPdf(item) {
+        const {schema, v1, pdf, img21, img22, img23, img24}  = item
+        return function show() {
+            if (!clickTimer) {
+                 clickTimer = setTimeout(function() {
+                    // 单击事件处理逻辑
+                    console.log("单击事件触发了");
+                    clickTimer = null;
+
+                    img.style.display = 'none'
+                    pdfPanel.style.display = 'block'
+                    panel1.style.display = 'none'
+                    panel2.style.display = 'none'
+                    panel3.style.display = 'none'
+                    pdfPanel.src = window.location.origin +  pdf
+                }, 250); // 设置计时器时间间隔，单位为毫秒
+            } else {
+                clearTimeout(clickTimer);
+                console.log("双击事件触发了");
+                clickTimer = null;
+
+                schemaName.value = schema
+                img1.src=img21
+                img2.src=img22
+                img3.src=img23
+                img4.src=img24
+                v1DOM.innerText = v1
+                img.style.display = 'block'
+                pdfPanel.style.display = 'none'
+                panel1.style.display = 'none'
+                panel2.style.display = 'none'
+                panel3.style.display = 'none'
+            }
+        }
+    }
+
+    const tree = document.getElementById('tree-list');
+    buildTree(tree, data);
 
 
-  })
+
+    function displayFileName(input) {
+        const fileName = input.files[0].name;
+        const label = input.nextElementSibling;
+        label.innerText = fileName;
+    }
 
 
 
+    var segmentations = {{ segmentations|safe }}
+    var segSelect = document.getElementById('seg-select')
+    var segSelect2 = document.getElementById('seg-select2')
+    segmentations.forEach(seg => {
+      const op = document.createElement('option')
+      op.innerHTML = seg.seg_name
+      op.value = seg.seg_name
+      segSelect.appendChild(op)
+    })
+    segmentations.forEach(seg => {
+      const op = document.createElement('option')
+      op.innerHTML = seg.seg_name
+      op.value = seg.seg_name
+      segSelect2.appendChild(op)
+    })
+    const img21 = document.getElementById('seg-img')
+    const img212 = document.getElementById('seg-img2')
+    const segInput = document.getElementById('seg-input')
+    segInput.value = segmentations?.[0]?.seg_name || ''
+    img21.src = segmentations?.[0]?.img_seg || ''
+    img212.src = segmentations?.[0]?.img_seg || ''
+    segSelect.addEventListener('change', (e) => {
+      img21.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
+      segInput.value = e.target.value
+    })
+    segSelect2.addEventListener('change', (e) => {
+      img212.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
+      // segInput.value = e.target.value
+    })
 
-  var schemas = {{ schemas|safe }}
-  var pdfPanel = document.getElementById('pdf-panel');
-  var img = document.getElementById('effect-image');
-  var img1 = document.getElementById('img1');
-  var img2 = document.getElementById('img2');
-  var img3 = document.getElementById('img3');
-  var img4 = document.getElementById('img4');
-  var panelTrigger1 = document.getElementById('panel-trigger-1');
-  var panelTrigger2 = document.getElementById('panel-trigger-2');
-  var panelTrigger3 = document.getElementById('panel-trigger-3');
-  var panel1 = document.getElementById('panel-1');
-  var panel2 = document.getElementById('panel-2');
-  var panel3 = document.getElementById('panel-3');
-  var modalButton = document.getElementById('modal-button-2');
-  var schemaName = document.getElementById('schemaName');
-  var v1DOM = document.getElementById('v-1')
-  panelTrigger1.addEventListener('click', () => {
+
+
+    var tunnels = {{ tunnels|safe }}
+    const showTunnel = document.getElementById('showTunnel')
+    const showTunnel20 = document.getElementById('showTunnel20')
+    const tunnelQuery = document.getElementById('tunnelQuery')
+    const showTunnel1 = document.getElementById('showTunnel1')
+    const showTunnel2 = document.getElementById('showTunnel2')
+    const showTunnel3 = document.getElementById('showTunnel3')
+    const showTunnel4 = document.getElementById('showTunnel4')
+    const showTunnel5 = document.getElementById('showTunnel5')
+    const showTunnel6 = document.getElementById('showTunnel6')
+    const showTunnel7 = document.getElementById('showTunnel7')
+    const showTunnel8 = document.getElementById('showTunnel8')
+    const showTunnel9 = document.getElementById('showTunnel9')
+    const showTunnel10 = document.getElementById('showTunnel10')
+    tunnels.forEach(seg => {
+      const op = document.createElement('option')
+      op.innerHTML = seg.tunnel_name.split(',')[1]
+      op.value = seg.tunnel_name.split(',')[1]
+      showTunnel.appendChild(op)
+    })
+    tunnels.forEach(seg => {
+      const op = document.createElement('option')
+      op.innerHTML = seg.tunnel_name.split(',')[1]
+      op.value = seg.tunnel_name.split(',')[1]
+      showTunnel20.appendChild(op)
+    })
+    tunnelQuery.addEventListener('click', () => {
+      const data = tunnels.find(tunnel => tunnel.tunnel_name === segSelect.value + ',' + showTunnel.value)
+      if(data) {
+        showTunnel1.innerText = data.tunnel_name1
+        showTunnel2.innerText = data.tunnel_name2
+        showTunnel3.innerText = data.tunnel_name3
+        showTunnel4.innerText = data.tunnel_name4
+        showTunnel5.innerText = data.tunnel_name5
+        showTunnel6.innerText = data.tunnel_name6
+        showTunnel7.innerText = data.tunnel_name7
+        showTunnel8.innerText = data.tunnel_name8
+        showTunnel9.innerText = data.tunnel_name9
+        showTunnel10.innerText = data.tunnel_name10
+      }
+      else {
+        showTunnel1.innerText = ''
+        showTunnel2.innerText = ''
+        showTunnel3.innerText = ''
+        showTunnel4.innerText = ''
+        showTunnel5.innerText = ''
+        showTunnel6.innerText = ''
+        showTunnel7.innerText = ''
+        showTunnel8.innerText = ''
+        showTunnel9.innerText = ''
+        showTunnel10.innerText = ''
+      }
+    })
+
+    // tunnelQuery.addEventListener('click', () => {
+    //   const data = tunnels.find(tunnel => tunnel.tunnel_name === segSelect.value + ',' + showTunnel.value)
+    //   if(data) {
+    //     showTunnel1.innerText = data.tunnel_name1
+    //     showTunnel2.innerText = data.tunnel_name2
+    //     showTunnel3.innerText = data.tunnel_name3
+    //     showTunnel4.innerText = data.tunnel_name4
+    //     showTunnel5.innerText = data.tunnel_name5
+    //     showTunnel6.innerText = data.tunnel_name6
+    //     showTunnel7.innerText = data.tunnel_name7
+    //     showTunnel8.innerText = data.tunnel_name8
+    //     showTunnel9.innerText = data.tunnel_name9
+    //     showTunnel10.innerText = data.tunnel_name10
+    //   }
+    //   else {
+    //     showTunnel1.innerText = ''
+    //     showTunnel2.innerText = ''
+    //     showTunnel3.innerText = ''
+    //     showTunnel4.innerText = ''
+    //     showTunnel5.innerText = ''
+    //     showTunnel6.innerText = ''
+    //     showTunnel7.innerText = ''
+    //     showTunnel8.innerText = ''
+    //     showTunnel9.innerText = ''
+    //     showTunnel10.innerText = ''
+    //   }
+    // })
+
+    if(window.location.search?.includes('type=3-4') || window.location.search?.includes('type=3-5')) {
       panel1.style.display = 'block'
       panel2.style.display = 'none'
       panel3.style.display = 'none'
       img.style.display = 'none'
       pdfPanel.style.display = 'none'
-  })
-  panelTrigger2.addEventListener('click', () => {
-      panel1.style.display = 'none'
-      panel2.style.display = 'block'
-      panel3.style.display = 'none'
-      img.style.display = 'none'
-      pdfPanel.style.display = 'none'
-  })
-  panelTrigger3.addEventListener('click', () => {
-      panel1.style.display = 'none'
-      panel2.style.display = 'none'
-      panel3.style.display = 'block'
-      img.style.display = 'none'
-      pdfPanel.style.display = 'none'
-  })
-  let data = []
-  schemas.forEach(schema => {
-      const [year, month, day, area, plat, well] = schema.schema_name.split(',')
-      let yearNode = data.find(item => item.id === year+'年') || {id: year+'年', children: []}
-      let monthNode = yearNode.children.find(item => item.id === month+'月') || {id: month+'月', children: []}
-      const node = {
-          id: day + '日' + area + '分段' + plat + '近路' + well + '排数',
-          schema: year + ',' + month + ',' + day+',' + area + ',' + plat + ',' + well,
-          v1: schema.velocity,
-          isLeaf: true, pdf: schema.pdf,
-          img21: schema.img1,img22: schema.img2,img23: schema.img3,img24: schema.img4
-      }
-      monthNode.children = monthNode.children.concat(node)
-      let oldMonthNode = yearNode.children.find(item => item.id === month+'月')
-      if(!oldMonthNode) {
-          yearNode.children = yearNode.children.concat(monthNode)
-      } else {
-          oldMonthNode = monthNode
-      }
-      let oldYearNode = data.find(item => item.id === year+'年')
-      if(!oldYearNode) {
-          data = data.concat(yearNode)
-      } else {
-          oldYearNode = yearNode
-      }
-  })
-
-  function buildTree(parent, items) {
-      const ul = document.createElement('ul');
-      parent.appendChild(ul);
-      items.forEach(item => {
-          const li = document.createElement('li');
-          li.textContent = item.id;
-          ul.appendChild(li);
-          if(item.isLeaf) {
-              // 末端处理事件
-              li.addEventListener('click', showPdf(item))
-              li.style.textDecoration = 'underline'
-              li.style.textUnderlineOffset = '0.3em'
-              li.style.textDecorationThickness = '1px'
-              const button = document.createElement('button');
-              button.innerText = '删除'
-              button.classList.add('btn')
-              button.classList.add('btn-sm')
-              button.classList.add('btn-primary')
-              button.addEventListener('click', () => {
-                deleteButton.click()
-                schemaName2.value = item.schema
-              })
-              ul.style.display="flex"
-              ul.style.alignItems="center"
-              ul.style.gap="10px"
-              ul.appendChild(button)
-          } else {
-              li.addEventListener('click', (e) => {
-                  if(e.target.className === '') {
-                      e.target.classList.add("closed");
-                      if(e.target.childNodes[1]) {
-                          e.target.childNodes[1].style.display = 'none'
-                      }
-                  } else {
-                      e.target.classList.remove('closed')
-                      if(e.target.childNodes[1]) {
-                          e.target.childNodes[1].style.display = 'block'
-                      }
-                  }
-                  e.preventDefault()
-                  e.stopPropagation()
-              })
-          }
-
-          if (item.children) {
-              buildTree(li, item.children);
-          }
-      });
-  }
-
-  let clickTimer = null
-
-  function showPdf(item) {
-      const {schema, v1, pdf, img21, img22, img23, img24}  = item
-      return function show() {
-          if (!clickTimer) {
-               clickTimer = setTimeout(function() {
-                  // 单击事件处理逻辑
-                  console.log("单击事件触发了");
-                  clickTimer = null;
-
-                  img.style.display = 'none'
-                  pdfPanel.style.display = 'block'
-                  panel1.style.display = 'none'
-                  panel2.style.display = 'none'
-                  panel3.style.display = 'none'
-                  pdfPanel.src = window.location.origin +  pdf
-              }, 250); // 设置计时器时间间隔，单位为毫秒
-          } else {
-              clearTimeout(clickTimer);
-              console.log("双击事件触发了");
-              clickTimer = null;
-
-              schemaName.value = schema
-              img1.src=img21
-              img2.src=img22
-              img3.src=img23
-              img4.src=img24
-              v1DOM.innerText = v1
-              img.style.display = 'block'
-              pdfPanel.style.display = 'none'
-              panel1.style.display = 'none'
-              panel2.style.display = 'none'
-              panel3.style.display = 'none'
-          }
-      }
-  }
-
-  const tree = document.getElementById('tree-list');
-  buildTree(tree, data);
-
-
-
-  function displayFileName(input) {
-      const fileName = input.files[0].name;
-      const label = input.nextElementSibling;
-      label.innerText = fileName;
-  }
-
-
-
-  var segmentations = {{ segmentations|safe }}
-  var segSelect = document.getElementById('seg-select')
-  segmentations.forEach(seg => {
-    const op = document.createElement('option')
-    op.innerHTML = seg.seg_name
-    op.value = seg.seg_name
-    segSelect.appendChild(op)
-  })
-  const img21 = document.getElementById('seg-img')
-  const segInput = document.getElementById('seg-input')
-  segInput.value = segmentations?.[0]?.seg_name || ''
-  img21.src = segmentations?.[0]?.img_seg || ''
-  segSelect.addEventListener('change', (e) => {
-    img21.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
-    segInput.value = e.target.value
-  })
-
-
-
-  var tunnels = {{ tunnels|safe }}
-  const showTunnel = document.getElementById('showTunnel')
-  const tunnelQuery = document.getElementById('tunnelQuery')
-  const showTunnel1 = document.getElementById('showTunnel1')
-  const showTunnel2 = document.getElementById('showTunnel2')
-  const showTunnel3 = document.getElementById('showTunnel3')
-  const showTunnel4 = document.getElementById('showTunnel4')
-  const showTunnel5 = document.getElementById('showTunnel5')
-  const showTunnel6 = document.getElementById('showTunnel6')
-  const showTunnel7 = document.getElementById('showTunnel7')
-  const showTunnel8 = document.getElementById('showTunnel8')
-  const showTunnel9 = document.getElementById('showTunnel9')
-  const showTunnel10 = document.getElementById('showTunnel10')
-  tunnels.forEach(seg => {
-    const op = document.createElement('option')
-    op.innerHTML = seg.tunnel_name.split(',')[1]
-    op.value = seg.tunnel_name.split(',')[1]
-    showTunnel.appendChild(op)
-  })
-  tunnelQuery.addEventListener('click', () => {
-    const data = tunnels.find(tunnel => tunnel.tunnel_name === segSelect.value + ',' + showTunnel.value)
-    if(data) {
-      showTunnel1.innerText = data.tunnel_name1
-      showTunnel2.innerText = data.tunnel_name2
-      showTunnel3.innerText = data.tunnel_name3
-      showTunnel4.innerText = data.tunnel_name4
-      showTunnel5.innerText = data.tunnel_name5
-      showTunnel6.innerText = data.tunnel_name6
-      showTunnel7.innerText = data.tunnel_name7
-      showTunnel8.innerText = data.tunnel_name8
-      showTunnel9.innerText = data.tunnel_name9
-      showTunnel10.innerText = data.tunnel_name10
     }
-    else {
-      showTunnel1.innerText = ''
-      showTunnel2.innerText = ''
-      showTunnel3.innerText = ''
-      showTunnel4.innerText = ''
-      showTunnel5.innerText = ''
-      showTunnel6.innerText = ''
-      showTunnel7.innerText = ''
-      showTunnel8.innerText = ''
-      showTunnel9.innerText = ''
-      showTunnel10.innerText = ''
-    }
-  })
+  </script>
 
-  if(window.location.search?.includes('type=3-4')) {
-    panel1.style.display = 'block'
-    panel2.style.display = 'none'
-    panel3.style.display = 'none'
-    img.style.display = 'none'
-    pdfPanel.style.display = 'none'
-  }
-</script>
-
-{% endblock %}
+  {% endblock %}
+</div>
