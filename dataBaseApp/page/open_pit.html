@@ -60,13 +60,15 @@
 
 <div class="row col-xl-12" style="flex: 1; gap: 20px">
   <div class="d-flex flex-column" style="width: 320px; padding-bottom: 20px">
-    <div style="height: 150px">
-      <h4 style="color: #000">> 爆破振动数据计算分析</h4>
+    <div style="height: 100px">
+      <h5 style="color: #000">> 爆破振动数据计算分析</h5>
       <h6
         style="
           color: #666;
           text-decoration: underline;
+          text-underline-offset:0.3em;
           text-decoration-thickness: 1px;
+          margin-left: 23px;
         "
         id="panel-trigger-1"
       >
@@ -76,7 +78,9 @@
         style="
           color: #666;
           text-decoration: underline;
+          text-underline-offset:0.3em;
           text-decoration-thickness: 1px;
+          margin-left: 23px;
         "
         id="panel-trigger-2"
       >
@@ -84,12 +88,12 @@
       </h6>
     </div>
     <div style="flex: 1; overflow: auto">
-      <h4 style="color: #000">> 矿山现场试验结果记录</h4>
+      <h5 style="color: #000">> 矿山现场试验结果记录</h5>
       <div
         class="w-100 row justify-between align-center"
         style="align-items: center; gap: 20px"
       >
-        <h6 style="color: #666; margin: 0; margin-left: 15px">方案查看</h6>
+        <h6 style="color: #666; margin-left: 33px">方案查看</h6>
         <button
           type="button"
           class="btn btn-sm btn-primary"
@@ -99,7 +103,7 @@
           添加方案
         </button>
       </div>
-      <div id="tree-list" style="margin: 0; padding: 0; color: #999"></div>
+      <div id="tree-list" style="margin-left: 16px; padding: 0; color: #999"></div>
     </div>
   </div>
   <div style="width: 3px; height: 100%; background-color: #e9ecef"></div>
@@ -113,25 +117,25 @@
     />
     <div id="effect-image" style="display: none" class="container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 45px">
           <h5>振动波形</h5>
-          <img id="img1" alt="Image 1" class="img-fluid" />
+          <img id="img1" alt="Image 1" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover"/>
           <span>爆破振动速度峰值(cm/s)：</span>
           <span id="v-1"></span>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 45px">
           <h5>损伤情况</h5>
-          <img id="img2" alt="Image 2" class="img-fluid" />
+          <img id="img2" alt="Image 2" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover"/>
         </div>
       </div>
       <div class="row mt-3">
-        <div class="col-md-6">
+        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 30px">
           <h5>爆堆形态</h5>
-          <img id="img3" alt="Image 3" class="img-fluid" />
+          <img id="img3" alt="Image 3" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover"/>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 30px">
           <h5>壁面情况</h5>
-          <img id="img4" alt="Image 4" class="img-fluid" />
+          <img id="img4" alt="Image 4" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover"/>
         </div>
       </div>
       <button
@@ -1059,6 +1063,7 @@
               // 末端处理事件
               li.addEventListener('click', showPdf(item))
               li.style.textDecoration = 'underline'
+              li.style.textUnderlineOffset = '0.3em'
               li.style.textDecorationThickness = '1px'
               const button = document.createElement('button');
               button.innerText = '删除'

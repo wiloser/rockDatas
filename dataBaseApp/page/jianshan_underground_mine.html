@@ -63,8 +63,8 @@
   style="flex: 1; gap: 30px; flex-wrap: nowrap; overflow: auto"
 >
   <div class="d-flex flex-column" style="width: 320px; padding-bottom: 20px">
-    <div style="height: 100px">
-      <h4 style="color: #000">> 三维激光扫描</h4>
+    <div style="height: 80px">
+      <h5 style="color: #000">> 三维激光扫描</h5>
       <div
         class="w-100 row justify-between align-center"
         style="align-items: center; gap: 20px"
@@ -73,9 +73,9 @@
           style="
             color: #666;
             text-decoration: underline;
+            text-underline-offset: 0.3em;
             text-decoration-thickness: 1px;
-            margin: 0;
-            margin-left: 15px;
+            margin-left: 35px;
             cursor: pointer;
           "
           id="panel-trigger-3"
@@ -92,13 +92,15 @@
         </button>
       </div>
     </div>
-    <div style="height: 150px">
-      <h4 style="color: #000">> 爆破振动数据计算与分析</h4>
+    <div style="height: 80px">
+      <h5 style="color: #000">> 爆破振动数据计算与分析</h5>
       <h6
         style="
           color: #666;
           text-decoration: underline;
+          text-underline-offset:0.3em;
           text-decoration-thickness: 1px;
+          margin-left: 23px;
           cursor: pointer;
         "
         id="panel-trigger-1"
@@ -109,8 +111,10 @@
         style="
           color: #666;
           text-decoration: underline;
+          text-underline-offset:0.3em;
           text-decoration-thickness: 1px;
           cursor: pointer;
+          margin-left: 23px;
         "
         id="panel-trigger-2"
       >
@@ -118,12 +122,12 @@
       </h6>
     </div>
     <div style="flex: 1; overflow: auto; margin-top: 20px">
-      <h4 style="color: #000">> 矿山现场试验结果记录</h4>
+      <h5 style="color: #000">> 矿山现场试验结果记录</h5>
       <div
         class="w-100 row justify-between align-center"
         style="align-items: center; gap: 20px"
       >
-        <h6 style="color: #666; margin: 0; margin-left: 15px">方案查看</h6>
+        <h6 style="color: #666; margin-left: 33px">方案查看</h6>
         <button
           type="button"
           class="btn btn-sm btn-primary"
@@ -133,7 +137,7 @@
           添加方案
         </button>
       </div>
-      <div id="tree-list" style="margin: 0; padding: 0; color: #999"></div>
+      <div id="tree-list" style="padding: 0; margin-left: 16px; color: #999"></div>
     </div>
   </div>
   <div style="width: 3px; height: 100%; background-color: #e9ecef"></div>
@@ -147,31 +151,32 @@
     />
     <div id="effect-image" style="display: none" class="container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 30px" >
           <h5>振动监测</h5>
-          <img id="img1" alt="Image 1" class="img-fluid" />
+          <img id="img1" alt="Image 1" class="img-fluid" style="height: 100%; width: 100%; object-fit: contain"/>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" style = "height: 250px; width: 300px">
           <h5>悬顶扫描</h5>
-          <img id="img2" alt="Image 2" class="img-fluid" />
+          <img id="img2" alt="Image 2" class="img-fluid" style="height: 100%; width: 100%; object-fit: contain" />
         </div>
       </div>
       <div class="row mt-3">
-        <div class="col-md-6">
+        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 30px">
           <h5>爆堆形态</h5>
-          <img id="img3" alt="Image 3" class="img-fluid" />
+          <img id="img3" alt="Image 3" class="img-fluid" style="height: 100%; width: 100%; object-fit: contain"/>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" style = "height: 250px; width: 300px">
           <h5>眉线破坏</h5>
-          <img id="img4" alt="Image 4" class="img-fluid" />
+          <img id="img4" alt="Image 4" class="img-fluid" style="height: 100%; width: 100%; object-fit: contain"/>
         </div>
       </div>
-      <div class="row mt-3">
+      <div class="row mt-3" style="margin-left: 5px">
         <span>试验结果：</span>
         <span id="v-1"></span>
       </div>
       <button
         type="button"
+        style="margin-left: 5px"
         class="btn btn-sm btn-primary mt-3"
         data-toggle="modal"
         data-target="#myModal2"
@@ -294,6 +299,16 @@
             插入
           </button>
         </div>
+        <div style="height: 2px;
+              width: 100%;
+              background-color: #e9ecef;
+              margin-left: -25px;
+              margin-bottom: 20px;
+              margin-top: 15px;
+              "
+        >
+
+        </div>
         <div
           style="
             display: flex;
@@ -303,7 +318,7 @@
           "
         >
           <div style="display: flex; flex-direction: column; width: 100%">
-            <h4 class="text-danger">振动速度计算:</h4>
+            <h5 class="text-danger">振动速度计算:</h5>
             <label>爆区位置输入</label>
             <input id="input-1-1" />
             <label class="mt-2">最大单响药量Q输入</label>
@@ -316,7 +331,7 @@
             <p id="out-1-5"></p>
           </div>
           <div style="display: flex; flex-direction: column; width: 100%">
-            <h4 class="text-danger">爆区距离计算:</h4>
+            <h5 class="text-danger">爆区距离计算:</h5>
             <label>爆区位置输入</label>
             <input id="input-2-1" />
             <label class="mt-2">最大单响药量Q输入</label>
@@ -470,8 +485,8 @@
         </div>
       </form>
     </div>
-    <div id="panel-3">
-      <div style="gap: 20px; height: 300px; display: flex; flex-wrap: nowrap">
+    <div id="panel-3" >
+      <div style="gap: 15px; margin-left: -15px; height: 250px; width: 280px; display: flex; flex-wrap: nowrap">
         <img
           style="height: 100%; object-fit: contain; flex: 1"
           src="/static/image/undergroundmine.jpg"
@@ -502,6 +517,7 @@
             查询
           </button>
         </div>
+        <div style="height: 2px; width: 100%; background-color: #e9ecef; margin-left: -25px"></div>
         <div class="row">
           <div class="col-md-4">
             <label for="showTunnel1">岩石名称：</label>
@@ -550,6 +566,7 @@
             <span type="text" id="showTunnel10"></span>
           </div>
         </div>
+        <div style="height: 2px; width: 100%; background-color: #e9ecef; margin-left: -25px">
       </div>
     </div>
   </div>
@@ -1272,6 +1289,7 @@
               // 末端处理事件
               li.addEventListener('click', showPdf(item))
               li.style.textDecoration = 'underline'
+              li.style.textUnderlineOffset = '0.3em'
               li.style.textDecorationThickness = '1px'
               const button = document.createElement('button');
               button.innerText = '删除'
