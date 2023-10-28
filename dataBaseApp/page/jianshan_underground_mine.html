@@ -551,6 +551,14 @@
           >
             添加巷道数据
           </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary ml-3"
+            data-toggle="modal"
+            data-target="#myModal8"
+          >
+            删除分段
+          </button>
         </div>
         <div class="row">
           <label for="showTunnel">巷道名称：</label>
@@ -561,14 +569,6 @@
             id="tunnelQuery"
           >
             查询
-          </button>
-          <button
-            type="button"
-            class="btn btn-sm btn-warning ml-3"
-            data-toggle="modal"
-            data-target="#myModal8"
-          >
-            删除
           </button>
         </div>
         <div
@@ -1214,7 +1214,7 @@
                 align-items: center;
               "
             >
-              确认删除此巷道吗？
+              确认删除此分段吗？
             </div>
           </div>
           <div class="modal-footer">
@@ -1621,10 +1621,24 @@
 
 
 
+
+    Array.from({ length: showTunnel.childElementCount }, (_, index) => index + 1).forEach(() => {
+      showTunnel.removeChild(showTunnel.firstChild)
+    })
+    tunnels.forEach(seg => {
+      const op = document.createElement('option')
+      if(seg.tunnel_name.split(',')[0] !== segSelect.value) return
+      op.innerHTML = seg.tunnel_name.split(',')[1]
+      op.value = seg.tunnel_name.split(',')[1]
+      showTunnel.appendChild(op)
+    })
     segSelect.addEventListener('change', (e) => {
       img21.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
       segInput.value = e.target.value
       segInput2.value = e.target.value
+      Array.from({ length: showTunnel.childElementCount }, (_, index) => index + 1).forEach(() => {
+        showTunnel.removeChild(showTunnel.firstChild)
+      })
       tunnels.forEach(seg => {
         const op = document.createElement('option')
         if(seg.tunnel_name.split(',')[0] !== e.target.value) return
@@ -1634,9 +1648,24 @@
       })
 
     })
+
+
+    Array.from({ length: showTunnel20.childElementCount }, (_, index) => index + 1).forEach(() => {
+      showTunnel20.removeChild(showTunnel20.firstChild)
+    })
+    tunnels.forEach(seg => {
+        const op = document.createElement('option')
+        if(seg.tunnel_name.split(',')[0] !== segSelect2.value) return
+        op.innerHTML = seg.tunnel_name.split(',')[1]
+        op.value = seg.tunnel_name.split(',')[1]
+        showTunnel20.appendChild(op)
+      })
     segSelect2.addEventListener('change', (e) => {
       img212.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
       // segInput.value = e.target.value
+      Array.from({ length: showTunnel20.childElementCount }, (_, index) => index + 1).forEach(() => {
+        showTunnel20.removeChild(showTunnel20.firstChild)
+      })
       tunnels.forEach(seg => {
         const op = document.createElement('option')
         if(seg.tunnel_name.split(',')[0] !== e.target.value) return

@@ -673,9 +673,10 @@ def schema(request):
                 pass
         elif(type == "3-6"):
             segInput = request.POST['seg-input2']
-            tunnel = request.POST['tunnel20']
-            oldValue = Tunnel.objects.get(tunnel_name=segInput+','+tunnel)
+            oldSeg = Segmentation.objects.get(seg_name=segInput)
+            oldValue = Tunnel.objects.filter(tunnel_name__startswith=segInput)
             try:
+                oldSeg.delete()
                 oldValue.delete()
             except:
                 pass
