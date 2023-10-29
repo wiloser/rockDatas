@@ -653,9 +653,10 @@ def schema(request):
                 pass
         elif(type == "3-4"):
             part = request.POST['part']
+            match = request.POST['match']
             KValue2 = request.POST['KValue2']
             AValue2 = request.POST['AValue2']
-            oldValue = KA2(k_a_value=part+'_'+KValue2+'_'+AValue2)
+            oldValue = KA2(k_a_value=part+'_'+KValue2+'_'+AValue2, is_match=match)
             
             try:
                 oldValue.save()

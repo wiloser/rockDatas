@@ -222,7 +222,8 @@
               <th>标号</th>
               <th>K值</th>
               <th>α值</th>
-              <th>操作</th>
+              <th>操</th>
+              <th>作</th>
             </tr>
           </thead>
           <tbody>
@@ -230,12 +231,32 @@
               <td>1</td>
               <td id="t-1-1"></td>
               <td id="t-1-2"></td>
-              <th id="t-1-3"></th>
+              <th>
+                <button id="t-1-4" type="button" class="btn btn-sm">
+                  选定
+                </button>
+              </th>
+              <th>
+                <button
+                  id="t-1-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>2</td>
               <td id="t-2-1"></td>
               <td id="t-2-2"></td>
+              <th>
+                <button id="t-2-4" type="button" class="btn btn-sm">
+                  选定
+                </button>
+              </th>
               <th>
                 <button
                   id="t-2-3"
@@ -253,6 +274,11 @@
               <td id="t-3-1"></td>
               <td id="t-3-2"></td>
               <th>
+                <button id="t-3-4" type="button" class="btn btn-sm">
+                  选定
+                </button>
+              </th>
+              <th>
                 <button
                   id="t-3-3"
                   type="button"
@@ -269,6 +295,11 @@
               <td id="t-4-1"></td>
               <td id="t-4-2"></td>
               <th>
+                <button id="t-4-4" type="button" class="btn btn-sm">
+                  选定
+                </button>
+              </th>
+              <th>
                 <button
                   id="t-4-3"
                   type="button"
@@ -284,6 +315,11 @@
               <td>5</td>
               <td id="t-5-1"></td>
               <td id="t-5-2"></td>
+              <th>
+                <button id="t-5-4" type="button" class="btn btn-sm">
+                  选定
+                </button>
+              </th>
               <th>
                 <button
                   id="t-5-3"
@@ -1081,7 +1117,7 @@
         {% csrf_token %}
         <div class="modal-content">
           <div class="modal-body">
-            <label style="display: none" for="part">分区：</label>
+            <label style="display: none" for="part">巷口：</label>
             <input
               style="display: none"
               type="text"
@@ -1284,6 +1320,8 @@
       var deleteButton = document.getElementById('deleteButton')
       var schemaName2 = document.getElementById('schemaName2')
 
+
+      var t13 = document.getElementById('t-1-3')
       var t21 = document.getElementById('t-2-1')
       var t22 = document.getElementById('t-2-2')
       var t23 = document.getElementById('t-2-3')
@@ -1296,6 +1334,83 @@
       var t51 = document.getElementById('t-5-1')
       var t52 = document.getElementById('t-5-2')
       var t53 = document.getElementById('t-5-3')
+
+
+      var t14 = document.getElementById('t-1-4')
+      var t24 = document.getElementById('t-2-4')
+      var t34 = document.getElementById('t-3-4')
+      var t44 = document.getElementById('t-4-4')
+      var t54 = document.getElementById('t-5-4')
+
+      t14.addEventListener('click', () => {
+        if(t11.textContent && t12.textContent) {
+          KValue.value = t11.textContent
+          AValue.value = t12.textContent
+          t14.parentElement.style.backgroundColor = 'teal'
+          t24.parentElement.style.backgroundColor = ''
+          t34.parentElement.style.backgroundColor = ''
+          t44.parentElement.style.backgroundColor = ''
+          t54.parentElement.style.backgroundColor = ''
+        }
+      })
+      t24.addEventListener('click', () => {
+        if(t21.textContent && t22.textContent) {
+          KValue.value = t21.textContent
+          AValue.value = t22.textContent
+          t14.parentElement.style.backgroundColor = ''
+          t24.parentElement.style.backgroundColor = 'teal'
+          t34.parentElement.style.backgroundColor = ''
+          t44.parentElement.style.backgroundColor = ''
+          t54.parentElement.style.backgroundColor = ''
+        }
+      })
+      t34.addEventListener('click', () => {
+        if(t31.textContent && t32.textContent) {
+          KValue.value = t31.textContent
+          AValue.value = t32.textContent
+          t14.parentElement.style.backgroundColor = ''
+          t24.parentElement.style.backgroundColor = ''
+          t34.parentElement.style.backgroundColor = 'teal'
+          t44.parentElement.style.backgroundColor = ''
+          t54.parentElement.style.backgroundColor = ''
+        }
+      })
+      t44.addEventListener('click', () => {
+        if(t41.textContent && t42.textContent) {
+          KValue.value = t41.textContent
+          AValue.value = t42.textContent
+          t14.parentElement.style.backgroundColor = ''
+          t24.parentElement.style.backgroundColor = ''
+          t34.parentElement.style.backgroundColor = ''
+          t44.parentElement.style.backgroundColor = 'teal'
+          t54.parentElement.style.backgroundColor = ''
+        }
+      })
+      t54.addEventListener('click', () => {
+        if(t51.textContent && t52.textContent) {
+          KValue.value = t51.textContent
+          AValue.value = t52.textContent
+          t14.parentElement.style.backgroundColor = ''
+          t24.parentElement.style.backgroundColor = ''
+          t34.parentElement.style.backgroundColor = ''
+          t44.parentElement.style.backgroundColor = ''
+          t54.parentElement.style.backgroundColor = 'teal'
+        }
+      })
+
+      var t213 = document.getElementById('t2-1-3')
+      var t221 = document.getElementById('t2-2-1')
+      var t222 = document.getElementById('t2-2-2')
+      var t223 = document.getElementById('t2-2-3')
+      var t231 = document.getElementById('t2-3-1')
+      var t232 = document.getElementById('t2-3-2')
+      var t233 = document.getElementById('t2-3-3')
+      var t241 = document.getElementById('t2-4-1')
+      var t242 = document.getElementById('t2-4-2')
+      var t243 = document.getElementById('t2-4-3')
+      var t251 = document.getElementById('t2-5-1')
+      var t252 = document.getElementById('t2-5-2')
+      var t253 = document.getElementById('t2-5-3')
 
 
       t311 = document.getElementById('t3-1-1')
@@ -1319,6 +1434,10 @@
 
 
       filedSelect = document.getElementById('filed')
+      t13.addEventListener('click', (e) => {
+        KValue3.value = t11.textContent
+        AValue3.value = t12.textContent
+      })
       t23.addEventListener('click', (e) => {
         KValue3.value = t21.textContent
         AValue3.value = t22.textContent
@@ -1372,96 +1491,10 @@
       ]
       const t11 = document.getElementById('t-1-1')
       const t12 = document.getElementById('t-1-2')
-
-      var KA = {{ KA|safe }}
-      KA.forEach(item => {
-        const [part, v1, v2] = item.value.split('_')
-        if(part === filedSelect.value) {
-          if(!t21.textContent) {
-            t21.textContent = v1
-            t22.textContent = v2
-          }
-          else if(!t31.textContent) {
-            t31.textContent = v1
-            t32.textContent = v2
-          }
-          else if(!t41.textContent) {
-            t41.textContent = v1
-            t42.textContent = v2
-          }
-          else if(!t51.textContent) {
-            t51.textContent = v1
-            t52.textContent = v2
-          }
-        }
-      })
-      KValue.value = KAList[0].k
-      AValue.value = KAList[0].a
-      t11.innerText = KAList[0].k
-      t12.innerText = KAList[0].a
+      const t211 = document.getElementById('t2-1-1')
+      const t212 = document.getElementById('t2-1-2')
 
 
-      KValue2.value = KAList[0].k
-      AValue2.value = KAList[0].a
-      KValue3.value = KAList[0].k
-      AValue3.value = KAList[0].a
-
-      KValue.addEventListener('change', () => {
-        KValue2.value = KValue.value
-      })
-      AValue.addEventListener('change', () => {
-        AValue2.value = AValue.value
-      })
-
-      part.value = filedSelect.value
-      part2.value = filedSelect.value
-
-      filedSelect.addEventListener('change', (e) => {
-        part.value = e.target.value
-        part2.value = e.target.value
-        KValue.value = KAList[Number(e.target.value) - 1].k
-        AValue.value = KAList[Number(e.target.value) - 1].a
-        KValue2.value = KAList[Number(e.target.value) - 1].k
-        AValue2.value = KAList[Number(e.target.value) - 1].a
-        KValue3.value = KAList[Number(e.target.value) - 1].k
-        AValue3.value = KAList[Number(e.target.value) - 1].a
-        t11.innerText = KAList[Number(e.target.value) - 1].k
-        t12.innerText = KAList[Number(e.target.value) - 1].a
-
-
-        t21.textContent = ''
-        t22.textContent = ''
-        t31.textContent = ''
-        t32.textContent = ''
-        t41.textContent = ''
-        t42.textContent = ''
-        t51.textContent = ''
-        t52.textContent = ''
-
-        KA.forEach(item => {
-        const [part, v1, v2] = item.value.split('_')
-        if(part === filedSelect.value) {
-          if(!t21.textContent) {
-            t21.textContent = v1
-            t22.textContent = v2
-          }
-          else if(!t31.textContent) {
-            t31.textContent = v1
-            t32.textContent = v2
-          }
-          else if(!t41.textContent) {
-            t41.textContent = v1
-            t42.textContent = v2
-          }
-          else if(!t51.textContent) {
-            t51.textContent = v1
-            t52.textContent = v2
-          }
-        }
-      })
-
-
-      })
 
 
 
@@ -1803,6 +1836,68 @@
         }
       })
 
+
+      var KA = {{ KA|safe }}
+      KA.forEach(item => {
+        const [part, v1, v2] = item.value.split('_')
+        if(part === segSelect2.value + '+' + showTunnel20.value) {
+          if(!t11.textContent) {
+            t11.textContent = v1
+            t12.textContent = v2
+          }
+          else if(!t21.textContent) {
+            t21.textContent = v1
+            t22.textContent = v2
+          }
+          else if(!t31.textContent) {
+            t31.textContent = v1
+            t32.textContent = v2
+          }
+          else if(!t41.textContent) {
+            t41.textContent = v1
+            t42.textContent = v2
+          }
+          else if(!t51.textContent) {
+            t51.textContent = v1
+            t52.textContent = v2
+          }
+        }
+      })
+
+      KA.forEach(item => {
+        const [part, v1, v2] = item.value.split('_')
+        if(item.match !== '1') return
+        if(part === segSelect3.value + '+' + showTunnel200.value) {
+          if(!t211.textContent) {
+            t211.textContent = v1
+            t212.textContent = v2
+          }
+          else if(!t221.textContent) {
+            t221.textContent = v1
+            t222.textContent = v2
+          }
+          else if(!t231.textContent) {
+            t231.textContent = v1
+            t232.textContent = v2
+          }
+          else if(!t241.textContent) {
+            t241.textContent = v1
+            t242.textContent = v2
+          }
+          else if(!t251.textContent) {
+            t251.textContent = v1
+            t252.textContent = v2
+          }
+        }
+      })
+
+      KValue.addEventListener('change', () => {
+        KValue2.value = KValue.value
+      })
+      AValue.addEventListener('change', () => {
+        AValue2.value = AValue.value
+      })
+
       // tunnelQuery.addEventListener('click', () => {
       //   const data = tunnels.find(tunnel => tunnel.tunnel_name === segSelect.value + ',' + showTunnel.value)
       //   if(data) {
@@ -1885,7 +1980,8 @@
           kComputedValue.innerText = Number(computed.k_fit).toFixed(2)
           aComputedValue.innerText = Number(computed.a_fit).toFixed(2)
           match.value = '1'
-          part.value = filedSelect2.value
+          segSelect2.value = computed.seg
+          showTunnel200.value = computed.tunnel
           KValue2.value = kComputedValue.innerText
           AValue2.value = aComputedValue.innerText
         }
@@ -1917,6 +2013,23 @@
       match.value = ''
     })
 
+
+
+
+
+    if(segSelect2) {
+        part.value = segSelect2.value + '+' + showTunnel20.value
+        part2.value = segSelect2.value + '+' + showTunnel20.value
+      }
+      showTunnel20.addEventListener('change', () => {
+        part.value = segSelect2.value + '+' + showTunnel20.value
+        part2.value = segSelect2.value + '+' + showTunnel20.value
+      })
+
+      showTunnel200.addEventListener('change', () => {
+        part.value = segSelect3.value + '+' + showTunnel200.value
+        part2.value = segSelect3.value + '+' + showTunnel200.value
+      })
 
 
       if(localStorage.getItem('page2') === '1') {
