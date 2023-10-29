@@ -230,6 +230,7 @@ class Tunnel(models.Model):
 
 class KA(models.Model):
     k_a_value = models.CharField(primary_key=True, max_length=255, verbose_name='KA值') # 分区_k_a
+    is_match = models.CharField(max_length=255, default='0', verbose_name='是否拟合参数')
 
     class Meta:
         app_label = 'dataBaseApp'
@@ -239,6 +240,7 @@ class KA(models.Model):
 
 class KA2(models.Model):
     k_a_value = models.CharField(primary_key=True, max_length=255, verbose_name='KA值') # 分区_k_a
+    is_match = models.CharField(max_length=255, default='0', verbose_name='是否拟合参数')
 
     class Meta:
         app_label = 'dataBaseApp'

@@ -12,6 +12,13 @@ from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.storage import default_storage
 from django.http import HttpResponse
+from scipy.optimize import curve_fit
+import numpy as np
+
+def fit_func(w, k, a):
+    Q, R = w
+    return k * np.power(Q**(1/3) / R, a)
+
 
 def get_default_image():
     # 读取默认图片文件
@@ -635,12 +642,13 @@ def schema(request):
                 pass
         elif(type == "1-4"):
             part = request.POST['part']
+            match = request.POST['match']
             KValue2 = request.POST['KValue2']
             AValue2 = request.POST['AValue2']
-            oldValue = KA(k_a_value=part+'_'+KValue2+'_'+AValue2)
+            value = KA(k_a_value=part+'_'+KValue2+'_'+AValue2, is_match=match)
             
             try:
-                oldValue.save()
+                value.save()
             except:
                 pass
         elif(type == "3-4"):
@@ -735,7 +743,79 @@ def schema(request):
                     # return render(request, pageName['OpenPit'])
                 except:
                     pass
-
+        elif(type == "4-1"):
+            # 拟合数据
+            filed21 = request.POST['filed2']
+            t311 = request.POST['t3-1-1']
+            t312 = request.POST['t3-1-2']
+            t313 = request.POST['t3-1-3']
+            t321 = request.POST['t3-2-1']
+            t322 = request.POST['t3-2-2']
+            t323 = request.POST['t3-2-3']
+            t331 = request.POST['t3-3-1']
+            t332 = request.POST['t3-3-2']
+            t333 = request.POST['t3-3-3']
+            t341 = request.POST['t3-4-1']
+            t342 = request.POST['t3-4-2']
+            t343 = request.POST['t3-4-3']
+            t351 = request.POST['t3-5-1']
+            t352 = request.POST['t3-5-2']
+            t353 = request.POST['t3-5-3']
+            t361 = request.POST['t3-6-1']
+            t362 = request.POST['t3-6-2']
+            t363 = request.POST['t3-6-3']
+            if t311 == '' or t321 == '' or t331 == '':
+                pass
+            elif t341 == '':
+                Q = np.array([t311, t321, t331 ])
+                R = np.array([t312, t322, t332 ])
+                y = np.array([t313, t323, t333 ])
+                params, cov = curve_fit(fit_func, (Q, R), y)
+                k_fit, a_fit = params
+                print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+            elif t351 == '': 
+                Q = np.array([t311, t321, t331, t341 ])
+                R = np.array([t312, t322, t332, t342 ])
+                y = np.array([t313, t323, t333, t343 ])
+                params, cov = curve_fit(fit_func, (Q, R), y)
+                k_fit, a_fit = params
+                print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+            elif t361 == '':
+                Q = np.array([t311, t321, t331, t341, t351 ])
+                R = np.array([t312, t322, t332, t342, t352 ])
+                y = np.array([t313, t323, t333, t343, t353 ])
+                params, cov = curve_fit(fit_func, (Q, R), y)
+                k_fit, a_fit = params
+                print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+            else:
+                Q = np.array([t311, t321, t331, t341 , t351 , t361 ])
+                R = np.array([t312, t322, t332, t342 , t352 , t362 ])
+                y = np.array([t313, t323, t333, t343 , t353 , t363 ])
+                params, cov = curve_fit(fit_func, (Q, R), y)
+                k_fit, a_fit = params
+            result7 = {
+                'filed2': filed21,
+                't311': t311,
+                't312': t312,
+                't313': t313,
+                't321': t321,
+                't322': t322,
+                't323': t323,
+                't331': t331,
+                't332': t332,
+                't333': t333,
+                't341': t341,
+                't342': t342,
+                't343': t343,
+                't351': t351,
+                't352': t352,
+                't353': t353,
+                't361': t361,
+                't362': t362,
+                't363': t363,
+                'k_fit': k_fit,
+                'a_fit': a_fit,
+            }
         schemaList = Schema.objects.all()
         result = []
         for item in schemaList:
@@ -789,6 +869,7 @@ def schema(request):
         for item in schemaList5:
             result5.append({
                 'value': item.k_a_value,
+                'match': item.is_match,
             })
         print(result5)
         result6 = []
@@ -796,10 +877,13 @@ def schema(request):
         for item in schemaList6:
             result6.append({
                 'value': item.k_a_value,
+                'match': item.is_match,
             })
         print(result6)
-        if(type != "2-1" and type != '2-2' and type != '3-1' and type != '3-2' and type != '3-3' and type != '3-4' and type != '3-5' and type != '3-6'):
-            return render(request, pageName['OpenPit'], {'schemas': result, 'KA': result5})
+        if(type == '4-1'):
+            return render(request, pageName['OpenPit'], {'schemas': result, 'KA': result5, 'COM': result7})
+        elif(type != "2-1" and type != '2-2' and type != '3-1' and type != '3-2' and type != '3-3' and type != '3-4' and type != '3-5' and type != '3-6'):
+            return render(request, pageName['OpenPit'], {'schemas': result, 'KA': result5, 'COM': {}})
         else:
             return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'KA': result6, 'segmentations': result2, 'tunnels': result3})
     if request.method == 'GET':
@@ -836,7 +920,7 @@ def schema(request):
             })
         print(result6)
         if not pageParam:
-            return render(request, pageName['OpenPit'], {'schemas': result, 'KA': result5})
+            return render(request, pageName['OpenPit'], {'schemas': result, 'KA': result5, 'COM': {}})
         else:
             result4 = []
             schemaList4 = Schema2.objects.all()

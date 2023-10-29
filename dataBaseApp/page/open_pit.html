@@ -48,6 +48,10 @@
   th {
     background-color: #f2f2f2;
   }
+
+  td {
+    cursor: pointer;
+  }
 </style>
 
 <nav aria-label="breadcrumb">
@@ -66,7 +70,7 @@
         style="
           color: #666;
           text-decoration: underline;
-          text-underline-offset:0.3em;
+          text-underline-offset: 0.3em;
           text-decoration-thickness: 1px;
           margin-left: 23px;
         "
@@ -78,7 +82,7 @@
         style="
           color: #666;
           text-decoration: underline;
-          text-underline-offset:0.3em;
+          text-underline-offset: 0.3em;
           text-decoration-thickness: 1px;
           margin-left: 23px;
         "
@@ -103,7 +107,10 @@
           添加方案
         </button>
       </div>
-      <div id="tree-list" style="margin-left: 16px; padding: 0; color: #999"></div>
+      <div
+        id="tree-list"
+        style="margin-left: 16px; padding: 0; color: #999"
+      ></div>
     </div>
   </div>
   <div style="width: 3px; height: 100%; background-color: #e9ecef"></div>
@@ -117,25 +124,57 @@
     />
     <div id="effect-image" style="display: none" class="container">
       <div class="row">
-        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 45px">
+        <div
+          class="col-md-6"
+          style="height: 250px; width: 300px; margin-bottom: 45px"
+        >
           <h5>振动波形</h5>
-          <img id="img1" alt="Image 1" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover"/>
+          <img
+            id="img1"
+            alt="Image 1"
+            class="img-fluid"
+            style="height: 100%; width: 100%; object-fit: cover"
+          />
           <span>爆破振动速度峰值(cm/s)：</span>
           <span id="v-1"></span>
         </div>
-        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 45px">
+        <div
+          class="col-md-6"
+          style="height: 250px; width: 300px; margin-bottom: 45px"
+        >
           <h5>损伤情况</h5>
-          <img id="img2" alt="Image 2" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover"/>
+          <img
+            id="img2"
+            alt="Image 2"
+            class="img-fluid"
+            style="height: 100%; width: 100%; object-fit: cover"
+          />
         </div>
       </div>
       <div class="row mt-3">
-        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 30px">
+        <div
+          class="col-md-6"
+          style="height: 250px; width: 300px; margin-bottom: 30px"
+        >
           <h5>爆堆形态</h5>
-          <img id="img3" alt="Image 3" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover"/>
+          <img
+            id="img3"
+            alt="Image 3"
+            class="img-fluid"
+            style="height: 100%; width: 100%; object-fit: cover"
+          />
         </div>
-        <div class="col-md-6" style = "height: 250px; width: 300px; margin-bottom: 30px">
+        <div
+          class="col-md-6"
+          style="height: 250px; width: 300px; margin-bottom: 30px"
+        >
           <h5>壁面情况</h5>
-          <img id="img4" alt="Image 4" class="img-fluid" style="height: 100%; width: 100%; object-fit: cover"/>
+          <img
+            id="img4"
+            alt="Image 4"
+            class="img-fluid"
+            style="height: 100%; width: 100%; object-fit: cover"
+          />
         </div>
       </div>
       <button
@@ -382,7 +421,7 @@
         </table>
       </div>
       <form
-        action="{% url 'schema' %}?type=1-3"
+        action="{% url 'schema' %}?type=4-1"
         method="post"
         enctype="multipart/form-data"
       >
@@ -390,7 +429,7 @@
         <div style="display: flex; flex-direction: column; gap: 10px">
           <div class="row mt-3">
             <span>边坡系数：</span>
-            <select id="filed2" name="filed">
+            <select id="filed2" name="filed2">
               <option value="1">1分区</option>
               <option value="2">2分区</option>
               <option value="3">3分区</option>
@@ -403,7 +442,7 @@
           </div>
           <div class="row" style="align-items: center; gap: 10px">
             <span>参考输入：</span>
-            <table class="table-KA">
+            <table class="table-KA" style="width: 100%">
               <thead>
                 <tr>
                   <th>测振点位</th>
@@ -414,7 +453,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><div style="width: 80px">1</div></td>
+                  <td>1</td>
                   <td>
                     <input id="t3-1-1" name="t3-1-1" />
                   </td>
@@ -451,26 +490,64 @@
                 </tr>
                 <tr>
                   <td>4</td>
-                  <td><input id="t3-4-1" /></td>
-                  <td><input id="t3-4-2" /></td>
-                  <td><input id="t3-4-3" /></td>
+                  <td><input id="t3-4-1" name="t3-4-1" /></td>
+                  <td><input id="t3-4-2" name="t3-4-2" /></td>
+                  <td><input id="t3-4-3" name="t3-4-3" /></td>
                 </tr>
                 <tr>
                   <td>5</td>
-                  <td><input id="t3-5-1" /></td>
-                  <td><input id="t3-5-2" /></td>
-                  <td><input id="t3-5-3" /></td>
+                  <td><input id="t3-5-1" name="t3-5-1" /></td>
+                  <td><input id="t3-5-2" name="t3-5-2" /></td>
+                  <td><input id="t3-5-3" name="t3-5-3" /></td>
                 </tr>
                 <tr>
                   <td>6</td>
-                  <td><input id="t3-6-1" /></td>
-                  <td><input id="t3-6-2" /></td>
-                  <td><input id="t3-6-3" /></td>
+                  <td><input id="t3-6-1" name="t3-6-1" /></td>
+                  <td><input id="t3-6-2" name="t3-6-2" /></td>
+                  <td><input id="t3-6-3" name="t3-6-3" /></td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <button type="submit" class="btn btn-primary">提交</button>
+          <div
+            style="
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              gap: 20px;
+            "
+          >
+            <button
+              style="width: 200px"
+              type="submit"
+              class="btn btn-sm btn-primary"
+            >
+              计算K α值
+            </button>
+            <button
+              style="width: 200px"
+              type="button"
+              id="clear-button"
+              class="btn btn-sm btn-primary"
+            >
+              清空数据
+            </button>
+          </div>
+          <div class="row" style="align-items: center; gap: 10px">
+            <span>结果输出：</span>
+            <label style="margin-top: 10px" for="kComputedValue">K: </label>
+            <span id="kComputedValue" id="kComputedValue"></span>
+            <label style="margin-top: 10px" for="aComputedValue">α: </label>
+            <span id="aComputedValue" id="aComputedValue"></span>
+            <button
+              type="button"
+              class="btn btn-sm btn-primary"
+              data-toggle="modal"
+              data-target="#myModal4"
+            >
+              插入
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -720,6 +797,8 @@
             name="part"
             class="form-control"
           />
+          <label style="display: none" for="match">是否拟合：</label>
+          <input style="display: none" name="match" id="match" />
           <label style="display: none" for="KValue2">K：</label>
           <input
             style="display: none"
@@ -856,6 +935,29 @@
   var t51 = document.getElementById('t-5-1')
   var t52 = document.getElementById('t-5-2')
   var t53 = document.getElementById('t-5-3')
+
+  var t221 = document.getElementById('t2-2-1')
+  var t222 = document.getElementById('t2-2-2')
+  var t223 = document.getElementById('t2-2-3')
+  var t231 = document.getElementById('t2-3-1')
+  var t232 = document.getElementById('t2-3-2')
+  var t233 = document.getElementById('t2-3-3')
+  var t241 = document.getElementById('t2-4-1')
+  var t242 = document.getElementById('t2-4-2')
+  var t243 = document.getElementById('t2-4-3')
+  var t251 = document.getElementById('t2-5-1')
+  var t252 = document.getElementById('t2-5-2')
+  var t253 = document.getElementById('t2-5-3')
+
+  var match = document.getElementById('match')
+
+
+
+  filedSelect2 = document.getElementById('filed2')
+
+
+
+
   filedSelect = document.getElementById('filed')
   t23.addEventListener('click', (e) => {
     KValue3.value = t21.textContent
@@ -910,6 +1012,8 @@
   ]
   const t11 = document.getElementById('t-1-1')
   const t12 = document.getElementById('t-1-2')
+  const t211 = document.getElementById('t2-1-1')
+  const t212 = document.getElementById('t2-1-2')
   var KA = {{ KA|safe }}
   KA.forEach(item => {
     const [part, v1, v2] = item.value.split('_')
@@ -932,6 +1036,27 @@
       }
     }
   })
+  KA.forEach(item => {
+    const [part, v1, v2] = item.value.split('_')
+    if(part === filedSelect2.value) {
+      if(!t221.textContent) {
+        t221.textContent = v1
+        t222.textContent = v2
+      }
+      else if(!t231.textContent) {
+        t231.textContent = v1
+        t232.textContent = v2
+      }
+      else if(!t41.textContent) {
+        t241.textContent = v1
+        t242.textContent = v2
+      }
+      else if(!t51.textContent) {
+        t251.textContent = v1
+        t252.textContent = v2
+      }
+    }
+  })
 
 
 
@@ -939,6 +1064,8 @@
   AValue.value = KAList[0].a
   t11.innerText = KAList[0].k
   t12.innerText = KAList[0].a
+  t211.innerText = KAList[0].k
+  t212.innerText = KAList[0].a
   KValue2.value = KAList[0].k
   AValue2.value = KAList[0].a
   KValue3.value = KAList[0].k
@@ -993,8 +1120,51 @@
         t52.textContent = v2
       }
     }
+    })
   })
+  filedSelect2.addEventListener('change', (e) => {
+    part.value = e.target.value
+    part2.value = e.target.value
+    KValue.value = KAList[Number(e.target.value) - 1].k
+    AValue.value = KAList[Number(e.target.value) - 1].a
+    KValue2.value = KAList[Number(e.target.value) - 1].k
+    AValue2.value = KAList[Number(e.target.value) - 1].a
+    KValue3.value = KAList[Number(e.target.value) - 1].k
+    AValue3.value = KAList[Number(e.target.value) - 1].a
+    t211.innerText = KAList[Number(e.target.value) - 1].k
+    t212.innerText = KAList[Number(e.target.value) - 1].a
+
+    t221.textContent = ''
+    t222.textContent = ''
+    t231.textContent = ''
+    t232.textContent = ''
+    t241.textContent = ''
+    t242.textContent = ''
+    t251.textContent = ''
+    t252.textContent = ''
+    KA.forEach(item => {
+    const [part, v1, v2] = item.value.split('_')
+    if(part === filedSelect2.value) {
+      if(!t221.textContent) {
+        t221.textContent = v1
+        t222.textContent = v2
+      }
+      else if(!t31.textContent) {
+        t231.textContent = v1
+        t232.textContent = v2
+      }
+      else if(!t41.textContent) {
+        t241.textContent = v1
+        t242.textContent = v2
+      }
+      else if(!t51.textContent) {
+        t251.textContent = v1
+        t252.textContent = v2
+      }
+    }
+    })
   })
+
 
 
 
@@ -1148,6 +1318,91 @@
       const label = input.nextElementSibling;
       label.innerText = fileName;
   }
+
+  t311 = document.getElementById('t3-1-1')
+  t312 = document.getElementById('t3-1-2')
+  t313 = document.getElementById('t3-1-3')
+  t321 = document.getElementById('t3-2-1')
+  t322 = document.getElementById('t3-2-2')
+  t323 = document.getElementById('t3-2-3')
+  t331 = document.getElementById('t3-3-1')
+  t332 = document.getElementById('t3-3-2')
+  t333 = document.getElementById('t3-3-3')
+  t341 = document.getElementById('t3-4-1')
+  t342 = document.getElementById('t3-4-2')
+  t343 = document.getElementById('t3-4-3')
+  t351 = document.getElementById('t3-5-1')
+  t352 = document.getElementById('t3-5-2')
+  t353 = document.getElementById('t3-5-3')
+  t361 = document.getElementById('t3-6-1')
+  t362 = document.getElementById('t3-6-2')
+  t363 = document.getElementById('t3-6-3')
+
+
+
+  kComputedValue = document.getElementById('kComputedValue')
+  aComputedValue = document.getElementById('aComputedValue')
+  var computed = {{ COM|safe }}
+  if(window.location.search?.includes('type=4-1')) {
+      panel1.style.display = 'none'
+      panel2.style.display = 'block'
+      img.style.display = 'none'
+      pdfPanel.style.display = 'none'
+      if(computed.filed2) {
+        console.log(computed)
+        filedSelect2.value = computed.filed2
+        t311.value = computed.t311
+        t312.value = computed.t312
+        t313.value = computed.t313
+        t321.value = computed.t321
+        t322.value = computed.t322
+        t323.value = computed.t323
+        t331.value = computed.t331
+        t332.value = computed.t332
+        t333.value = computed.t333
+        t341.value = computed.t341
+        t342.value = computed.t342
+        t343.value = computed.t343
+        t351.value = computed.t351
+        t352.value = computed.t352
+        t353.value = computed.t353
+        t361.value = computed.t361
+        t362.value = computed.t362
+        t363.value = computed.t363
+        kComputedValue.innerText = Number(computed.k_fit).toFixed(2)
+        aComputedValue.innerText = Number(computed.a_fit).toFixed(2)
+        match.value = '1'
+        part.value = filedSelect2.value
+        KValue2.value = kComputedValue.innerText
+        AValue2.value = aComputedValue.innerText
+      }
+
+  }
+
+  var clearButton = document.getElementById('clear-button')
+  clearButton.addEventListener('click', () => {
+    t311.value = ''
+    t312.value = ''
+    t313.value = ''
+    t321.value = ''
+    t322.value = ''
+    t323.value = ''
+    t331.value = ''
+    t332.value = ''
+    t333.value = ''
+    t341.value = ''
+    t342.value = ''
+    t343.value = ''
+    t351.value = ''
+    t352.value = ''
+    t353.value = ''
+    t361.value = ''
+    t362.value = ''
+    t363.value = ''
+    kComputedValue.innerText = ''
+    aComputedValue.innerText = ''
+    match.value = ''
+  })
 </script>
 
 {% endblock %}
