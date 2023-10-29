@@ -881,12 +881,30 @@
       {% csrf_token %}
       <div class="modal-content">
         <div class="modal-body">
-          <label for="part2">分区：</label>
-          <input type="text" id="part2" name="part2" class="form-control" />
-          <label for="KValue3">K：</label>
-          <input type="text" id="KValue3" name="KValue3" class="form-control" />
-          <label for="AValue3">A：</label>
-          <input type="text" id="AValue3" name="AValue3" class="form-control" />
+          <label style="display: none" for="part2">分区：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="part2"
+            name="part2"
+            class="form-control"
+          />
+          <label style="display: none" for="KValue3">K：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="KValue3"
+            name="KValue3"
+            class="form-control"
+          />
+          <label style="display: none" for="AValue3">A：</label>
+          <input
+            style="display: none"
+            type="text"
+            id="AValue3"
+            name="AValue3"
+            class="form-control"
+          />
           <div
             style="
               width: 300px;
@@ -1228,6 +1246,7 @@
     t252.textContent = ''
     KA.forEach(item => {
     const [part, v1, v2] = item.value.split('_')
+    if(item.match !== '1') return
     if(part === filedSelect2.value) {
       if(!t221.textContent) {
         t221.textContent = v1
@@ -1268,12 +1287,14 @@
   var schemaName = document.getElementById('schemaName');
   var v1DOM = document.getElementById('v-1')
   panelTrigger1.addEventListener('click', () => {
+      localStorage.setItem('page', '1')
       panel1.style.display = 'block'
       panel2.style.display = 'none'
       img.style.display = 'none'
       pdfPanel.style.display = 'none'
   })
   panelTrigger2.addEventListener('click', () => {
+      localStorage.setItem('page', '2')
       panel1.style.display = 'none'
       panel2.style.display = 'block'
       img.style.display = 'none'
@@ -1487,6 +1508,18 @@
     aComputedValue.innerText = ''
     match.value = ''
   })
+
+  if(localStorage.getItem('page') === '1') {
+    panel1.style.display = 'block'
+    panel2.style.display = 'none'
+    img.style.display = 'none'
+    pdfPanel.style.display = 'none'
+  } else if(localStorage.getItem('page') === '2') {
+    panel1.style.display = 'none'
+    panel2.style.display = 'block'
+    img.style.display = 'none'
+    pdfPanel.style.display = 'none'
+  }
 </script>
 
 {% endblock %}
