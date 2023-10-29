@@ -195,7 +195,8 @@
               <th>标号</th>
               <th>K值</th>
               <th>α值</th>
-              <th>操作</th>
+              <th>操</th>
+              <th>作</th>
             </tr>
           </thead>
           <tbody>
@@ -203,12 +204,18 @@
               <td>1</td>
               <td id="t-1-1"></td>
               <td id="t-1-2"></td>
+              <th id="t-1-4"></th>
               <th id="t-1-3"></th>
             </tr>
             <tr>
               <td>2</td>
               <td id="t-2-1"></td>
               <td id="t-2-2"></td>
+              <th>
+                <button id="t-2-4" type="button" class="btn btn-sm">
+                  选定
+                </button>
+              </th>
               <th>
                 <button
                   id="t-2-3"
@@ -226,6 +233,11 @@
               <td id="t-3-1"></td>
               <td id="t-3-2"></td>
               <th>
+                <button id="t-3-4" type="button" class="btn btn-sm">
+                  选定
+                </button>
+              </th>
+              <th>
                 <button
                   id="t-3-3"
                   type="button"
@@ -242,6 +254,11 @@
               <td id="t-4-1"></td>
               <td id="t-4-2"></td>
               <th>
+                <button id="t-4-4" type="button" class="btn btn-sm">
+                  选定
+                </button>
+              </th>
+              <th>
                 <button
                   id="t-4-3"
                   type="button"
@@ -257,6 +274,11 @@
               <td>5</td>
               <td id="t-5-1"></td>
               <td id="t-5-2"></td>
+              <th>
+                <button id="t-5-4" type="button" class="btn btn-sm">
+                  选定
+                </button>
+              </th>
               <th>
                 <button
                   id="t-5-3"
@@ -361,12 +383,13 @@
               <td>2</td>
               <td id="t2-2-1"></td>
               <td id="t2-2-2"></td>
-              <th id="t2-2-3">
+              <th>
                 <button
+                  id="t2-2-3"
                   type="button"
                   class="btn btn-sm"
                   data-toggle="modal"
-                  data-target="#myModal"
+                  data-target="#myModal5"
                 >
                   移除
                 </button>
@@ -376,12 +399,13 @@
               <td>3</td>
               <td id="t2-3-1"></td>
               <td id="t2-3-2"></td>
-              <th id="t2-3-3">
+              <th>
                 <button
+                  id="t2-3-3"
                   type="button"
                   class="btn btn-sm"
                   data-toggle="modal"
-                  data-target="#myModal"
+                  data-target="#myModal5"
                 >
                   移除
                 </button>
@@ -391,12 +415,13 @@
               <td>4</td>
               <td id="t2-4-1"></td>
               <td id="t2-4-2"></td>
-              <th id="t2-4-3">
+              <th>
                 <button
+                  id="t2-4-3"
                   type="button"
                   class="btn btn-sm"
                   data-toggle="modal"
-                  data-target="#myModal"
+                  data-target="#myModal5"
                 >
                   移除
                 </button>
@@ -406,12 +431,13 @@
               <td>5</td>
               <td id="t2-5-1"></td>
               <td id="t2-5-2"></td>
-              <th id="t2-5-3">
+              <th>
                 <button
+                  id="t2-5-3"
                   type="button"
                   class="btn btn-sm"
                   data-toggle="modal"
-                  data-target="#myModal"
+                  data-target="#myModal5"
                 >
                   移除
                 </button>
@@ -855,30 +881,12 @@
       {% csrf_token %}
       <div class="modal-content">
         <div class="modal-body">
-          <label style="display: none" for="part2">分区：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="part2"
-            name="part2"
-            class="form-control"
-          />
-          <label style="display: none" for="KValue3">K：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="KValue3"
-            name="KValue3"
-            class="form-control"
-          />
-          <label style="display: none" for="AValue3">A：</label>
-          <input
-            style="display: none"
-            type="text"
-            id="AValue3"
-            name="AValue3"
-            class="form-control"
-          />
+          <label for="part2">分区：</label>
+          <input type="text" id="part2" name="part2" class="form-control" />
+          <label for="KValue3">K：</label>
+          <input type="text" id="KValue3" name="KValue3" class="form-control" />
+          <label for="AValue3">A：</label>
+          <input type="text" id="AValue3" name="AValue3" class="form-control" />
           <div
             style="
               width: 300px;
@@ -926,15 +934,63 @@
   var t21 = document.getElementById('t-2-1')
   var t22 = document.getElementById('t-2-2')
   var t23 = document.getElementById('t-2-3')
+  var t24 = document.getElementById('t-2-4')
+
   var t31 = document.getElementById('t-3-1')
   var t32 = document.getElementById('t-3-2')
   var t33 = document.getElementById('t-3-3')
+  var t34 = document.getElementById('t-3-4')
+
   var t41 = document.getElementById('t-4-1')
   var t42 = document.getElementById('t-4-2')
   var t43 = document.getElementById('t-4-3')
+  var t44 = document.getElementById('t-4-4')
+
   var t51 = document.getElementById('t-5-1')
   var t52 = document.getElementById('t-5-2')
   var t53 = document.getElementById('t-5-3')
+  var t54 = document.getElementById('t-5-4')
+
+  t24.addEventListener('click', () => {
+    if(t21.textContent && t22.textContent) {
+      KValue.value = t21.textContent
+      AValue.value = t22.textContent
+      t24.parentElement.style.backgroundColor = 'teal'
+      t34.parentElement.style.backgroundColor = ''
+      t44.parentElement.style.backgroundColor = ''
+      t54.parentElement.style.backgroundColor = ''
+    }
+  })
+  t34.addEventListener('click', () => {
+    if(t31.textContent && t32.textContent) {
+      KValue.value = t31.textContent
+      AValue.value = t32.textContent
+      t24.parentElement.style.backgroundColor = ''
+      t34.parentElement.style.backgroundColor = 'teal'
+      t44.parentElement.style.backgroundColor = ''
+      t54.parentElement.style.backgroundColor = ''
+    }
+  })
+  t44.addEventListener('click', () => {
+    if(t41.textContent && t22.textContent) {
+      KValue.value = t41.textContent
+      AValue.value = t42.textContent
+      t24.parentElement.style.backgroundColor = ''
+      t34.parentElement.style.backgroundColor = ''
+      t44.parentElement.style.backgroundColor = 'teal'
+      t54.parentElement.style.backgroundColor = ''
+    }
+  })
+  t54.addEventListener('click', () => {
+    if(t51.textContent && t22.textContent) {
+      KValue.value = t51.textContent
+      AValue.value = t52.textContent
+      t24.parentElement.style.backgroundColor = ''
+      t34.parentElement.style.backgroundColor = ''
+      t44.parentElement.style.backgroundColor = ''
+      t54.parentElement.style.backgroundColor = 'teal'
+    }
+  })
 
   var t221 = document.getElementById('t2-2-1')
   var t222 = document.getElementById('t2-2-2')
@@ -974,6 +1030,23 @@
   t53.addEventListener('click', () => {
     KValue3.value = t51.textContent
     AValue3.value = t52.textContent
+  })
+
+  t223.addEventListener('click', (e) => {
+    KValue3.value = t221.textContent
+    AValue3.value = t222.textContent
+  })
+  t233.addEventListener('click', () => {
+    KValue3.value = t231.textContent
+    AValue3.value = t232.textContent
+  })
+  t243.addEventListener('click', () => {
+    KValue3.value = t241.textContent
+    AValue3.value = t242.textContent
+  })
+  t253.addEventListener('click', () => {
+    KValue3.value = t251.textContent
+    AValue3.value = t252.textContent
   })
 
   input11.addEventListener('change', change)
@@ -1038,6 +1111,7 @@
   })
   KA.forEach(item => {
     const [part, v1, v2] = item.value.split('_')
+    if(item.match !== '1') return
     if(part === filedSelect2.value) {
       if(!t221.textContent) {
         t221.textContent = v1
@@ -1081,6 +1155,16 @@
   part.value = filedSelect.value
   part2.value = filedSelect.value
   filedSelect.addEventListener('change', (e) => {
+
+
+
+    t24.parentElement.style.backgroundColor = ''
+    t34.parentElement.style.backgroundColor = ''
+    t44.parentElement.style.backgroundColor = ''
+    t54.parentElement.style.backgroundColor = ''
+
+
+
     part.value = e.target.value
     part2.value = e.target.value
     KValue.value = KAList[Number(e.target.value) - 1].k
