@@ -684,9 +684,11 @@ def schema(request):
             segInput = request.POST['seg-input2']
             oldSeg = Segmentation.objects.get(seg_name=segInput)
             oldValue = Tunnel.objects.filter(tunnel_name__startswith=segInput)
+            oldKAValue = KA2.objects.filter(k_a_value__startswith=segInput)
             try:
                 oldSeg.delete()
                 oldValue.delete()
+                oldKAValue.delete()
             except:
                 pass
         elif(type == "3-3"):
@@ -969,6 +971,8 @@ def schema(request):
         # Schema2.objects.all().delete()
         # Segmentation.objects.all().delete()
         # Tunnel.objects.all().delete()
+        # KA.objects.all().delete()
+        # KA2.objects.all().delete()
         schemaList = Schema.objects.all()
         pageParam = request.GET.get('param1', '')
         result = []

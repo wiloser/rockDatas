@@ -1387,7 +1387,7 @@
                   // 单击事件处理逻辑
                   console.log("单击事件触发了");
                   clickTimer = null;
-
+                  localStorage.setItem('page', '3')
                   img.style.display = 'none'
                   pdfPanel.style.display = 'block'
                   panel1.style.display = 'none'
@@ -1405,6 +1405,7 @@
               img3.src=img23
               img4.src=img24
               v1DOM.innerText = v1
+              localStorage.setItem('page', '4')
               img.style.display = 'block'
               pdfPanel.style.display = 'none'
               panel1.style.display = 'none'
@@ -1518,6 +1519,16 @@
     panel1.style.display = 'none'
     panel2.style.display = 'block'
     img.style.display = 'none'
+    pdfPanel.style.display = 'none'
+  } else if(localStorage.getItem('page') === '3') {
+    panel1.style.display = 'none'
+    panel2.style.display = 'none'
+    img.style.display = 'none'
+    pdfPanel.style.display = 'block'
+  } else if(localStorage.getItem('page') === '4') {
+    panel1.style.display = 'none'
+    panel2.style.display = 'none'
+    img.style.display = 'block'
     pdfPanel.style.display = 'none'
   }
 </script>
