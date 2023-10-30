@@ -236,7 +236,17 @@
                   选定
                 </button>
               </th>
-              <th></th>
+              <th>
+                <button
+                  id="t-1-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>2</td>
@@ -417,31 +427,81 @@
               <td>1</td>
               <td id="t2-1-1"></td>
               <td id="t2-1-2"></td>
-              <th></th>
+              <th>
+                <button
+                  id="t2-1-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>2</td>
               <td id="t2-2-1"></td>
               <td id="t2-2-2"></td>
-              <th id="t2-2-3">移除</th>
+              <th>
+                <button
+                  id="t2-2-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>3</td>
               <td id="t2-3-1"></td>
               <td id="t2-3-2"></td>
-              <th id="t2-3-3">移除</th>
+              <th>
+                <button
+                  id="t2-3-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>4</td>
               <td id="t2-4-1"></td>
               <td id="t2-4-2"></td>
-              <th id="t2-4-3">移除</th>
+              <th>
+                <button
+                  id="t2-4-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
             <tr>
               <td>5</td>
               <td id="t2-5-1"></td>
               <td id="t2-5-2"></td>
-              <th id="t2-5-3">移除</th>
+              <th>
+                <button
+                  id="t2-5-3"
+                  type="button"
+                  class="btn btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal7"
+                >
+                  移除
+                </button>
+              </th>
             </tr>
           </tbody>
         </table>
@@ -1310,7 +1370,7 @@
       var deleteButton = document.getElementById('deleteButton')
       var schemaName2 = document.getElementById('schemaName2')
 
-
+      var t13 = document.getElementById('t-1-3')
       var t21 = document.getElementById('t-2-1')
       var t22 = document.getElementById('t-2-2')
       var t23 = document.getElementById('t-2-3')
@@ -1423,6 +1483,10 @@
 
 
       filedSelect = document.getElementById('filed')
+      t13.addEventListener('click', (e) => {
+        KValue3.value = t11.textContent
+        AValue3.value = t12.textContent
+      })
       t23.addEventListener('click', (e) => {
         KValue3.value = t21.textContent
         AValue3.value = t22.textContent
@@ -1438,6 +1502,28 @@
       t53.addEventListener('click', () => {
         KValue3.value = t51.textContent
         AValue3.value = t52.textContent
+      })
+
+
+      t213.addEventListener('click', (e) => {
+        KValue3.value = t211.textContent
+        AValue3.value = t212.textContent
+      })
+      t223.addEventListener('click', (e) => {
+        KValue3.value = t221.textContent
+        AValue3.value = t222.textContent
+      })
+      t233.addEventListener('click', () => {
+        KValue3.value = t231.textContent
+        AValue3.value = t232.textContent
+      })
+      t243.addEventListener('click', () => {
+        KValue3.value = t241.textContent
+        AValue3.value = t242.textContent
+      })
+      t253.addEventListener('click', () => {
+        KValue3.value = t251.textContent
+        AValue3.value = t252.textContent
       })
 
       input11.addEventListener('change', change)
@@ -1464,23 +1550,23 @@
           }
       }
 
-      var KAList = [
-          {k: 100, a: 1.45},
-      ]
-      KValue.value = KAList[0].k
-      AValue.value = KAList[0].a
-      KValue2.value = KAList[0].k
-      AValue2.value = KAList[0].a
-      KValue3.value = KAList[0].k
-      AValue3.value = KAList[0].a
+      // var KAList = [
+      //     {k: 100, a: 1.45},
+      // ]
+      // KValue.value = KAList[0].k
+      // AValue.value = KAList[0].a
+      // KValue2.value = KAList[0].k
+      // AValue2.value = KAList[0].a
+      // KValue3.value = KAList[0].k
+      // AValue3.value = KAList[0].a
       const t11 = document.getElementById('t-1-1')
       const t12 = document.getElementById('t-1-2')
       const t211 = document.getElementById('t2-1-1')
       const t212 = document.getElementById('t2-1-2')
-      t11.textContent = KAList[0].k
-      t12.textContent = KAList[0].a
-      t211.textContent = KAList[0].k
-      t212.textContent = KAList[0].a
+      // t11.textContent = KAList[0].k
+      // t12.textContent = KAList[0].a
+      // t211.textContent = KAList[0].k
+      // t212.textContent = KAList[0].a
 
 
 
@@ -1829,7 +1915,11 @@
       KA.forEach(item => {
         const [part, v1, v2] = item.value.split('_')
         if(part === segSelect2.value + '+' + showTunnel20.value) {
-          if(!t21.textContent) {
+          if(!t11.textContent) {
+            t11.textContent = v1
+            t12.textContent = v2
+          }
+          else if(!t21.textContent) {
             t21.textContent = v1
             t22.textContent = v2
           }
@@ -1980,6 +2070,8 @@
       showTunnel20.addEventListener('change', () => {
         part.value = segSelect2.value + '+' + showTunnel20.value
         part2.value = segSelect2.value + '+' + showTunnel20.value
+        t11.textContent = ''
+        t12.textContent = ''
         t21.textContent = ''
         t22.textContent = ''
         t31.textContent = ''
@@ -1991,7 +2083,11 @@
         KA.forEach(item => {
           const [part, v1, v2] = item.value.split('_')
           if(part === segSelect2.value + '+' + showTunnel20.value) {
-            if(!t21.textContent) {
+            if(!t11.textContent) {
+              t11.textContent = v1
+              t12.textContent = v2
+            }
+            else if(!t21.textContent) {
               t21.textContent = v1
               t22.textContent = v2
             }
@@ -2009,12 +2105,12 @@
             }
           }
         })
-        KValue.value = KAList[0].k
-        AValue.value = KAList[0].a
-        KValue2.value = KAList[0].k
-        AValue2.value = KAList[0].a
-        KValue3.value = KAList[0].k
-        AValue3.value = KAList[0].a
+        KValue.value = t11.textContent
+        AValue.value = t12.textContent
+        KValue2.value = t11.textContent
+        AValue2.value = t12.textContent
+        KValue3.value = t11.textContent
+        AValue3.value = t12.textContent
       })
 
       showTunnel200.addEventListener('change', () => {

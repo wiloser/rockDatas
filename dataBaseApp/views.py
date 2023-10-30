@@ -992,6 +992,7 @@ def schema(request):
         for item in schemaList5:
             result5.append({
                 'value': item.k_a_value,
+                'match': item.is_match,
             })
         print(result5)
         result6 = []
@@ -999,6 +1000,7 @@ def schema(request):
         for item in schemaList6:
             result6.append({
                 'value': item.k_a_value,
+                'match': item.is_match,
             })
         print(result6)
         if not pageParam:
