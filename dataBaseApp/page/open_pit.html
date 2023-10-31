@@ -1365,7 +1365,6 @@
       items.forEach(item => {
           const li = document.createElement('li');
           li.textContent = item.id;
-          ul.appendChild(li);
           if(item.isLeaf) {
               // 末端处理事件
               li.addEventListener('click', showPdf(item))
@@ -1381,11 +1380,15 @@
                 deleteButton.click()
                 schemaName2.value = item.schema
               })
-              ul.style.display="flex"
-              ul.style.alignItems="center"
-              ul.style.gap="10px"
-              ul.appendChild(button)
+              const div = document.createElement('div');
+              div.appendChild(li)
+              div.appendChild(button)
+              div.style.marginTop = '5px'
+              div.style.display="flex"
+              div.style.justifyContent="space-between"
+              ul.appendChild(div)
           } else {
+              ul.appendChild(li);
               li.addEventListener('click', (e) => {
                   if(e.target.className === '') {
                       e.target.classList.add("closed");
