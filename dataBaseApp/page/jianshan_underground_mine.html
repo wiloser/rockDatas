@@ -1957,6 +1957,22 @@
       })
 
 
+
+
+
+
+
+      // 插入KA 不变化分区选项
+      if(window.location.search.includes('3-4')) {
+        segSelect2.value = localStorage.getItem('seg2')
+        segSelect3.value = localStorage.getItem('seg3')
+        showTunnel20.value = localStorage.getItem('tunnel2')
+        showTunnel200.value = localStorage.getItem('tunnel3')
+      }
+
+
+
+
       var KA = {{ KA|safe }}
       KA.forEach(item => {
         const [part, v1, v2] = item.value.split('_')
@@ -2042,68 +2058,6 @@
 
     kComputedValue = document.getElementById('kComputedValue')
     aComputedValue = document.getElementById('aComputedValue')
-    var computed = {{ COM|safe }}
-    if(window.location.search?.includes('type=4-1-2')) {
-        panel1.style.display = 'none'
-        panel2.style.display = 'block'
-        panel3.style.display = 'none'
-        img.style.display = 'none'
-        pdfPanel.style.display = 'none'
-        if(computed.tunnel) {
-          console.log(computed)
-          t311.value = computed.t311
-          t312.value = computed.t312
-          t313.value = computed.t313
-          t321.value = computed.t321
-          t322.value = computed.t322
-          t323.value = computed.t323
-          t331.value = computed.t331
-          t332.value = computed.t332
-          t333.value = computed.t333
-          t341.value = computed.t341
-          t342.value = computed.t342
-          t343.value = computed.t343
-          t351.value = computed.t351
-          t352.value = computed.t352
-          t353.value = computed.t353
-          t361.value = computed.t361
-          t362.value = computed.t362
-          t363.value = computed.t363
-          kComputedValue.innerText = Number(computed.k_fit).toFixed(2)
-          aComputedValue.innerText = Number(computed.a_fit).toFixed(2)
-          match.value = '1'
-          segSelect2.value = computed.seg
-          showTunnel200.value = computed.tunnel
-          KValue2.value = kComputedValue.innerText
-          AValue2.value = aComputedValue.innerText
-        }
-
-    }
-
-    var clearButton = document.getElementById('clear-button')
-    clearButton.addEventListener('click', () => {
-      t311.value = ''
-      t312.value = ''
-      t313.value = ''
-      t321.value = ''
-      t322.value = ''
-      t323.value = ''
-      t331.value = ''
-      t332.value = ''
-      t333.value = ''
-      t341.value = ''
-      t342.value = ''
-      t343.value = ''
-      t351.value = ''
-      t352.value = ''
-      t353.value = ''
-      t361.value = ''
-      t362.value = ''
-      t363.value = ''
-      kComputedValue.innerText = ''
-      aComputedValue.innerText = ''
-      match.value = ''
-    })
 
 
 
@@ -2111,9 +2065,16 @@
 
     if(segSelect2) {
         part.value = segSelect2.value + '+' + showTunnel20.value
+        if(panel2.style.display === 'block') {
+          part.value = segSelect3.value + '+' + showTunnel200.value
+        }
         part2.value = segSelect2.value + '+' + showTunnel20.value
       }
       showTunnel20.addEventListener('change', () => {
+        localStorage.setItem('seg2', segSelect2.value)
+        localStorage.setItem('tunnel2', showTunnel20.value)
+
+
         part.value = segSelect2.value + '+' + showTunnel20.value
         part2.value = segSelect2.value + '+' + showTunnel20.value
         t11.textContent = ''
@@ -2160,8 +2121,13 @@
       })
 
       showTunnel200.addEventListener('change', () => {
+        localStorage.setItem('seg3', segSelect3.value)
+        localStorage.setItem('tunnel3', showTunnel200.value)
+
         part.value = segSelect3.value + '+' + showTunnel200.value
         part2.value = segSelect3.value + '+' + showTunnel200.value
+        t211.textContent = ''
+        t212.textContent = ''
         t221.textContent = ''
         t222.textContent = ''
         t231.textContent = ''
@@ -2174,7 +2140,11 @@
           const [part, v1, v2] = item.value.split('_')
           if(item.match !== '1') return
           if(part === segSelect3.value + '+' + showTunnel200.value) {
-            if(!t221.textContent) {
+            if(!t211.textContent) {
+              t211.textContent = v1
+              t212.textContent = v2
+            }
+            else if(!t221.textContent) {
               t221.textContent = v1
               t222.textContent = v2
             }
@@ -2193,6 +2163,70 @@
           }
         })
       })
+
+    var computed = {{ COM|safe }}
+    if(window.location.search?.includes('type=4-1-2')) {
+        panel1.style.display = 'none'
+        panel2.style.display = 'block'
+        panel3.style.display = 'none'
+        img.style.display = 'none'
+        pdfPanel.style.display = 'none'
+        if(computed.tunnel) {
+          console.log(computed)
+          t311.value = computed.t311
+          t312.value = computed.t312
+          t313.value = computed.t313
+          t321.value = computed.t321
+          t322.value = computed.t322
+          t323.value = computed.t323
+          t331.value = computed.t331
+          t332.value = computed.t332
+          t333.value = computed.t333
+          t341.value = computed.t341
+          t342.value = computed.t342
+          t343.value = computed.t343
+          t351.value = computed.t351
+          t352.value = computed.t352
+          t353.value = computed.t353
+          t361.value = computed.t361
+          t362.value = computed.t362
+          t363.value = computed.t363
+          kComputedValue.innerText = Number(computed.k_fit).toFixed(2)
+          aComputedValue.innerText = Number(computed.a_fit).toFixed(2)
+          match.value = '1'
+          segSelect3.value = computed.seg
+          showTunnel200.value = ''
+          showTunnel200.value = computed.tunnel
+          KValue2.value = kComputedValue.innerText
+          AValue2.value = aComputedValue.innerText
+        }
+
+    }
+
+    var clearButton = document.getElementById('clear-button')
+    clearButton.addEventListener('click', () => {
+      t311.value = ''
+      t312.value = ''
+      t313.value = ''
+      t321.value = ''
+      t322.value = ''
+      t323.value = ''
+      t331.value = ''
+      t332.value = ''
+      t333.value = ''
+      t341.value = ''
+      t342.value = ''
+      t343.value = ''
+      t351.value = ''
+      t352.value = ''
+      t353.value = ''
+      t361.value = ''
+      t362.value = ''
+      t363.value = ''
+      kComputedValue.innerText = ''
+      aComputedValue.innerText = ''
+      match.value = ''
+    })
 
 
       if(localStorage.getItem('page2') === '1') {

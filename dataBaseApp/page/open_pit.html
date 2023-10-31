@@ -1099,6 +1099,12 @@
     AValue3.value = t252.textContent
   })
 
+  // 插入KA 不变化分区选项
+  if(window.location.search.includes('1-4')) {
+    filedSelect.value = localStorage.getItem('filedSelect')
+    filedSelect2.value = localStorage.getItem('filedSelect2')
+  }
+
   input11.addEventListener('change', change)
   input12.addEventListener('change', change)
   input13.addEventListener('change', change)
@@ -1205,6 +1211,7 @@
   part.value = filedSelect.value
   part2.value = filedSelect.value
   filedSelect.addEventListener('change', (e) => {
+    localStorage.setItem('filedSelect', e.target.value)
 
 
 
@@ -1257,6 +1264,8 @@
     })
   })
   filedSelect2.addEventListener('change', (e) => {
+    localStorage.setItem('filedSelect2', e.target.value)
+
     part.value = e.target.value
     part2.value = e.target.value
     KValue.value = KAList[Number(e.target.value) - 1].k
