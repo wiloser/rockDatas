@@ -666,20 +666,26 @@ def schema(request):
             part = request.POST['part2']
             KValue3 = request.POST['KValue3']
             AValue3 = request.POST['AValue3']
-            oldValue = KA.objects.get(k_a_value=part+'_'+KValue3+'_'+AValue3)
-            try:
-                oldValue.delete()
-            except:
+            if not KValue3 or not AValue3:
                 pass
+            else:
+                oldValue = KA.objects.get(k_a_value=part+'_'+KValue3+'_'+AValue3)
+                try:
+                    oldValue.delete()
+                except:
+                    pass
         elif(type == "3-5"):
             part = request.POST['part2']
             KValue3 = request.POST['KValue3']
             AValue3 = request.POST['AValue3']
-            oldValue = KA2.objects.get(k_a_value=part+'_'+KValue3+'_'+AValue3)
-            try:
-                oldValue.delete()
-            except:
+            if not KValue3 or not AValue3:
                 pass
+            else:
+                oldValue = KA2.objects.get(k_a_value=part+'_'+KValue3+'_'+AValue3)
+                try:
+                    oldValue.delete()
+                except:
+                    pass
         elif(type == "3-6"):
             segInput = request.POST['seg-input2']
             oldSeg = Segmentation.objects.get(seg_name=segInput)
