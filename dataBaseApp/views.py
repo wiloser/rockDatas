@@ -683,15 +683,18 @@ def schema(request):
                     pass
         elif(type == "3-6"):
             segInput = request.POST['seg-input2']
-            oldSeg = Segmentation.objects.get(seg_name=segInput)
-            oldValue = Tunnel.objects.filter(tunnel_name__startswith=segInput)
-            oldKAValue = KA2.objects.filter(k_a_value__startswith=segInput)
-            try:
-                oldSeg.delete()
-                oldValue.delete()
-                oldKAValue.delete()
-            except:
+            if not segInput:
                 pass
+            else:
+                oldSeg = Segmentation.objects.get(seg_name=segInput)
+                oldValue = Tunnel.objects.filter(tunnel_name__startswith=segInput)
+                oldKAValue = KA2.objects.filter(k_a_value__startswith=segInput)
+                try:
+                    oldSeg.delete()
+                    oldValue.delete()
+                    oldKAValue.delete()
+                except:
+                    pass
         elif(type == "3-3"):
             schemaName2 = request.POST['schemaName2']
             deleteSchema = Schema2.objects.get(schema_name=schemaName2) or ''
@@ -701,8 +704,8 @@ def schema(request):
             except:
                 pass
         elif(type == "2-1"):
-            segmentation = request.POST['segmentation']
-            img12 = request.FILES['img1-2']
+            segmentation = request.POST.get('segmentation', '')
+            img12 = request.FILES.get('img1-2', '')
             if not segmentation or not img12:
                 pass
             else:
@@ -769,61 +772,84 @@ def schema(request):
             t362 = request.POST['t3-6-2']
             t363 = request.POST['t3-6-3']
             if t311 == '' or t321 == '' or t331 == '':
-                pass
-            elif t341 == '':
-                Q = np.array([t311, t321, t331 ])
-                R = np.array([t312, t322, t332 ])
-                y = np.array([t313, t323, t333 ])
-                params, cov = curve_fit(fit_func, (Q, R), y)
-                k_fit, a_fit = params
-                print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
-            elif t351 == '': 
-                Q = np.array([t311, t321, t331, t341 ])
-                R = np.array([t312, t322, t332, t342 ])
-                y = np.array([t313, t323, t333, t343 ])
-                params, cov = curve_fit(fit_func, (Q, R), y)
-                k_fit, a_fit = params
-                print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
-            elif t361 == '':
-                Q = np.array([t311, t321, t331, t341, t351 ])
-                R = np.array([t312, t322, t332, t342, t352 ])
-                y = np.array([t313, t323, t333, t343, t353 ])
-                params, cov = curve_fit(fit_func, (Q, R), y)
-                k_fit, a_fit = params
-                print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+                result7 = {
+                    'filed2': filed21,
+                    't311': t311,
+                    't312': t312,
+                    't313': t313,
+                    't321': t321,
+                    't322': t322,
+                    't323': t323,
+                    't331': t331,
+                    't332': t332,
+                    't333': t333,
+                    't341': t341,
+                    't342': t342,
+                    't343': t343,
+                    't351': t351,
+                    't352': t352,
+                    't353': t353,
+                    't361': t361,
+                    't362': t362,
+                    't363': t363,
+                    'k_fit': '',
+                    'a_fit': '',
+                }
             else:
-                Q = np.array([t311, t321, t331, t341 , t351 , t361 ])
-                R = np.array([t312, t322, t332, t342 , t352 , t362 ])
-                y = np.array([t313, t323, t333, t343 , t353 , t363 ])
-                params, cov = curve_fit(fit_func, (Q, R), y)
-                k_fit, a_fit = params
-            result7 = {
-                'filed2': filed21,
-                't311': t311,
-                't312': t312,
-                't313': t313,
-                't321': t321,
-                't322': t322,
-                't323': t323,
-                't331': t331,
-                't332': t332,
-                't333': t333,
-                't341': t341,
-                't342': t342,
-                't343': t343,
-                't351': t351,
-                't352': t352,
-                't353': t353,
-                't361': t361,
-                't362': t362,
-                't363': t363,
-                'k_fit': k_fit,
-                'a_fit': a_fit,
-            }
+                if t341 == '':
+                    Q = np.array([t311, t321, t331 ])
+                    R = np.array([t312, t322, t332 ])
+                    y = np.array([t313, t323, t333 ])
+                    params, cov = curve_fit(fit_func, (Q, R), y)
+                    k_fit, a_fit = params
+                    print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+                elif t351 == '': 
+                    Q = np.array([t311, t321, t331, t341 ])
+                    R = np.array([t312, t322, t332, t342 ])
+                    y = np.array([t313, t323, t333, t343 ])
+                    params, cov = curve_fit(fit_func, (Q, R), y)
+                    k_fit, a_fit = params
+                    print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+                elif t361 == '':
+                    Q = np.array([t311, t321, t331, t341, t351 ])
+                    R = np.array([t312, t322, t332, t342, t352 ])
+                    y = np.array([t313, t323, t333, t343, t353 ])
+                    params, cov = curve_fit(fit_func, (Q, R), y)
+                    k_fit, a_fit = params
+                    print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+                else:
+                    Q = np.array([t311, t321, t331, t341 , t351 , t361 ])
+                    R = np.array([t312, t322, t332, t342 , t352 , t362 ])
+                    y = np.array([t313, t323, t333, t343 , t353 , t363 ])
+                    params, cov = curve_fit(fit_func, (Q, R), y)
+                    k_fit, a_fit = params
+                result7 = {
+                    'filed2': filed21,
+                    't311': t311,
+                    't312': t312,
+                    't313': t313,
+                    't321': t321,
+                    't322': t322,
+                    't323': t323,
+                    't331': t331,
+                    't332': t332,
+                    't333': t333,
+                    't341': t341,
+                    't342': t342,
+                    't343': t343,
+                    't351': t351,
+                    't352': t352,
+                    't353': t353,
+                    't361': t361,
+                    't362': t362,
+                    't363': t363,
+                    'k_fit': k_fit,
+                    'a_fit': a_fit,
+                }
         elif(type == "4-1-2"):
             # 拟合数据
-            seg = request.POST['seg-select3']
-            tunnel = request.POST['showTunnel200']
+            seg = request.POST.get('seg-select3', '')
+            tunnel = request.POST.get('showTunnel200', '')
             t311 = request.POST['t3-1-1']
             t312 = request.POST['t3-1-2']
             t313 = request.POST['t3-1-3']
@@ -842,59 +868,83 @@ def schema(request):
             t361 = request.POST['t3-6-1']
             t362 = request.POST['t3-6-2']
             t363 = request.POST['t3-6-3']
-            if t311 == '' or t321 == '' or t331 == '':
-                pass
-            elif t341 == '':
-                Q = np.array([t311, t321, t331 ])
-                R = np.array([t312, t322, t332 ])
-                y = np.array([t313, t323, t333 ])
-                params, cov = curve_fit(fit_func, (Q, R), y)
-                k_fit, a_fit = params
-                print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
-            elif t351 == '': 
-                Q = np.array([t311, t321, t331, t341 ])
-                R = np.array([t312, t322, t332, t342 ])
-                y = np.array([t313, t323, t333, t343 ])
-                params, cov = curve_fit(fit_func, (Q, R), y)
-                k_fit, a_fit = params
-                print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
-            elif t361 == '':
-                Q = np.array([t311, t321, t331, t341, t351 ])
-                R = np.array([t312, t322, t332, t342, t352 ])
-                y = np.array([t313, t323, t333, t343, t353 ])
-                params, cov = curve_fit(fit_func, (Q, R), y)
-                k_fit, a_fit = params
-                print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+            if not seg or not tunnel or t311 == '' or t321 == '' or t331 == '':
+                result8 = {
+                    'seg': seg,
+                    'tunnel': tunnel,
+                    't311': t311,
+                    't312': t312,
+                    't313': t313,
+                    't321': t321,
+                    't322': t322,
+                    't323': t323,
+                    't331': t331,
+                    't332': t332,
+                    't333': t333,
+                    't341': t341,
+                    't342': t342,
+                    't343': t343,
+                    't351': t351,
+                    't352': t352,
+                    't353': t353,
+                    't361': t361,
+                    't362': t362,
+                    't363': t363,
+                    'k_fit': '',
+                    'a_fit': '',
+                }
             else:
-                Q = np.array([t311, t321, t331, t341 , t351 , t361 ])
-                R = np.array([t312, t322, t332, t342 , t352 , t362 ])
-                y = np.array([t313, t323, t333, t343 , t353 , t363 ])
-                params, cov = curve_fit(fit_func, (Q, R), y)
-                k_fit, a_fit = params
-            result8 = {
-                'seg': seg,
-                'tunnel': tunnel,
-                't311': t311,
-                't312': t312,
-                't313': t313,
-                't321': t321,
-                't322': t322,
-                't323': t323,
-                't331': t331,
-                't332': t332,
-                't333': t333,
-                't341': t341,
-                't342': t342,
-                't343': t343,
-                't351': t351,
-                't352': t352,
-                't353': t353,
-                't361': t361,
-                't362': t362,
-                't363': t363,
-                'k_fit': k_fit,
-                'a_fit': a_fit,
-            }
+                if t341 == '':
+                    Q = np.array([t311, t321, t331 ])
+                    R = np.array([t312, t322, t332 ])
+                    y = np.array([t313, t323, t333 ])
+                    params, cov = curve_fit(fit_func, (Q, R), y)
+                    k_fit, a_fit = params
+                    print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+                elif t351 == '': 
+                    Q = np.array([t311, t321, t331, t341 ])
+                    R = np.array([t312, t322, t332, t342 ])
+                    y = np.array([t313, t323, t333, t343 ])
+                    params, cov = curve_fit(fit_func, (Q, R), y)
+                    k_fit, a_fit = params
+                    print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+                elif t361 == '':
+                    Q = np.array([t311, t321, t331, t341, t351 ])
+                    R = np.array([t312, t322, t332, t342, t352 ])
+                    y = np.array([t313, t323, t333, t343, t353 ])
+                    params, cov = curve_fit(fit_func, (Q, R), y)
+                    k_fit, a_fit = params
+                    print(f"拟合的参数：k = {k_fit}, a = {a_fit}")
+                else:
+                    Q = np.array([t311, t321, t331, t341 , t351 , t361 ])
+                    R = np.array([t312, t322, t332, t342 , t352 , t362 ])
+                    y = np.array([t313, t323, t333, t343 , t353 , t363 ])
+                    params, cov = curve_fit(fit_func, (Q, R), y)
+                    k_fit, a_fit = params
+                result8 = {
+                    'seg': seg,
+                    'tunnel': tunnel,
+                    't311': t311,
+                    't312': t312,
+                    't313': t313,
+                    't321': t321,
+                    't322': t322,
+                    't323': t323,
+                    't331': t331,
+                    't332': t332,
+                    't333': t333,
+                    't341': t341,
+                    't342': t342,
+                    't343': t343,
+                    't351': t351,
+                    't352': t352,
+                    't353': t353,
+                    't361': t361,
+                    't362': t362,
+                    't363': t363,
+                    'k_fit': k_fit,
+                    'a_fit': a_fit,
+                }
         schemaList = Schema.objects.all()
         result = []
         for item in schemaList:
