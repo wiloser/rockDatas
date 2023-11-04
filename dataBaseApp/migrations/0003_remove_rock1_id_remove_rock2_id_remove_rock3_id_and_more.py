@@ -68,11 +68,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name="rock2",
-            name="uniaxialCrackMorphology",
-            field=models.ImageField(upload_to="images/"),
-        ),
-        migrations.AlterField(
-            model_name="rock2",
             name="uniaxialFailureMode",
             field=models.ImageField(upload_to="images/"),
         ),

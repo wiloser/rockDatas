@@ -184,10 +184,6 @@ def addRock(request):
         uniaxialStressStrainCurve = request.FILES.get('uniaxialStressStrainCurve')
         if uniaxialStressStrainCurve is None:
             uniaxialStressStrainCurve = default_image
-        # 图片
-        uniaxialCrackMorphology = request.FILES.get('uniaxialCrackMorphology')
-        if uniaxialCrackMorphology is None:
-            uniaxialCrackMorphology = default_image
         
         # ------- 力学实验库的三轴压缩实验
         triaxialCompressiveStrength = request.POST.get('triaxialCompressiveStrength')
@@ -304,14 +300,13 @@ def addRock(request):
             print('cslog_uniaxialFailureMode:',type(uniaxialFailureMode))
             uniaxialFailureModePath = default_storage.save(file_path+'1', uniaxialFailureMode)
             uniaxialStressStrainCurvePath = default_storage.save(file_path+'2', uniaxialStressStrainCurve)
-            uniaxialCrackMorphologyPath = default_storage.save(file_path+'3', uniaxialCrackMorphology)
             rock2 = Rock2(key=rock,
                           uniaxialCompressiveStrength=uniaxialCompressiveStrength,
                           elasticModulus=elasticModulus,
                           poissonsRatio=poissonsRatio,
                           uniaxialFailureMode=uniaxialFailureModePath,
                           uniaxialStressStrainCurve=uniaxialStressStrainCurvePath,
-                          uniaxialCrackMorphology=uniaxialCrackMorphologyPath, )
+                          )
             rock2.save()
             rockDatas = Rock2.objects.all()
             # Redirect to a success page or perform any additional operations

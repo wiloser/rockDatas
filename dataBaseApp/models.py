@@ -43,7 +43,6 @@ class Rock2(models.Model):
     poissonsRatio = models.CharField(blank=True,null=True, verbose_name='泊松比', max_length=255,)
     uniaxialFailureMode = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='单轴破坏模式（图）', default='path/to/default_image.jpg')
     uniaxialStressStrainCurve = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='单轴应力-应变曲线（图）', default='path/to/default_image.jpg')
-    uniaxialCrackMorphology = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='单轴裂纹形态（图）', default='path/to/default_image.jpg')
 
     class Meta:
         app_label = 'dataBaseApp'

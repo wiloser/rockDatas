@@ -317,7 +317,6 @@ class Migration(migrations.Migration):
                 ("poissonsRatio", models.FloatField(null=True)),
                 ("uniaxialFailureMode", models.CharField(max_length=255)),
                 ("uniaxialStressStrainCurve", models.CharField(max_length=255)),
-                ("uniaxialCrackMorphology", models.CharField(max_length=255)),
                 (
                     "key",
                     models.ForeignKey(

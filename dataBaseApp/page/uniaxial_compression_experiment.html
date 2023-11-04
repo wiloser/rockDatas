@@ -38,7 +38,6 @@
     <th>泊松比</th>
     <th>单轴破坏模式</th>
     <th>单轴应力-应变曲线</th>
-    <th>单轴裂纹形态</th>
 
     </thead>
 
@@ -58,11 +57,6 @@
         <td>
             <a href="#" data-toggle="modal" data-target="#imageModal" onclick="openModal('{{ rock.uniaxialStressStrainCurve.url }}')">
                 <img src="{{ rock.uniaxialStressStrainCurve.url }}" alt="单轴应力-应变曲线" class="thumbnail-image">
-            </a>
-        </td>
-        <td>
-            <a href="#" data-toggle="modal" data-target="#imageModal" onclick="openModal('{{ rock.uniaxialCrackMorphology.url }}')">
-                <img src="{{ rock.uniaxialCrackMorphology.url }}" alt="单轴裂纹形态" class="thumbnail-image">
             </a>
         </td>
         <td><a href="#" onclick="confirmDelete('{{ rock.key.rock_id }}', '2-1')">删除</a></td>
@@ -123,15 +117,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="uniaxialCrackMorphology">单轴裂纹形态：</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="uniaxialCrackMorphology"
-                                   name="uniaxialCrackMorphology"
-                                   onchange="displayFileName(this)">
-                            <label class="custom-file-label" for="uniaxialCrackMorphology">选择文件</label>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
