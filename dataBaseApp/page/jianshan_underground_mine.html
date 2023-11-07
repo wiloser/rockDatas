@@ -36,7 +36,22 @@
     border-collapse: collapse;
     width: 30%;
   }
+  .scroll-Style{
+            padding: 15px;
+    		overflow-y: auto;
+            overflow-x: hidden;
+            margin-top: 4px;
+		}
 
+  .scroll-Style::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 0px rgba(118, 118, 118, 0.5);
+    background-color: rgba(118, 118, 118, 0.5);
+  }
+  /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+  .scroll-Style::-webkit-scrollbar{
+    width: 5px;
+    background-color: #F5F5F5;
+  }
   th,
   td {
     padding: 8px;
@@ -58,7 +73,7 @@
   </ol>
 </nav>
 
-<div class="row col-xl-12" style="flex: 1; gap: 30px; flex-wrap: nowrap">
+<div class="row col-xl-12" style="flex: 1; gap: 20px; flex-wrap: nowrap">
   <div class="d-flex flex-column" style="width: 320px; padding-bottom: 20px">
     <div style="height: 80px">
       <h5 style="color: #000">> 三维激光扫描</h5>
@@ -118,7 +133,8 @@
         爆破振动参数拟合计算页面
       </h6>
     </div>
-    <div style="flex: 1; overflow: auto; margin-top: 20px">
+
+    <div  style=" margin-top: 20px">
       <h5 style="color: #000">> 矿山现场试验结果记录</h5>
       <div
         class="w-100 row justify-between align-center"
@@ -134,14 +150,14 @@
           添加方案
         </button>
       </div>
-      <div
+      <div class="scroll-Style"
         id="tree-list"
-        style="padding: 0; margin-left: 16px; color: #999"
+        style="max-height: 530px; color: #999"
       ></div>
     </div>
   </div>
   <div style="width: 3px; height: 100%; background-color: #e9ecef"></div>
-  <div style="flex: 1; margin-left: 20px">
+  <div style="flex: 1; margin-left: 30px">
     <embed
       id="pdf-panel"
       type="application/pdf"
