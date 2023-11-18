@@ -36,21 +36,21 @@
     border-collapse: collapse;
     width: 30%;
   }
-  .scroll-Style{
-            padding: 15px;
-    		overflow-y: auto;
-            overflow-x: hidden;
-            margin-top: 4px;
-		}
+  .scroll-Style {
+    padding: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 4px;
+  }
 
   .scroll-Style::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 0px rgba(118, 118, 118, 0.5);
     background-color: rgba(118, 118, 118, 0.5);
   }
   /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
-  .scroll-Style::-webkit-scrollbar{
+  .scroll-Style::-webkit-scrollbar {
     width: 5px;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
   }
   th,
   td {
@@ -134,7 +134,7 @@
       </h6>
     </div>
 
-    <div  style=" margin-top: 20px">
+    <div style="margin-top: 20px">
       <h5 style="color: #000">> 矿山现场试验结果记录</h5>
       <div
         class="w-100 row justify-between align-center"
@@ -150,7 +150,8 @@
           添加方案
         </button>
       </div>
-      <div class="scroll-Style"
+      <div
+        class="scroll-Style"
         id="tree-list"
         style="max-height: 530px; color: #999"
       ></div>
@@ -695,6 +696,14 @@
             id="tunnelQuery"
           >
             查询
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary ml-3"
+            data-toggle="modal"
+            data-target="#myModal9"
+          >
+            删除巷道
           </button>
         </div>
         <div
@@ -1325,6 +1334,58 @@
               name="seg-input2"
               class="form-control"
             />
+            <div
+              style="
+                width: 300px;
+                height: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              确认删除此分段吗？
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              关闭
+            </button>
+            <button type="submit" class="btn btn-primary">确认</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="myModal9"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <form
+        action="{% url 'schema' %}?type=3-7"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-body">
+            <label style="display: none" for="seg-input3">分段名称：</label>
+            <input
+              style="display: none"
+              type="text"
+              id="seg-input3"
+              name="seg-input3"
+              class="form-control"
+            />
             <label style="display: none" for="tunnel20">巷道：</label>
             <input
               style="display: none"
@@ -1342,7 +1403,7 @@
                 align-items: center;
               "
             >
-              确认删除此分段吗？
+              确认删除此巷道吗？
             </div>
           </div>
           <div class="modal-footer">
@@ -1826,8 +1887,10 @@
       const img213 = document.getElementById('seg-img3')
       const segInput = document.getElementById('seg-input')
       const segInput2 = document.getElementById('seg-input2')
+      const segInput3 = document.getElementById('seg-input3')
       segInput.value = segmentations?.[0]?.seg_name || ''
       segInput2.value = segmentations?.[0]?.seg_name || ''
+      segInput3.value = segmentations?.[0]?.seg_name || ''
       img21.src = segmentations?.[0]?.img_seg || ''
       img212.src = segmentations?.[0]?.img_seg || ''
       img213.src = segmentations?.[0]?.img_seg || ''
@@ -1867,6 +1930,7 @@
         img21.src = segmentations.find(seg => seg.seg_name === e.target.value).img_seg
         segInput.value = e.target.value
         segInput2.value = e.target.value
+        segInput3.value = e.target.value
         Array.from({ length: showTunnel.childElementCount }, (_, index) => index + 1).forEach(() => {
           showTunnel.removeChild(showTunnel.firstChild)
         })

@@ -695,6 +695,19 @@ def schema(request):
                     oldKAValue.delete()
                 except:
                     pass
+        elif(type == "3-7"):
+            segInput = request.POST['seg-input3']
+            tunnel = request.POST['tunnel20']
+            if not segInput or not tunnel:
+                pass
+            else:
+                oldValue = Tunnel.objects.filter(tunnel_name=segInput + ',' + tunnel)
+                oldKAValue = KA2.objects.filter(k_a_value__startswith=segInput + '+' + tunnel)
+                try:
+                    oldValue.delete()
+                    oldKAValue.delete()
+                except:
+                    pass
         elif(type == "3-3"):
             schemaName2 = request.POST['schemaName2']
             deleteSchema = Schema2.objects.get(schema_name=schemaName2) or ''
@@ -1013,7 +1026,7 @@ def schema(request):
             return render(request, pageName['OpenPit'], {'schemas': result, 'KA': result5, 'COM': result7})
         elif(type == '4-1-2'):
             return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'KA': result6, 'segmentations': result2, 'tunnels': result3, 'COM': result8})
-        elif(type != "2-1" and type != '2-2' and type != '3-1' and type != '3-2' and type != '3-3' and type != '3-4' and type != '3-5' and type != '3-6'):
+        elif(type != "2-1" and type != '2-2' and type != '3-1' and type != '3-2' and type != '3-3' and type != '3-4' and type != '3-5' and type != '3-6' and type != '3-7'):
             return render(request, pageName['OpenPit'], {'schemas': result, 'KA': result5, 'COM': {}})
         else:
             return render(request, pageName['JianShanUndergroundMine'], {'schemas': result4, 'KA': result6, 'segmentations': result2, 'tunnels': result3, 'COM': {}})
