@@ -84,14 +84,14 @@ class Migration(migrations.Migration):
             model_name="rock2",
             name="uniaxialFailureMode",
             field=models.ImageField(
-                blank=True, null=True, upload_to="images/", verbose_name="单轴破坏模式（图）"
+                blank=True, null=True, upload_to="images/", verbose_name="单轴破坏模式"
             ),
         ),
         migrations.AlterField(
             model_name="rock2",
             name="uniaxialStressStrainCurve",
             field=models.ImageField(
-                blank=True, null=True, upload_to="images/", verbose_name="单轴应力-应变曲线（图）"
+                blank=True, null=True, upload_to="images/", verbose_name="单轴应力-应变曲线"
             ),
         ),
         migrations.AlterField(
@@ -118,21 +118,21 @@ class Migration(migrations.Migration):
             model_name="rock3",
             name="triaxialFailureMode",
             field=models.ImageField(
-                blank=True, null=True, upload_to="images/", verbose_name="三轴破坏模式（图）"
+                blank=True, null=True, upload_to="images/", verbose_name="三轴破坏模式"
             ),
         ),
         migrations.AlterField(
             model_name="rock3",
             name="triaxialMohrStrength",
             field=models.ImageField(
-                blank=True, null=True, upload_to="images/", verbose_name="三轴莫尔强度包络图（图）"
+                blank=True, null=True, upload_to="images/", verbose_name="三轴莫尔强度包络图"
             ),
         ),
         migrations.AlterField(
             model_name="rock3",
             name="triaxialStressStrainCurve",
             field=models.ImageField(
-                blank=True, null=True, upload_to="images/", verbose_name="三轴应力-应变曲线（图）"
+                blank=True, null=True, upload_to="images/", verbose_name="三轴应力-应变曲线"
             ),
         ),
         migrations.AlterField(
@@ -147,7 +147,7 @@ class Migration(migrations.Migration):
                 blank=True,
                 null=True,
                 upload_to="images/",
-                verbose_name="抗拉强度轴向-荷载位移图（图）",
+                verbose_name="抗拉强度轴向-荷载位移图",
             ),
         ),
         migrations.AlterField(
@@ -159,7 +159,7 @@ class Migration(migrations.Migration):
             model_name="rock4",
             name="tensileFailureMode",
             field=models.ImageField(
-                blank=True, null=True, upload_to="images/", verbose_name="抗拉强度破坏模式（图）"
+                blank=True, null=True, upload_to="images/", verbose_name="抗拉强度破坏模式"
             ),
         ),
         migrations.AlterField(
@@ -174,7 +174,7 @@ class Migration(migrations.Migration):
                 blank=True,
                 null=True,
                 upload_to="images/",
-                verbose_name="剪切应力-剪切方向位移（图）",
+                verbose_name="剪切应力-剪切方向位移",
             ),
         ),
         migrations.AlterField(

@@ -41,8 +41,8 @@ class Rock2(models.Model):
     uniaxialCompressiveStrength = models.CharField(blank=True,null=True, verbose_name='单轴抗压强度', max_length=255,)
     elasticModulus = models.CharField(blank=True,null=True, verbose_name='弹性模量', max_length=255,)
     poissonsRatio = models.CharField(blank=True,null=True, verbose_name='泊松比', max_length=255,)
-    uniaxialFailureMode = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='单轴破坏模式（图）', default='path/to/default_image.jpg')
-    uniaxialStressStrainCurve = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='单轴应力-应变曲线（图）', default='path/to/default_image.jpg')
+    uniaxialFailureMode = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='单轴破坏模式', default='path/to/default_image.jpg')
+    uniaxialStressStrainCurve = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='单轴应力-应变曲线', default='path/to/default_image.jpg')
 
     class Meta:
         app_label = 'dataBaseApp'
@@ -60,9 +60,9 @@ class Rock3(models.Model):
     rockInternalFrictionAngle = models.CharField(blank=True,null=True,max_length=255,  verbose_name='内摩擦角')
     youngModulus = models.CharField(blank=True,null=True, max_length=255, verbose_name='杨氏模量')
     poissonsRatio = models.CharField(blank=True,null=True, max_length=255, verbose_name='泊松比')
-    triaxialFailureMode = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='三轴破坏模式（图）', default='path/to/default_image.jpg')
-    triaxialStressStrainCurve = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='三轴应力-应变曲线（图）', default='path/to/default_image.jpg')
-    triaxialMohrStrength = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='三轴莫尔强度包络图（图）', default='path/to/default_image.jpg')
+    triaxialFailureMode = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='三轴破坏模式', default='path/to/default_image.jpg')
+    triaxialStressStrainCurve = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='三轴应力-应变曲线', default='path/to/default_image.jpg')
+    triaxialMohrStrength = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='三轴莫尔强度包络图', default='path/to/default_image.jpg')
 
     class Meta:
         app_label = 'dataBaseApp'
@@ -74,8 +74,8 @@ class Rock4(models.Model):
     key = models.ForeignKey(Rock, on_delete=models.CASCADE, primary_key=True, verbose_name='岩石')
     tensileStrength = models.CharField(blank=True,null=True, max_length=255, verbose_name='抗拉强度')
     tensileFailureLoad = models.CharField(blank=True,null=True, max_length=255, verbose_name='破坏荷载')
-    tensileFailureMode = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='抗拉强度破坏模式（图）', default='path/to/default_image.jpg')
-    tensileAxialLoad = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='抗拉强度轴向-荷载位移图（图）', default='path/to/default_image.jpg')
+    tensileFailureMode = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='抗拉强度破坏模式', default='path/to/default_image.jpg')
+    tensileAxialLoad = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='抗拉强度轴向-荷载位移图', default='path/to/default_image.jpg')
 
     class Meta:
         app_label = 'dataBaseApp'
@@ -87,7 +87,7 @@ class Rock4(models.Model):
 class Rock5(models.Model):
     key = models.ForeignKey(Rock, on_delete=models.CASCADE, primary_key=True, verbose_name='岩石')
     shearingStrength = models.CharField(blank=True,null=True, max_length=255, verbose_name='抗剪强度')
-    shearStressShearDirection = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='剪切应力-剪切方向位移（图）', default='path/to/default_image.jpg')
+    shearStressShearDirection = models.ImageField(blank=True,null=True, upload_to='images/', verbose_name='剪切应力-剪切方向位移', default='path/to/default_image.jpg')
 
     class Meta:
         app_label = 'dataBaseApp'
