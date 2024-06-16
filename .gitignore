@@ -15,4 +15,5 @@
 *.pyc
 *.pyo
 *.pyd
+*.idea
 __pycache__/
