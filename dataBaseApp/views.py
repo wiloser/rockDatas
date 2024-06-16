@@ -76,12 +76,14 @@ pageName = {'homePage': 'rock_properties.html',
 
             # 大数据计算平台
             'Theoretical_Calculation': 'theoretical_Calculation.html',
+            # 岩体质量分级
+            'Rock_Basic_Quality': 'rock_basic_quality.html',
             # 大数据分析
             'Big_Date': 'none.html',
 
             # 尖山地下矿
             'JianShanUndergroundMine': 'jianshan_underground_mine.html',
-            # 露天采矿
+            # 露天矿山
             'OpenPit': 'open_pit.html',
             }
 
@@ -131,6 +133,9 @@ def page_view(request):
         rockDatas = Rock1.objects.all()
     elif param2 == "4-2":
         # 大数据分析
+        rockDatas = Rock1.objects.all()
+    elif param2 == "4-3":
+        # 岩体质量分级
         rockDatas = Rock1.objects.all()
     elif param2 == "5":
         # 矿山信息库

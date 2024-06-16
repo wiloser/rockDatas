@@ -1,0 +1,179 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
+    <li class="breadcrumb-item"><a href="#">大数据平台</a></li>
+    <li class="breadcrumb-item active" aria-current="page">岩体质量分级</li>
+  </ol>
+</nav>
+<hr />
+
+<div class="row col-xl-12" style="flex: 0;margin-top: -15px">
+    <div class="col-xl-4">
+    <label for="static-strength">岩石饱和单轴抗压强度：</label>
+    <input
+      type="text"
+      id="static-strength"
+      name="static_strength"
+      placeholder="输入岩石饱和单轴抗压强度"
+      class="form-control"
+    />
+  </div>
+</div>
+
+<div class="row col-xl-12" style="flex: 0;margin-bottom: 5px">
+  <div class="col-xl-4">
+    <label for="rock-integrity">岩体完整系系数：</label>
+    <input
+      type="text"
+      id="rock-integrity"
+      name="rock-integrity"
+      placeholder="输入岩体完整系系数"
+      class="form-control"
+    />
+  </div>
+</div>
+<div class="row col-xl-12" style="flex: 0;margin-bottom: 5px">
+  <div class="col-xl-4">
+    <label for="K1">地下水影响修正系数：</label>
+    <input type="text" id="K1" name="" placeholder="输入" class="form-control" />
+  </div>
+</div>
+<div class="row col-xl-12" style="flex: 0;margin-bottom: 5px">
+  <div class="col-xl-4">
+    <label for="K2">主要软弱结构面产状影响修正系数：</label>
+    <input type="text" id="K2" name="" placeholder="输入" class="form-control" />
+  </div>
+</div>
+<div class="row col-xl-12" style="flex: 0;margin-bottom: 5px">
+  <div class="col-xl-4">
+    <label for="K3">初始应力状态影响修正系数：</label>
+    <input type="text" id="K3" name="" placeholder="输入" class="form-control" />
+  </div>
+</div>
+
+<div class="row col-xl-12" style="flex: 0;margin-bottom: 5px">
+  <div class="col-xl-4">
+    <label for="rock_basic_quality">岩体基本质量指标值BQ：</label>
+    <div class="input-group">
+      <button
+        type="submit"
+        class="btn btn-secondary"
+        id="rock_basic_quality_btn"
+      >
+        计算BQ值
+      </button>
+      <input
+        type="text"
+        id="rock_basic_quality_result"
+        class="form-control"
+        readonly
+      />
+    </div>
+  </div>
+</div>
+  <div class="row col-xl-12" style="flex: 0;margin-bottom: 5px">
+    <div class="col-xl-4">
+      <label for="rock_basic_quality_modify">岩体基本质量指标修正值[BQ]：</label>
+      <div class="input-group">
+        <button
+          type="submit"
+          class="btn btn-secondary"
+          id="rock_basic_quality_modify_btn"
+        >
+       计算[BQ]值
+        </button>
+        <input
+          type="text"
+          id="rock_basic_quality_modify_result"
+          class="form-control"
+          readonly
+        />
+      </div>
+    </div>
+  </div>
+<hr/>
+
+<script>
+  //计算BQ方法
+  let rockBasicQuality;
+  function calculateBQConsumption() {
+    // Kv
+    var rockIntegrity = parseFloat(
+      document.getElementById('rock-integrity').value
+    )
+    // Rc
+    var staticStrength = parseFloat(
+      document.getElementById('static-strength').value
+    )
+    // BQ
+    // var rockBasicQuality = parseFloat(
+     //  document.getElementById('rock_basic_quality').value
+     //)
+
+    // 计算BQ值
+    if (staticStrength > 90 * rockIntegrity + 30)
+      staticStrength = 90 * rockIntegrity + 30
+    rockBasicQuality = 100 + 3 * staticStrength + 250 * rockIntegrity;
+    if (Number.isNaN(rockBasicQuality))
+      alert('请至少输入岩石饱和单轴抗压强度、岩体的完整性系数！')
+    // 显示结果
+    else {
+      document.getElementById('rock_basic_quality_result').value =
+        rockBasicQuality.toFixed(2)
+    }
+  }
+
+  //计算修正BQ方法
+  function calculateModifyBQConsumption() {
+    // 获取所需的输入值
+    var k1 = parseFloat(
+      document.getElementById('K1').value
+    )
+    var k2 = parseFloat(
+      document.getElementById('K2').value
+    )
+    var k3 = parseFloat(
+      document.getElementById('K3').value
+    )
+    console.log('rockBasicQuality->', rockBasicQuality)
+    if (Number.isNaN(rockBasicQuality)) {
+      alert('请至少输入岩石饱和单轴抗压强度、岩体的完整性系数！')
+    }
+    var rockModifyBasicQuality = rockBasicQuality - 100 * (k1 + k2 + k3)
+    console.log('retreat_calculate_result->', rockModifyBasicQuality)
+    // 有结果的话再显示，无结果不展示，弹框提示
+   let rockMassLevel
+    if rockModifyBasicQuality > 550:
+      rockMassLevel = "I"
+    elif (rockModifyBasicQuality <= 550 && rockModifyBasicQuality > 450)
+      rockMassLevel = "II"
+    elif (rockModifyBasicQuality <= 450 && rockModifyBasicQuality > 350)
+      rockMassLevel = "III"
+    elif (rockModifyBasicQuality <= 350 && rockModifyBasicQuality > 250)
+      rockMassLevel = "IV"
+    elif (rockModifyBasicQuality <= 250)
+      rockMassLevel = "V"
+    else
+      rockMassLevel = "需试验确定"
+    document.getElementById('rock_basic_quality_modify_result').value =
+        rockModifyBasicQuality.toFixed(2) + "，岩体质量分级为" + rockMassLevel + "级"
+  }
+  //回采爆破炸药单耗计算
+  ;(function () {
+    document
+      .getElementById('rock_basic_quality_btn')
+      .addEventListener('click', function () {
+        calculateBQConsumption()
+      })
+    document
+      .getElementById('rock_basic_quality_modify_btn')
+      .addEventListener('click', function () {
+        calculateModifyBQConsumption()
+      })
+  })()
+</script>
+
+{% endblock %}
+

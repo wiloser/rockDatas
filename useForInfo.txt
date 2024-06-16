@@ -1,4 +1,4 @@
-
+// 操作models.py 需要先执行以下两个命令
 python .\manage.py makemigrations
 python .\manage.py migrate
 
