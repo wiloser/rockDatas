@@ -1451,7 +1451,7 @@
       pdfPanel.style.display = 'none'
   })
   panelTrigger3.addEventListener('click', () => {
-      localStorage.setItem('page', '3')
+      localStorage.setItem('page', '5')
       panel1.style.display = 'none'
       panel2.style.display = 'none'
       panel3.style.display = 'block'
@@ -1462,7 +1462,7 @@
       pdfPanel.style.display = 'none'
   })
   panelTrigger4.addEventListener('click', () => {
-      localStorage.setItem('page', '4')
+      localStorage.setItem('page', '6')
       panel1.style.display = 'none'
       panel2.style.display = 'none'
       panel3.style.display = 'none'
@@ -1473,7 +1473,7 @@
       pdfPanel.style.display = 'none'
   })
   panelTrigger5.addEventListener('click', () => {
-      localStorage.setItem('page', '5')
+      localStorage.setItem('page', '7')
       panel1.style.display = 'none'
       panel2.style.display = 'none'
       panel3.style.display = 'none'
@@ -1484,7 +1484,7 @@
       pdfPanel.style.display = 'none'
   })
   panelTrigger6.addEventListener('click', () => {
-      localStorage.setItem('page', '6')
+      localStorage.setItem('page', '8')
       panel1.style.display = 'none'
       panel2.style.display = 'none'
       panel3.style.display = 'none'
@@ -1592,6 +1592,10 @@
                   pdfPanel.style.display = 'block'
                   panel1.style.display = 'none'
                   panel2.style.display = 'none'
+                  panel3.style.display = 'none'
+                  panel4.style.display = 'none'
+                  panel5.style.display = 'none'
+                  panel6.style.display = 'none'
                   pdfPanel.src = window.location.origin +  pdf
               }, 250); // 设置计时器时间间隔，单位为毫秒
           } else {
@@ -1610,6 +1614,10 @@
               pdfPanel.style.display = 'none'
               panel1.style.display = 'none'
               panel2.style.display = 'none'
+              panel3.style.display = 'none'
+              panel4.style.display = 'none'
+              panel5.style.display = 'none'
+              panel6.style.display = 'none'
           }
       }
   }
@@ -1654,6 +1662,10 @@
       panel2.style.display = 'block'
       img.style.display = 'none'
       pdfPanel.style.display = 'none'
+      panel3.style.display = 'none'
+      panel4.style.display = 'none'
+      panel5.style.display = 'none'
+      panel6.style.display = 'none'
       if(computed.filed2) {
         console.log(computed)
         filedSelect2.value = computed.filed2
@@ -1715,21 +1727,73 @@
     panel2.style.display = 'none'
     img.style.display = 'none'
     pdfPanel.style.display = 'none'
+    panel3.style.display = 'none'
+    panel4.style.display = 'none'
+    panel5.style.display = 'none'
+    panel6.style.display = 'none'
   } else if(localStorage.getItem('page') === '2') {
     panel1.style.display = 'none'
     panel2.style.display = 'block'
     img.style.display = 'none'
     pdfPanel.style.display = 'none'
+    panel3.style.display = 'none'
+    panel4.style.display = 'none'
+    panel5.style.display = 'none'
+    panel6.style.display = 'none'
   } else if(localStorage.getItem('page') === '3') {
     panel1.style.display = 'none'
     panel2.style.display = 'none'
     img.style.display = 'none'
     pdfPanel.style.display = 'block'
+    panel3.style.display = 'none'
+    panel4.style.display = 'none'
+    panel5.style.display = 'none'
+    panel6.style.display = 'none'
   } else if(localStorage.getItem('page') === '4') {
     panel1.style.display = 'none'
     panel2.style.display = 'none'
     img.style.display = 'block'
     pdfPanel.style.display = 'none'
+    panel3.style.display = 'none'
+    panel4.style.display = 'none'
+    panel5.style.display = 'none'
+    panel6.style.display = 'none'
+  } else if(localStorage.getItem('page') === '5') {
+    panel1.style.display = 'none'
+    panel2.style.display = 'none'
+    img.style.display = 'none'
+    pdfPanel.style.display = 'none'
+    panel3.style.display = 'block'
+    panel4.style.display = 'none'
+    panel5.style.display = 'none'
+    panel6.style.display = 'none'
+  } else if(localStorage.getItem('page') === '6') {
+    panel1.style.display = 'none'
+    panel2.style.display = 'none'
+    img.style.display = 'none'
+    pdfPanel.style.display = 'none'
+    panel3.style.display = 'none'
+    panel4.style.display = 'block'
+    panel5.style.display = 'none'
+    panel6.style.display = 'none'
+  } else if(localStorage.getItem('page') === '7') {
+    panel1.style.display = 'none'
+    panel2.style.display = 'none'
+    img.style.display = 'none'
+    pdfPanel.style.display = 'none'
+    panel3.style.display = 'none'
+    panel4.style.display = 'none'
+    panel5.style.display = 'block'
+    panel6.style.display = 'none'
+  } else if(localStorage.getItem('page') === '8') {
+    panel1.style.display = 'none'
+    panel2.style.display = 'none'
+    img.style.display = 'none'
+    pdfPanel.style.display = 'none'
+    panel3.style.display = 'none'
+    panel4.style.display = 'none'
+    panel5.style.display = 'none'
+    panel6.style.display = 'block'
   }
 </script>
 
