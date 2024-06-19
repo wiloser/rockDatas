@@ -148,7 +148,7 @@
     // 显示结果
     else {
       document.getElementById('rock_basic_quality_result').value =
-        rockBasicQuality.toFixed(2)
+        rockBasicQuality
     }
   }
 
@@ -171,21 +171,21 @@
     var rockModifyBasicQuality = rockBasicQuality - 100 * (k1 + k2 + k3)
     console.log('retreat_calculate_result->', rockModifyBasicQuality)
     // 有结果的话再显示，无结果不展示，弹框提示
-   let rockMassLevel
-    if rockModifyBasicQuality > 550:
-      rockMassLevel = "I"
-    elif (rockModifyBasicQuality <= 550 && rockModifyBasicQuality > 450)
-      rockMassLevel = "II"
-    elif (rockModifyBasicQuality <= 450 && rockModifyBasicQuality > 350)
-      rockMassLevel = "III"
-    elif (rockModifyBasicQuality <= 350 && rockModifyBasicQuality > 250)
-      rockMassLevel = "IV"
-    elif (rockModifyBasicQuality <= 250)
-      rockMassLevel = "V"
-    else
-      rockMassLevel = "需试验确定"
+     var rockMassLevel; // 声明变量
+
+    if (rockModifyBasicQuality > 550) {
+        rockMassLevel = "I";
+    } else if (450 < rockModifyBasicQuality && rockModifyBasicQuality <= 550) {
+        rockMassLevel = "II";
+    } else if (350 < rockModifyBasicQuality && rockModifyBasicQuality <= 450) {
+        rockMassLevel = "III";
+    } else if (250 < rockModifyBasicQuality && rockModifyBasicQuality <= 350) {
+        rockMassLevel = "IV";
+    } else {
+        rockMassLevel = "V";
+    }
     document.getElementById('rock_basic_quality_modify_result').value =
-        rockModifyBasicQuality.toFixed(2) + "，岩体质量分级为" + rockMassLevel + "级"
+        rockModifyBasicQuality + "，岩体质量分级为" + rockMassLevel + "级"
   }
   //回采爆破炸药单耗计算
   ;(function () {
