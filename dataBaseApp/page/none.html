@@ -3,13 +3,271 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{% url 'page' %}">首页</a></li>
-    <li class="breadcrumb-item"><a href="#">大数据平台</a></li>
+    <li class="breadcrumb-item active">大数据平台</li>
     <li class="breadcrumb-item active" aria-current="page">大数据分析</li>
   </ol>
 </nav>
 
-<div class="alert alert-info">
-  <strong>暂未开放</strong>
+<hr />
+
+<div class="row col-xl-12" style="flex: 0">
+  <div class="col-xl-4">
+    <label>岩石名称：</label>
+    <div class="input-group">
+      <select class="custom-select" id="inputGroupSelect01">
+        <option value="1">沉积岩</option>
+        <option value="2">火成岩</option>
+        <option value="3">变质岩</option>
+      </select>
+      <input type="text" class="form-control" placeholder="岩石名称" />
+    </div>
+  </div>
+  <div class="col-xl-4">
+    <label for="density">密度：</label>
+    <input
+      type="text"
+      id="density"
+      name="density"
+      placeholder="输入密度"
+      class="form-control"
+    />
+  </div>
+  <div class="col-xl-4">
+    <label for="porosity">孔隙率：</label>
+    <input
+      type="text"
+      id="porosity"
+      name="porosity"
+      placeholder="输入孔隙率"
+      class="form-control"
+    />
+  </div>
 </div>
+<div class="row col-xl-12" style="flex: 0">
+  <div class="col-xl-4">
+    <label for="water_absorption">吸水率：</label>
+    <input
+      type="text"
+      id="water_absorption"
+      name="water_absorption"
+      placeholder="输入吸水率"
+      class="form-control"
+    />
+  </div>
+  <div class="col-xl-4">
+    <label for="p_wave_velocity">纵波波速：</label>
+    <input
+      type="text"
+      id="p_wave_velocity"
+      name="p_wave_velocity"
+      placeholder="输入纵波波速"
+      class="form-control"
+    />
+  </div>
+  <div class="col-xl-4">
+    <label for="static_strength">静态强度：</label>
+    <input
+      type="text"
+      id="static_strength"
+      name="static_strength"
+      placeholder="输入静态强度"
+      class="form-control"
+    />
+  </div>
+</div>
+<div class="row col-xl-12" style="flex: 0">
+  <div class="col-xl-4">
+    <label for="proctor_test">普氏系数：</label>
+    <input
+      type="text"
+      id="proctor_test"
+      name="proctor_test"
+      placeholder="输入普氏系数"
+      class="form-control"
+    />
+  </div>
+  <div class="col-xl-4">
+    <label for="elastic_modulus">弹性模量：</label>
+    <input
+      type="text"
+      id="elastic_modulus"
+      name="elastic_modulus"
+      placeholder="输入弹性模量"
+      class="form-control"
+    />
+  </div>
+  <div class="col-xl-4">
+    <label for="poisson_ratio">泊松比：</label>
+    <input
+      type="text"
+      id="poisson_ratio"
+      name="poisson_ratio"
+      placeholder="输入泊松比"
+      class="form-control"
+    />
+  </div>
+</div>
+<div class="row col-xl-12" style="flex: 0">
+  <div class="col-xl-4">
+    <label for="uniaxial_compressive_strength">三轴抗压强度：</label>
+    <input
+      type="text"
+      id="uniaxial_compressive_strength"
+      name="uniaxial_compressive_strength"
+      placeholder="输入三轴抗压强度"
+      class="form-control"
+    />
+  </div>
+  <div class="col-xl-4">
+    <label for="cohesion">内聚力：</label>
+    <input
+      type="text"
+      id="cohesion"
+      name="cohesion"
+      placeholder="输入内聚力"
+      class="form-control"
+    />
+  </div>
+  <div class="col-xl-4">
+    <label for="friction_angle">内摩擦角：</label>
+    <input
+      type="text"
+      id="friction_angle"
+      name="friction_angle"
+      placeholder="输入内摩擦角"
+      class="form-control"
+    />
+  </div>
+</div>
+<div class="row col-xl-12" style="flex: 0">
+  <div class="col-xl-4">
+    <label for="tensile_strength">抗拉强度：</label>
+    <input
+      type="text"
+      id="tensile_strength"
+      name="tensile_strength"
+      placeholder="输入抗拉强度"
+      class="form-control"
+    />
+  </div>
+  <div class="col-xl-4">
+    <label for="shear_strength">抗剪强度：</label>
+    <input
+      type="text"
+      id="shear_strength"
+      name="shear_strength"
+      placeholder="输入抗剪强度"
+      class="form-control"
+    />
+  </div>
+</div>
+
+<hr />
+<div class="row col-xl-12" style="flex: 0">
+  <div class="col-xl-4">
+    <div class="input-group">
+      <button
+        type="submit"
+        class="btn btn-secondary"
+        id="open_pit_calculate_btn"
+      >
+        露天炸药单耗
+      </button>
+      <input
+        type="text"
+        id="open_pit_calculate_result"
+        class="form-control"
+        readonly
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  //露天爆破炸药单耗计算
+  async function calculateExplosiveConsumption() {
+    const density = parseFloat(document.getElementById('density').value) || 0
+    const porosity = parseFloat(document.getElementById('porosity').value) || 0
+    const water_absorption =
+      parseFloat(document.getElementById('water_absorption').value) || 0
+    const p_wave_velocity =
+      parseFloat(document.getElementById('p_wave_velocity').value) || 0
+    const static_strength =
+      parseFloat(document.getElementById('static_strength').value) || 0
+    const proctor_test =
+      parseFloat(document.getElementById('proctor_test').value) || 0
+    const elastic_modulus =
+      parseFloat(document.getElementById('elastic_modulus').value) || 0
+    const poisson_ratio =
+      parseFloat(document.getElementById('poisson_ratio').value) || 0
+    const uniaxial_compressive_strength =
+      parseFloat(
+        document.getElementById('uniaxial_compressive_strength').value
+      ) || 0
+    const cohesion = parseFloat(document.getElementById('cohesion').value) || 0
+    const friction_angle =
+      parseFloat(document.getElementById('friction_angle').value) || 0
+    const tensile_strength =
+      parseFloat(document.getElementById('tensile_strength').value) || 0
+    const shear_strength =
+      parseFloat(document.getElementById('shear_strength').value) || 0
+    const formData = new FormData()
+    formData.append('density', density)
+    formData.append('porosity', porosity)
+    formData.append('water_absorption', water_absorption)
+    formData.append('p_wave_velocity', p_wave_velocity)
+    formData.append('static_strength', static_strength)
+    formData.append('proctor_test', proctor_test)
+    formData.append('elastic_modulus', elastic_modulus)
+    formData.append('poisson_ratio', poisson_ratio)
+    formData.append(
+      'uniaxial_compressive_strength',
+      uniaxial_compressive_strength
+    )
+    formData.append('cohesion', cohesion)
+    formData.append('friction_angle', friction_angle)
+    formData.append('tensile_strength', tensile_strength)
+    formData.append('shear_strength', shear_strength)
+    const data = {
+      density,
+      porosity,
+      water_absorption,
+      p_wave_velocity,
+      static_strength,
+      proctor_test,
+      elastic_modulus,
+      poisson_ratio,
+      uniaxial_compressive_strength,
+      cohesion,
+      friction_angle,
+      tensile_strength,
+      shear_strength,
+    }
+    const stream = await fetch(
+      'http://47.103.83.250:8090/api/schema/explosive_consumption/predict',
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'x-token':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidGltZXN0YW1wIjoxNzI4MjkxNDk0MzUyfQ.K7hFN-NGYmejyw2biZ1HU-rBp_uQpftEDa1BkJKNB94',
+        },
+        body: JSON.stringify(data),
+      }
+    )
+
+    const res = await stream.json()
+
+    document.getElementById('open_pit_calculate_result').value =
+      res.data.predict_value.toFixed(3)
+  }
+  ;(function () {
+    document
+      .getElementById('open_pit_calculate_btn')
+      .addEventListener('click', function () {
+        calculateExplosiveConsumption()
+      })
+  })()
+</script>
 
 {% endblock %}
