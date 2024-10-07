@@ -258,7 +258,7 @@
 
     const res = await stream.json()
 
-    const range = Math.ceil(Math.random() * 2) * 0.1
+    const range = Math.floor(Math.random() * 2) * 0.1 + 0.05
 
     document.getElementById('open_pit_calculate_result').value = `${(
       res.data.predict_value - range
