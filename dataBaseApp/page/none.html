@@ -258,8 +258,11 @@
 
     const res = await stream.json()
 
-    document.getElementById('open_pit_calculate_result').value =
-      res.data.predict_value.toFixed(3)
+    const range = Math.ceil(Math.random() * 2) * 0.1
+
+    document.getElementById('open_pit_calculate_result').value = `${(
+      res.data.predict_value - range
+    ).toFixed(3)} ~ ${(res.data.predict_value + range).toFixed(3)}`
   }
   ;(function () {
     document
